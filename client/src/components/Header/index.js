@@ -1,9 +1,11 @@
 import { useRef } from "react"
-// import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // importing components
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { BsSearch } from 'react-icons/bs';
+import { FaMoon } from 'react-icons/fa';
+import { BsFillSunFill } from 'react-icons/bs';
 // import Avatar from "../Avatar"
 import { Link } from 'react-router-dom'
 
@@ -22,6 +24,9 @@ const Header = () => {
   const dispatch = useDispatch()
 
   // global state
+  const { 
+    lightMode,
+  }=  useSelector(state => state.generalStore)
   // const { currentUser } =  useSelector(state => state.userStore)
   // const [toggleMenu, setToggleMenu] = useState(false)
 
@@ -74,7 +79,8 @@ const Header = () => {
           </ul>            
         </nav>
         <nav>
-          <button onClick={handleLightMode}>Switch mode</button>
+          {lightMode ? <FaMoon onClick={handleLightMode} /> : <BsFillSunFill onClick={handleLightMode} />}
+          <BsSearch />
         </nav>
         {/* {
           currentUser._id ? <Link  className="flex flex__center" to={`/profile/${currentUser._id}`}><span className={styles.name}>{currentUser.fullName.split(" ")[0]}</span> {currentUser.profilePic ? <img className={styles.profile_pic} src={currentUser.profilePic} alt="profile_pic" /> : <span className={styles.profile_pic}><Avatar gender={currentUser.gender} /></span>  } </Link>:

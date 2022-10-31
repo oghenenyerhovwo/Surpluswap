@@ -3,7 +3,9 @@ import {
 } from "../constants/generalConstants";
 
 const initialState = {
-    lightMode: localStorage.getItem("impex_light_mode") ? JSON.parse(localStorage.getItem("impex_light_mode")) : true,
+    lightMode: localStorage.getItem("impex_light_mode") ? 
+        (JSON.parse(localStorage.getItem("impex_light_mode")) &&  JSON.parse(localStorage.getItem("impex_light_mode")).lightMode) 
+        : true,
 }
 
 const generalReducers =  (state = initialState, action) => {
