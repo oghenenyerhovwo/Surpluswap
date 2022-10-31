@@ -1,0 +1,115 @@
+.file_largescreen{
+    display: none;
+}
+
+.preview_file{
+    width: min(100%, 19rem);
+    height: min(100%, 10.5rem);
+    position: relative;
+}
+
+.preview_file img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 13px;
+}
+
+.preview_file video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 13px !important;
+}
+
+.preview_icon{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-lightgrey);
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 0.8rem;
+    border-radius: 50%;
+    z-index: 999;
+    cursor: pointer;
+    transition: 0.5s
+}
+
+.preview_icon:hover{
+    background: black;
+    color: var(--color-lightgrey)
+}
+
+.preview_overlay{
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 13px;
+    z-index: 99;
+}
+
+.preview_button{
+    background: linear-gradient(to right, var(--color-softblue), hsl(231, 30%, 55%));
+    color: var(--color-darkblue);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 28px;
+    padding: 0.3em 0.6em;
+    font-size: 0.6rem;
+    border-radius: 1px;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    box-shadow: rgba(17,12,46,0.15) 0px
+    4px 3px 0px;
+    transition: ease-in-out .5s;
+    border: none;
+    color: #fff;
+    display: inline-block;
+}
+  
+.preview_button:hover{
+    padding: 0.4em 0.9em;
+}
+
+.file_loader{
+    border: 1px solid var(--color-softblue);
+    height: 0.4rem;
+    border-radius: 0.1rem;
+  }
+  
+  .file_loader_inner{
+    height: 100%;
+    background: var(--color-softblue);
+  }
+
+  .preview_files{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, auto));
+    column-gap: 2rem;
+    justify-items: center;
+    align-items: stretch;
+  }
+
+  .preview_files .preview_file{
+    width: min(100%, 12rem);
+    height: min(100%, 9.5rem);
+    position: relative;
+  }
+
+  @media (min-width: 450px){
+    .file_smallscreen{
+        display: none;
+    }
+
+    .file_largescreen{
+        display: block;
+    }
+
+    .preview_file{
+        height: min(100%, 11.5rem);
+    }
+  }

@@ -1,0 +1,11 @@
+.app_container{
+    min-height: 100vh;
+}
+
+.app_container_light{
+    background: #fff;
+}
+
+.app_container_dark{
+    background: purple;
+}

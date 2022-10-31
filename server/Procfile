@@ -1,0 +1,2 @@
+node server.js
+npx prisma migrate deploy

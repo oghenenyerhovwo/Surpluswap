@@ -1,0 +1,17 @@
+.backlink{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.backlink a{
+    border: 1px solid var(--color-softblue);
+    font-size: 0.9rem;
+    color: var(--color-softblue);
+    padding: 0.2em 0.5em;
+    transition: 0.5s;
+}
+
+.backlink a:hover{
+    background: var(--color-softblue);
+    color: #fff;
+}

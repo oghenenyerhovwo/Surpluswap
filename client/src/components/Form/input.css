@@ -1,0 +1,28 @@
+/* ============================== */
+/* input */
+/* ============================== */
+
+  
+.app_input-password{
+    grid-column: 12 / 13;
+    grid-row: 2;
+
+    margin-top: 0.1em;
+    width: 100%;
+    background: transparent;
+
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+/* Chrome, Safari, Edge, Opera */
+.app_input-number input::-webkit-outer-spin-button,
+.app_input-number input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+     margin: 0;
+}
+
+/* Firefox */
+.app_input-number input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,35 @@
+.app__google button{
+    padding: 0px !important;
+    margin: 0px !important;
+    opacity: 1 !important;
+    cursor: pointer;
+    background: var(--color-white) !important;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+
+.app__google button span{
+    font-family: var(--font-avenir-book)!important ;
+    font-weight: 750;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    background: var(--color-white) !important;
+    color: var(--color-primary);
+    transition: 0.5s;
+}
+
+.app__google:hover  button{
+    background: var(--color-softblue) !important;
+    color: var(--color-white) !important;
+}
+
+.app__google:hover  button span{
+    background: var(--color-softblue) !important;
+    color: var(--color-white) !important;
+}
+
+.app__google:hover  button div{
+    background: var(--color-softblue) !important;
+    color: var(--color-white) !important;
+}

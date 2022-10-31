@@ -1,0 +1,44 @@
+.searchbar{
+    color: red;
+}
+
+.searchbar input[type="text"], input[type="password"], input[type="number"], textarea, select{
+    width: 100%!important;
+    background: transparent !important;
+    border-bottom: 0.1px solid var(--color-softblue) !important;
+    border-left: none!important;
+    border-top: none!important;
+    border-right: none!important;
+    font-size: 1rem!important;
+    margin-top: 0.1em!important;
+    padding-left: .5em!important;
+    padding-right: .5em!important;
+    padding-top: .5em!important;
+    padding-bottom: .5em!important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    color: var(--color-greyblue) !important;
+}
+
+.searchbar .input[type="text"]:active,
+.searchbar .input[type="text"]:focus,
+.searchbar .input[type="text"]:focus-visible,
+.searchbar .input[type="password"]:active,
+.searchbar .input[type="password"]:focus,
+.searchbar .input[type="password"]:focus-visible,
+.searchbar .input[type="number"]:active,
+.searchbar .input[type="number"]:focus,
+.searchbar .input[type="number"]:focus-visible,
+.searchbar textarea:active,
+.searchbar textarea:focus,
+.searchbar textarea:focus-visible,
+.searchbar select:active,
+.searchbar select:focus,
+.searchbar select:focus-visible{
+  outline: none!important;
+  border-bottom: 0.1px solid var(--color-softblue)!important;
+  border-left: none!important;
+  border-top: none!important;
+  border-right: none!important;
+  box-shadow: none!important;
+}

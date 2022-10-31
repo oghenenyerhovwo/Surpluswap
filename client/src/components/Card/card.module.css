@@ -1,0 +1,100 @@
+.card_container{
+    margin-top: 2em;
+    box-shadow: rgba(17,12,46,0.15) 0px
+    4px 3px 0px;
+    width: min(100%, 25rem);
+}
+
+.card_body{
+    padding: 1em 1.5em;
+    
+}
+  
+.card_image{
+    position: relative;
+}
+  
+.card_image span{
+    position: static !important; 
+}
+  
+.card_image img{
+    width: 100%!important; 
+    height: 100%;
+    max-height: 25rem;
+    object-fit: cover;
+    object-position: top;
+    position: static !important; 
+    height: auto !important;
+}
+
+/* body */
+
+.card_heading{
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.4rem; 
+    margin-bottom: 2em;
+    color: var( --color-darkblue);
+}
+
+.card_subheading{
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.2rem;
+    color: var( --color-darkblue);
+    margin-bottom: 0;
+}
+
+.card_container_faq {
+    padding: 1em 1em;
+    box-shadow: rgba(17,12,46,0.15) 0px
+    2px 2px 0px;
+    margin: 0 auto;
+    font-size: 1rem;
+    width: min(100%, 35rem);
+}
+
+.card_container_faq_heading{
+    font-size: 0.85rem;
+    line-height: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var( --color-darkblue);
+    cursor: pointer;
+}
+
+.card_container_faq_text{
+    flex: 1;
+    margin-right: 0.8rem;
+}
+
+.card_container_faq_icon svg{
+    width: 1.2rem;
+    height: 0.75rem;
+}
+
+.card_container_faq_icon svg path{
+    stroke: var(--color-softblue);
+}
+
+.card_container_faq_heading:hover .card_container_faq_icon svg path{
+    stroke: var(--color-softred); 
+}
+
+.card_container_faq_icon_active{
+    stroke: var(--color-softred);
+}
+
+.card_container_faq_heading :hover .card_container_faq_icon_active{
+    color: var(--color-softblue);
+}
+
+
+.card_paragraph{
+    font-size: 0.8rem;
+    line-height: 1.3rem;
+    margin-bottom: 2em;
+    text-align: justify;
+}

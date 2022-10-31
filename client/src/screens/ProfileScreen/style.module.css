@@ -1,0 +1,187 @@
+.col1{
+  grid-column: 1 / 13;
+  grid-row: 2;
+  align-self: start;
+}
+
+/* .name{
+
+} */
+
+.nationality{
+  color: var(--color-grey);
+}
+
+.membership{
+  color: var(--color-softblue);
+
+}
+
+.about_section h4{
+  color: var(--color-mediumgrey);
+}
+
+
+.about_section_label{
+  grid-column: 1/6;
+  grid-row: 1;
+  color: var(--color-greyblue);
+}
+
+.about_section_label_text{
+  grid-row: 1;
+  grid-column: 6/12;
+}
+
+.no_timeline{
+  /* box-shadow: rgba(17,12,46,0.15) 0px
+    4px 3px 0px; */
+    cursor: pointer;
+    padding: 1em;
+}
+
+.no_timeline:hover{
+  background: var(--color-softblue);
+  color: #fff;
+}
+
+.no_timeline p{
+  text-align: center;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+}
+
+.no_timeline_icon{
+  font-size: 1.4rem;
+  height: 2.3rem;
+  width: 2.3rem;
+  border: 1px solid var(--color-softblue);
+  color: var(--color-softblue);
+  border-radius: 50%;
+}
+
+.no_timeline:hover .no_timeline_icon{
+  background: var(--color-softblue);
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.timeline{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about_buttons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about_buttons a,
+.about_buttons button{
+  margin-bottom: 1em;
+}
+
+
+.delete_overlay{
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+}
+
+.delete_overlay_container{
+  width: min(70%, 20rem);
+  background: #fff;
+  padding: 1em 1em;
+  position: sticky;
+  z-index: 999;
+  top: 30%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.delete_overlay_container_button{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.col2{
+  grid-column: 1 / 13;
+  grid-row: 1;
+  align-self: start;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile_pic{
+  width: min(100%, 20rem);
+  border-radius: 1rem;
+}
+
+.profile_pic img{
+  width: 100%;
+  max-height: 20rem;
+  object-fit: cover;
+}
+
+.edit_pic{
+  width: min(100%, 20rem);
+}
+
+.input_file_designed{
+  grid-column: 1 / 13;
+  grid-row: 1;
+  z-index: 9;
+}
+
+.input_file_original{
+  grid-column: 1 / 13;
+  grid-row: 1;
+  opacity: 0;
+  z-index: 99;
+  cursor: pointer;
+}
+
+.edit_pic_loader{
+  border: 1px solid var(--color-softblue);
+  height: 0.4rem;
+  border-radius: 0.1rem;
+  align-self: stretch;
+}
+
+.edit_pic_loader_inner{
+  height: 100%;
+  background: var(--color-softblue);
+}
+
+@media (min-width: 400px){
+  .about_buttons{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+}
+
+@media (min-width: 700px){
+  .col1{
+    grid-column: 6 / 13;
+    grid-row: 1;
+  }
+
+  .col2{
+    grid-column: 1 / 5;
+    grid-row: 1
+  }
+  
+}

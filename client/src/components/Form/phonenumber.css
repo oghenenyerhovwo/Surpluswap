@@ -1,0 +1,56 @@
+.MgQcv,
+.cgiTwl,
+.jJOXFI,
+.bTrUwy {
+    width: 100% !important;
+    background: transparent !important;
+    border-bottom: 0.1px solid var(--color-softblue) !important;
+    border-left: none !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+    font-size: 1rem !important;
+    margin-top: 0.1em !important;
+    padding-left: .5em !important;
+    padding-right: .5em !important;
+    padding-top: .5em !important;
+    padding-bottom: .5em !important;
+    box-shadow: none !important;
+    display: grid !important;
+    grid-template-columns: auto auto 1fr;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: none !important;
+}
+
+.kJCncL svg
+.isCYvt svg{
+    width: 1.2rem !important;
+    height: 1.2rem !important;
+}
+
+.hyGZHN,
+.jkaLYY {
+    font-size: 0.8rem !important;
+}
+
+.xTUVe,
+.kunQDr{
+    width: 100% !important;
+    grid-column: 3 / 4;
+    grid-row: 1;
+}
+
+.hyGZHN,
+.jkaLYY {
+    width: auto !important;
+    grid-column: 2 / 3;
+    grid-row: 1;
+}
+
+.fzRoTu,
+.fbTEDd{
+    width: auto !important;
+    grid-column: 1 / 2;
+    grid-row: 1;
+}

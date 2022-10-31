@@ -1,0 +1,79 @@
+.form__heading{
+    color: var(--color-black);
+  }
+
+.form__label{
+    grid-column: 1 / 13;
+    grid-row: 1;
+    font-size: 1rem;
+}
+
+.form__field{
+    grid-column: 1 / 13;
+    grid-row: 2;
+
+    width: 100%;
+    background: transparent;
+    border-bottom: 0.1px solid var(--color-softblue);
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    font-size: 1rem;
+    margin-top: 0.1em;
+    padding-left: .5em;
+    padding-right: .5em;
+    padding-top: .5em;                                                               
+    padding-bottom: .5em;
+
+  }
+  .form__field:active,
+  .form__field:focus,
+  .form__field:focus-visible{
+    outline: none;
+    border-bottom: 0.1px solid var(--color-softblue);
+    border-left: none;
+    border-top: none;
+    border-right: none;
+  }
+
+  .form__field:disabled{
+    border: none;
+    outline: none;
+    background: #F0F0F0;
+
+  }
+
+  input[type="text"],   input[type="password"], input[type="number"], textarea, select{
+  outline: 0px!important;
+  outline: none,
+  }
+
+.form__checkbox_and_link{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+}
+
+.form__checkbox_and_link-checkbox{
+    grid-column: 1 / 2
+}
+
+.form__checkbox_and_link-checkbox{
+    grid-column: 2 / 3
+}
+
+.form__checkbox_and_link-link{
+    grid-column: 3 / 4;
+    color: var(--color-primary)
+}
+
+  /* error handling */
+  .form__error .form__field{
+    border-bottom: 1px solid var(--color-softred);
+
+  }
+
+  .form__error-paragraph{
+    grid-column: 1 / 13;
+    grid-row: 3;
+    color: var(--color-softred);
+  }

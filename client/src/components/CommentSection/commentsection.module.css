@@ -1,0 +1,101 @@
+.comment_section{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-lightgrey);
+    padding-top: 2em;
+}
+
+.post_section{
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 50rem);
+    margin: 0 auto;
+}
+
+.input_section{
+    display: flex;
+    padding: 0.6rem 0.7rem;
+    border-radius: 1rem;
+}
+
+.image{
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 1em;
+}
+
+.image img{
+    width: 2.3rem;
+    height: 2.3rem;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid var(--color-softblue);
+    word-wrap: wrap;
+}
+
+.image_line{
+    margin-top: 0.3em;
+    flex: 1;
+    width: 0.5px;
+    height: 4px;
+    background: var(--color-lightgrey);
+}
+
+.input_section textarea{
+    border: none;
+    flex: 1;
+    height: 10rem;
+    padding: 0.8rem;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.input_section textarea:focus,
+.input_section textarea:focus-visible{
+  outline: none;
+  border-bottom: none;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+}
+
+.post_button_big_screen{
+    margin-top: 1rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    color: var(--color-softblue);
+    cursor: pointer;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.post_button_big_screen:hover{
+    color: #fff;
+    background: var(--color-softblue);
+}
+
+
+@media screen and (min-width: 550px){
+    .post_section{
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .input_section{
+        width: 80%;
+    }
+
+    .post_button_small_screen{
+        display: none;
+    }
+
+    .post_button_big_screen{
+        display: flex;
+    }
+}

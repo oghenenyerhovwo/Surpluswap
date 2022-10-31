@@ -1,0 +1,126 @@
+@font-face{font-family: Roboto-Black; src: url('./assets/font-family/Roboto/Roboto-Black.ttf')}
+@font-face{font-family: Roboto-Black_Italic; src: url('./assets/font-family/Roboto/Roboto-BlackItalic.ttf')}
+@font-face{font-family: Roboto-Bold; src: url('./assets/font-family/Roboto/Roboto-Bold.ttf')}
+@font-face{font-family: Roboto-Bold_Italic; src: url('./assets/font-family/Roboto/Roboto-BoldItalic.ttf')}
+@font-face{font-family: Roboto-Light; src: url('./assets/font-family/Roboto/Roboto-Light.ttf')}
+@font-face{font-family: Roboto-Light_Italic; src: url('./assets/font-family/Roboto/Roboto-LightItalic.ttf')}
+@font-face{font-family: Roboto-Medium; src: url('./assets/font-family/Roboto/Roboto-Medium.ttf')}
+@font-face{font-family: Roboto-Medium_Italic; src: url('./assets/font-family/Roboto/Roboto-MediumItalic.ttf')}
+@font-face{font-family: Roboto-Thin; src: url('./assets/font-family/Roboto/Roboto-Thin.ttf')}
+@font-face{font-family: Roboto-Thin_Italic; src: url('./assets/font-family/Roboto/Roboto-ThinItalic.ttf')}
+@font-face{font-family: Roboto-Regular; src: url('./assets/font-family/Roboto/Roboto-Regular.ttf')}
+@font-face{font-family: Rubik; src: url('./assets/font-family/Rubik/Rubik-VariableFont_wght.ttf')}
+@font-face{font-family: Rubik_Italic; src: url('./assets/font-family/Rubik/Rubik-Italic-VariableFont_wght.ttf')}
+
+
+:root {
+  --font-roboto-black: "Roboto-Black", sans-serif;
+  --font-roboto-black_italic: "Roboto-Black_Italic", sans-serif;
+  --font-roboto-bold: "Roboto-Bold", sans-serif;
+  --font-roboto-bold_italic: "Roboto-Bold_Italic", sans-serif;
+  --font-roboto-light: "Roboto-Light", sans-serif;
+  --font-roboto-light_italic: "Roboto-Light_Italic", sans-serif;
+  --font-roboto-medium: "Roboto-Medium", sans-serif;
+  --font-roboto-medium_italic: "Roboto-Medium_Italic", sans-serif;
+  --font-roboto-thin: "Roboto-Thin", sans-serif;
+  --font-roboto-thin_italic: "Roboto-Thin_Italic", sans-serif;
+  --font-roboto-regular: "Roboto-Regular", sans-serif;
+  --font-rubik: 'Rubik',Helvetica,Arial,Lucida,sans-serif;
+  --font-rubik_italic: 'Rubik_Italic';
+
+
+
+  --color-orange: #ffcc57;
+  --color-dark-blue: #1a3066;
+  --color-light-blue: #6E98F2;
+  --color-dark-grey: #666;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-rubik);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+::after,
+::before,
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+
+main{
+  z-index: 9;
+}
+
+header{
+  z-index: 99;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* font */
+/* ============================== */
+h1{
+  font-size: 1.625rem;
+  font-family: var(--font-roboto-bold);
+  line-height: 1.3em;
+  font-weight: 500;
+}
+
+h2{
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.3em;
+}
+
+h3{
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.3em;
+}
+
+h4{
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.3em;
+}
+
+p{
+  font-size: 1rem;
+}
+
+a{
+  transition: 0.5s;
+}
+
+@media screen and (min-width: 767px){
+  h1{
+    font-size: 2.75rem;
+  }
+  h2{
+    font-size: 1.875rem;
+  }
+}
+
+@media screen and (min-width: 980px){
+  h1{
+    font-size: 3.375rem;
+  }
+  h2{
+    font-size: 2.375rem;
+  }
+}
+

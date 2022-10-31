@@ -1,0 +1,101 @@
+/* Layout */
+/* ============================== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 1rem;
+  row-gap: 1rem;
+}
+
+.flex{
+  display: flex;
+}
+
+.flex__center{
+  align-items: center;
+  justify-content: center;
+}
+
+.flex__column{
+  flex-direction: column;
+}
+
+.flex__row{
+  flex-direction: row;
+}
+
+.block{
+  width: 100%;
+}
+
+.container {
+  width: min(80%, 80rem);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* spacing */
+.spacing-xs{
+    margin-bottom: 0.5em;
+}
+
+.spacing-sm{
+  margin-bottom: 1em;
+}
+
+.spacing-md{
+  margin-bottom: 2em;
+}
+
+.spacing-lg{
+  margin-bottom: 4em;
+}
+
+.spacing-xl{
+  margin-bottom: 6em;
+}
+
+/* color */
+.soft_blue {
+  color: var(--color-softblue);
+}
+
+.word_break{
+  word-break: break-all;
+}
+
+/* react rainbow */
+
+/* button menu ellipse */
+.bSiEGH{
+  border: none !important;
+  background: transparent !important;
+  color: var(--color-mediumgrey) !important;
+}
+
+.bSiEGH:hover, .bSiEGH:focus, .bSiEGH:focus-visible, .bSiEGH:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  color: var(--color-softblue) !important;
+}
+
+.fGFUrL { /*the overlay */
+  line-height: 0.8rem !important;
+  -webkit-transition: 0.5s !important;
+  transition: 1.5s !important;
+  font-size: 0.7rem !important;
+  padding: 0.15rem 0.75rem !important;
+  color: rgba(42,48,57,1) !important;
+}
+
+.jeckxp {
+  font-size: 0.8rem !important;
+}
+
+/* radio buttons */
+.kMUtMg ~ label > .rainbow-input_faux {
+  width: 0.8rem !important;
+  height: 0.8rem !important;
+}

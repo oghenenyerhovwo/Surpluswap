@@ -1,0 +1,195 @@
+.app_header_container{
+    margin-bottom: 2em;
+}
+
+.navbar{
+    padding: 1em 0;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+} 
+
+.nav_brand{
+    /* flex: 1; */
+}
+
+.nav_brand h3{
+    cursor: pointer;
+    display:flex;
+    align-items: center;
+}
+
+.nav_brand h3 img{
+    height: 1.4rem;
+    margin-right: 0.4em;
+    filter: sepia(100%) hue-rotate(190deg) saturate(500%);
+} 
+
+.menu_icon{
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    justify-self: center;
+    margin-left: 1.5em;
+}
+
+.menu_icon:hover{
+    color: var( --color-secondary);
+}
+
+.nav_items{
+    background: linear-gradient(to left, rgba(250, 87, 87, 0.7),  rgba(246, 41, 41,0.7), rgba(250, 87, 87,0.7));
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    position:absolute;
+    top: -1000%;
+    left: 0;
+    color: #fff;
+    transition: 0.6s;
+    padding-top: 1em;
+    flex: 1;
+    z-index: 9999;
+}
+
+.nav_items ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav_items ul li{
+    list-style: none;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    position: relative;
+}
+
+.nav_items ul li:hover::after{
+    width: 100%;
+}
+
+.nav_links{
+    font-size: 0.9rem;
+}
+
+.nav_button_container{
+    margin-right: 0 !important;
+    position: relative;
+}
+
+.nav_button{
+    border: 1px solid var(--color-softblue);
+    border-radius: 1.2rem;
+    padding: 0.2em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0;
+    z-index: 9;
+}
+
+.nav_button_overlay{
+    border-radius: 1.2rem;
+    background:  var(--color-softblue);
+    display: block;
+    position:absolute;
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+}
+
+.nav_button_container:hover .nav_button_overlay {
+    width: 100%;
+}
+
+.nav_button_container:hover .nav_button{
+    color: var(--color-white);
+}
+
+.nav_button_container::after{
+    height: 0px !important;
+}
+
+.menu_icon{
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    justify-self: center;
+    margin-left: 1.5em;
+}
+
+.menu_icon:hover{
+    color: var( --color-secondary);
+}
+
+.name{
+    display: none;
+}
+
+.profile_pic{
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media screen and (min-width: 550px){
+    .nav_brand{
+        flex: 1;
+    }
+
+    .name{
+        display: inline;
+        margin-right: 0.3em;
+    }
+}
+
+
+@media screen and (min-width: 700px){
+    .nav_brand{
+        flex: 1;
+    }
+    .nav_items_small,
+    .menu_icon{
+        display: none
+    }
+    .nav_items{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        position: initial;
+        color: var(--color-black);
+        background: transparent;
+        width: auto;
+        padding-top: 0em;
+    }
+
+    .nav_items ul{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .nav_items ul li{
+        margin-bottom: 0;
+        padding-bottom: 0;
+        margin-right: 2em;
+    }
+
+
+    .nav_items{
+        padding: 0;
+    }
+
+    .nav_button_container_smallscreen{
+        display: none;
+    }
+}

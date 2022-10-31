@@ -1,0 +1,24 @@
+.events{
+   display: flex;
+   flex-direction: column;
+}
+
+.events_button{
+   display: flex;
+   justify-content: center;
+}
+
+@media screen and (min-width: 350px){
+   .events{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
+      column-gap: 2rem;
+      justify-items: center;
+   }
+}
+
+@media screen and (min-width: 700px){
+   .events_button{
+      justify-content: flex-end;
+   }
+}

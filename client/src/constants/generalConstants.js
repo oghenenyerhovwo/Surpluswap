@@ -1,0 +1,2 @@
+export const CHANGE_LIGHT_MODE = "CHANGE_APP_MODE"
+
