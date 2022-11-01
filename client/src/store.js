@@ -7,15 +7,15 @@ const initialState = {};
 const middleware = [thunk];
 
 // ***********************For development***********************
-const developmentStore = createStore(
+// const developmentStore = createStore(
 
-  rootReducer,
-  initialState,
-  compose(
-    applyMiddleware(...middleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+//   rootReducer,
+//   initialState,
+//   compose(
+//     applyMiddleware(...middleware),
+//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//   )
+// );
 
 // ***********************For production***********************
 const composeEnhancers =
@@ -32,6 +32,6 @@ const productionStore = createStore(
     )
 );
 
-const store = process.env.NODE_ENV === "development" ? developmentStore: productionStore
+// const store = process.env.NODE_ENV === "development" ? developmentStore: productionStore
 
-export default store;
+export default productionStore;
