@@ -1,5 +1,5 @@
 import React from 'react'
-import CustomLink from "../CustomLink"
+import { Link } from 'react-router-dom'
 import "./button.css"
 
 const Button = props => {
@@ -18,14 +18,14 @@ const Button = props => {
     <>
       {
         type === "link" ?
-        <CustomLink 
+        <Link 
           className={`btn btn-${variant } btn-${size || "lg" } spacing-sm  ${block && `flex flex__center btn-block` }`} 
-          href={href}
+          to={href}
           disabled={disabled}
           onClick={onClick}
         >
             {children} 
-        </CustomLink>:
+        </Link>:
         <button 
           className={`btn btn-${variant } btn-${size || "lg" } spacing-sm   ${block && `flex flex__center btn-block` }`} 
           to={href || "#"}

@@ -34,6 +34,7 @@
   --color-dark-blue: #1a3066;
   --color-light-blue: #6E98F2;
   --color-dark-grey: #666;
+  --color-light-grey: #ececec;
 }
 
 body {
@@ -100,6 +101,7 @@ h4{
 
 p{
   font-size: 1rem;
+  line-height: 1.3em;
 }
 
 a{

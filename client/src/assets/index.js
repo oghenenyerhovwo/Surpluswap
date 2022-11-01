@@ -1,5 +1,9 @@
-import { impexLogo } from "./images"
+import { 
+    impexLogo, 
+    introInterpreter, 
+} from "./images"
 
 export {
     impexLogo,
+    introInterpreter,
 }
