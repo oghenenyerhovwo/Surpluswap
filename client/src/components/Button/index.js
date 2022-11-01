@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FaAngleRight } from 'react-icons/fa';
 import "./button.css"
 
 const Button = props => {
@@ -24,7 +25,8 @@ const Button = props => {
           disabled={disabled}
           onClick={onClick}
         >
-            {children} 
+            <span>{children}</span>
+            <FaAngleRight />
         </Link>:
         <button 
           className={`btn btn-${variant } btn-${size || "lg" } spacing-sm   ${block && `flex flex__center btn-block` }`} 
@@ -33,7 +35,8 @@ const Button = props => {
           onClick={onClick}
           type={type}
         >
-          {children}
+          <span>{children}</span>
+          <FaAngleRight />
         </button>
       }
       {error && <p className="btn-error"><em>{"/* Make sure all required fields are filled */"}</em> </p>}
