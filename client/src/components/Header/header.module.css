@@ -127,6 +127,7 @@
     opacity: 0;
     overflow-y: hidden;
     z-index: 9999;
+    background: #fff;
 }
 
 .nav_collapse ul li{
