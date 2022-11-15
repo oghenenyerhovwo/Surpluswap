@@ -1,11 +1,18 @@
 import React from 'react';
+import { motion } from "framer-motion"
 import { useSelector } from 'react-redux'
 
 // functions
 // import { getUser } from "../../actions"
 
-// style
-import styles from "./appcontainer.module.css"
+const containerVariants = {
+  hidden: {
+    opacity: 0.98,
+  },
+  visible: {
+    opacity: 1,
+  },
+}
 
 const AppContainer =props => {
     // const dispatch = useDispatch()
@@ -35,7 +42,16 @@ const AppContainer =props => {
   // }, [dispatch, successDeleteUser, successSignOut, successUpdateUser])
 
   return (
-    <div className={`${styles.app_container} ${lightMode ? styles.app_container_light : styles.app_container_dark}`}>{props.children}</div> 
+    <motion.div 
+      className="app_container"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      whileInView="scrollVisible"
+      whileHover="hoverVisible"
+    >
+      <div className={`${"app_container_light"} ${!lightMode && "app_container_dark"}`}>{props.children}</div> 
+    </motion.div>
   )
 }
 

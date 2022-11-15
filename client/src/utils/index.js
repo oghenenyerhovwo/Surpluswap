@@ -20,6 +20,7 @@ import {
   isSuperAdmin,
   isAuthor,
 } from "./auth"
+import { scrollAnimations } from "./animations"
 
 
 
@@ -39,5 +40,7 @@ export {
     isAdmin,
     isSuperAdmin,
     isAuthor,
-    aboutSectionArray
+    aboutSectionArray,
+
+    scrollAnimations,
 }

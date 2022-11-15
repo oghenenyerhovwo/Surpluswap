@@ -4,6 +4,8 @@ import aboutInterpreter from "./interpreter-30.png"
 import missionTarget from "./our-mission-icon-e1665238881197.png"
 import visionIcon from "./vision-icon-e1665256838916.png"
 import coreValuesIcon from "./our-core-values-icon-e1665257641495.png"
+import yellowCurve from "./Path.png"
+import blueBlob from "./Path-1.png"
 
 export {
     impexLogo,
@@ -12,4 +14,6 @@ export {
     missionTarget,
     visionIcon,
     coreValuesIcon,
+    yellowCurve,
+    blueBlob,
 }

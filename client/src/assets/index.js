@@ -5,6 +5,8 @@ import {
     missionTarget,
     visionIcon,
     coreValuesIcon,
+    yellowCurve,
+    blueBlob,
 } from "./images"
 
 export {
@@ -14,4 +16,6 @@ export {
     missionTarget,
     visionIcon,
     coreValuesIcon,
+    yellowCurve,
+    blueBlob,
 }

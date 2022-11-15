@@ -1,5 +1,19 @@
+/* Light Mode */
+/* ============================== */
+
+.app_container_dark{
+  background: #081b33;
+  color: #fff;
+}
+
+
 /* Layout */
 /* ============================== */
+
+.app_container{
+  min-height: 100vh;
+  height: 100%;
+}
 
 .grid {
   display: grid;
@@ -37,28 +51,23 @@
 
 /* spacing */
 .spacing-xs{
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5rem;
 }
 
 .spacing-sm{
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .spacing-md{
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
 }
 
 .spacing-lg{
-  margin-bottom: 4em;
+  margin-bottom: 4rem;
 }
 
 .spacing-xl{
-  margin-bottom: 6em;
-}
-
-/* color */
-.soft_blue {
-  color: var(--color-softblue);
+  margin-bottom: 6rem;
 }
 
 .word_break{
@@ -99,3 +108,4 @@
   width: 0.8rem !important;
   height: 0.8rem !important;
 }
+

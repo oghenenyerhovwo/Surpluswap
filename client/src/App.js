@@ -1,22 +1,19 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-
-// components
-import { AppContainer } from "./components"
-
-// screens
-import HomeScreen from "./screens/HomeScreen"
+import { BrowserRouter } from "react-router-dom"
 
 // styles
 import './App.css';
 
+// components
+import { RoutesContainer } from "./components"
+// import { AppContainer } from "./components"
+
 function App() {
+
   return (
     <BrowserRouter>
-        <AppContainer> 
-          <Routes>
-            <Route path="/" element={<><HomeScreen /> </> } exact></Route>
-          </Routes>
-        </AppContainer>
+        {/* <AppContainer>  */}
+        <RoutesContainer />
+        {/* </AppContainer> */}
     </BrowserRouter>
   );
 }
