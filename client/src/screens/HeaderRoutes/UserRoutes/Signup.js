@@ -76,7 +76,7 @@ const SignUp = () => {
 
   const handlePhone = phone => {
     const digitNumber = `${phone.phone}`
-    const digitNumberPlusCode = `${phone.countryCode} ${Number(phone.phone)}`
+    const digitNumberPlusCode = `${phone.countryCode}${Number(phone.phone)}`
     setForm({
       ...form, 
       phoneNumber: phone,

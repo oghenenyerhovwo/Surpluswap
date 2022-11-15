@@ -56,7 +56,7 @@ const SignIn = () => {
 
   const handleChange = e => {
     const {name,value} = e.target
-    setForm({...form, [name]: value})
+    setForm({...form, [name]: typeof(value) === "object" ? value : value.trim()})
     onChangeError(name, value, form, error, setError)
   }
 
