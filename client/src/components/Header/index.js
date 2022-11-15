@@ -11,7 +11,7 @@ import { FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom'
 
 // actions
-import { changeLightMode } from "../../actions"
+import { changeLightMode, signOut } from "../../actions"
 
 // importing css
 import styles from "./header.module.css"
@@ -20,10 +20,26 @@ import styles from "./header.module.css"
 // import { impexLogo } from "../../assets"
 
 const NavLinks = () => {
+  const dispatch = useDispatch()
+
+  const { 
+    currentUser, 
+  }=  useSelector(state => state.userStore)
+
+  const signUserOut = () => {
+    dispatch(signOut())
+  }
+
   return (
     <ul>
       <li><Link className={`${styles.nav_links}`} to="/">Home</Link></li>
-      <li><Link className={`${styles.nav_links}`} to="/about">Logout</Link></li>
+      <li>
+        {
+          currentUser._id ? (
+            <Link onClick={signUserOut} className={`${styles.nav_links}`} to="#">Logout</Link>
+          ) : <Link className={`${styles.nav_links}`} to="/user/signin">Login</Link>
+        }
+      </li>
       <li><Link className={`${styles.nav_links}`} to="/story">Password Reset</Link></li>
       <li><Link className={`${styles.nav_links}`} to="/event">Register</Link></li>
       <li><Link className={`${styles.nav_links}`} to="/faq">Uncategorised</Link></li>
