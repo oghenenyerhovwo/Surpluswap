@@ -21,10 +21,10 @@ const HeaderRoutes = () => {
           </div>
         </section>
         <section className="body">
-          <UserRoutes />
           <Routes>
-              <Route exact path="/" element={<HomeScreen />}></Route>
+              <Route path="/" element={<HomeScreen />}></Route>
           </Routes>
+          <UserRoutes />
         </section>
       </>
     )

@@ -170,7 +170,7 @@ const SignUp = () => {
           <p className="spacing-md">
             Already have an account? 
             <Link 
-              to="/signin"
+              to="/user/signin"
             >Log In</Link></p>
           </div>        
 

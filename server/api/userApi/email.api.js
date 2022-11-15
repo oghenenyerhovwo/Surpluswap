@@ -9,12 +9,11 @@ import {
 
 const router = express.Router();
 
-
 // sign in user
 router.post(
     "/signin", (req, res) => {
         signIn(req, res)
-    });
+});
 
 // register user
 router.post(

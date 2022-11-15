@@ -41,19 +41,22 @@ export const signUp = async(req, res) => {
 }
 
 export const signIn = async(req, res) => {
-    const {email, password} = req.body
-    const foundUser = await findUser({email: email}) 
-    if(foundUser){
-         if(bcrypt.compareSync(password, foundUser.password)){
-             res.send({user: foundUser, token: generateToken(foundUser)})
-             return;
-         } else {
-             res.status(401).send({message: "Password is incorrect"})
-             return;
-         }
-    } else {
-        res.status(401).send({message: "User does not exist"})
-    }
+    const {emailOrPhoneNumber, password} = req.body
+    
+    const foundUserByEmail = await findUser({email: emailOrPhoneNumber}) 
+    const foundUserByPhoneNumberText = await findUser({phoneNumberText: emailOrPhoneNumber}) 
+    const foundUserByPhoneNumberTextWithCode = await findUser({phoneNumberTextWithCode: emailOrPhoneNumber}) 
+
+    if(!foundUserByEmail && !foundUserByPhoneNumberText && !foundUserByPhoneNumberTextWithCode){
+        return res.status(401).send({message: "No account has been created with this email or phone number"})
+    } 
+
+    const foundUser = foundUserByEmail || foundUserByPhoneNumberText || foundUserByPhoneNumberTextWithCode
+    if(!bcrypt.compareSync(password, foundUser.password)){
+        return res.status(401).send({message: "Password is incorrect"})
+    } 
+
+    res.send({user: foundUser, token: generateToken(foundUser)})
  }
 
 
