@@ -10,12 +10,18 @@ import { findUser, updateUserFunc } from "./userFunctions.js"
 
 export const signUp = async(req, res) => {
     try {
-        const {email, phoneNumber} = req.body
+        const {email, phoneNumberText} = req.body
         
         // check if email already exists
         const foundUserByEmail = await findUser({email: email}) 
         if(foundUserByEmail){
             return res.status(401).send({message: "This email has been used previously"})
+        }
+
+        // check if phone number already exists
+        const foundUserByPhoneNumberText = await findUser({phoneNumberText: phoneNumberText}) 
+        if(foundUserByPhoneNumberText){
+            return res.status(401).send({message: "This phone number has been used previously"})
         }
 
         const newUser= {

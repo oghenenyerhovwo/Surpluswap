@@ -17,6 +17,7 @@ const Input = props => {
         placeholder,
         disabled,
         required,
+        autoComplete,
         // hideNumberArrow,
     } = props
 
@@ -53,6 +54,7 @@ const handleIcon = () => {
             name={name}
             placeholder={placeholder}
             disabled={disabled}
+            autoComplete ={autoComplete}
         />
         {
             type === "password" && (

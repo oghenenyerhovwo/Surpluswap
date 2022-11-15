@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom"
 
 // screens
 import HomeScreen from "./Home"
-import UserRoutes from "./UserRoutes"
 
 // components
 import { 
@@ -21,9 +20,8 @@ const HeaderRoutes = () => {
           </div>
         </section>
         <section className="body">
-          <UserRoutes />
           <Routes>
-              <Route exact path="/" element={<HomeScreen />}></Route>
+              <Route path="/" element={<HomeScreen />}></Route>
           </Routes>
         </section>
       </>

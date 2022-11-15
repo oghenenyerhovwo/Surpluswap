@@ -7,12 +7,8 @@ export const onChangeError = (name, value, form, error, setError) => {
     }
     else{
       if(name === "confirmPassword" && form.password !== value){
-        keyObject[name] = "Password do not match"
-      } 
-      if(name === "phoneNumber" && value.length !== 11){
-        keyObject[name] = "Invalid phone number"
-      }
-       
+        keyObject = {...keyObject, [name] : "Password do not match"}
+      }  
       else {
         keyObject[name] = ""
       }
@@ -41,7 +37,15 @@ export const onChangeError = (name, value, form, error, setError) => {
         }
   
         else {
-          if(form[key] === "" && (typeof(error[key]) === "string") ){
+          if(typeof(form[key]) === "object" ){
+            console.log(key)
+            if(key === "phoneNumber" && !form[key].phone ){
+              keyObject[key] = "This field must not be empty"
+              isError = true
+            }
+          }
+
+          else if(form[key] === "" && (typeof(error[key]) === "string") ){
             keyObject[key] = "This field must not be empty"
             isError = true
           }

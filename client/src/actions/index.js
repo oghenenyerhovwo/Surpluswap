@@ -8,10 +8,10 @@ import { changeLightMode } from "./generalActions"
 // import { createRent, updateRent } from "./rentActions/postActions"
 // import { getRents } from "./rentActions/getActions"
 
-// import { signUpUser, signInUser, confirmEmail, signOut, } from "./userActions/email.action"
-// import { resetPassword, getResetPasswordEmail } from "./userActions/password.action"
-// import { getUser, getUserById, deleteUser, updateUser, getUsers } from "./userActions/control.action"
-// import { googleSignIn } from "./userActions/thirdparty.action"
+import { signUpUser, signInUser, confirmEmail, signOut, } from "./userActions/email.action"
+import { resetPassword, getResetPasswordEmail } from "./userActions/password.action"
+import { getUser, getUserById, deleteUser, updateUser, getUsers } from "./userActions/control.action"
+import { googleSignIn } from "./userActions/thirdparty.action"
 
 // import { createComment,  deleteComment } from "./commentActions/postActions"
 
@@ -46,18 +46,18 @@ export {
     // getRents,
 
 
-    // signUpUser,
-    // signInUser,
-    // confirmEmail,
-    // signOut,
-    // getResetPasswordEmail,
-    // resetPassword,
-    // googleSignIn,
-    // getUser,
-    // getUserById,
-    // deleteUser,
-    // updateUser,
-    // getUsers,
+    signUpUser,
+    signInUser,
+    confirmEmail,
+    signOut,
+    getResetPasswordEmail,
+    resetPassword,
+    googleSignIn,
+    getUser,
+    getUserById,
+    deleteUser,
+    updateUser,
+    getUsers,
 
     // uploadImage,
     // postImage,

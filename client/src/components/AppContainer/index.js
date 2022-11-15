@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from "framer-motion"
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 // functions
-// import { getUser } from "../../actions"
+import { getUser } from "../../actions"
 
 const containerVariants = {
   hidden: {
@@ -15,25 +15,25 @@ const containerVariants = {
 }
 
 const AppContainer =props => {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-  // const { 
-  //   currentUser, 
-  //   token ,
-  //   successDeleteUser,
-  //   successSignOut,
-  //   successUpdateUser,
-  // }=  useSelector(state => state.userStore)
+  const { 
+    currentUser, 
+    token ,
+    // successDeleteUser,
+    // successSignOut,
+    // successUpdateUser,
+  }=  useSelector(state => state.userStore)
 
   const { 
     lightMode,
   }=  useSelector(state => state.generalStore)
 
-  // useEffect(() => {
-  //   if(token && !currentUser.email){
-  //     dispatch(getUser())
-  //   }
-  // }, [currentUser, token, dispatch])
+  useEffect(() => {
+    if(token && !currentUser.email){
+      dispatch(getUser())
+    }
+  }, [currentUser, token, dispatch])
 
   // useEffect(() => {
   //   if(successDeleteUser || successSignOut || successUpdateUser){

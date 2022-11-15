@@ -1,0 +1,10 @@
+.home_container{
+    width: min(90%, 90rem);
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 300px){
+    .home_container{
+      width: min(80%, 90rem);
+    }
+}
