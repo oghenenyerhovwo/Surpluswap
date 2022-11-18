@@ -9,6 +9,7 @@ import RoutesContainer from "./RoutesContainer"
 import Spinner from "./Spinner"
 import MessageBox from "./MessageBox"
 import Form from "./Form"
+import ErrorBox from "./ErrorBox"
 
 export {
     Header,
@@ -21,4 +22,5 @@ export {
     Spinner,
     MessageBox,
     Form,
+    ErrorBox,
 }

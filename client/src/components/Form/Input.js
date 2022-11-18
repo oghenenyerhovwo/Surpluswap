@@ -3,6 +3,7 @@ import "./input.css"
 
 import {BiHide} from "react-icons/bi"
 import {BiShow} from "react-icons/bi"
+import ErrorBox from "../ErrorBox"
 // 
 // BiShow
 const Input = props => {
@@ -18,6 +19,7 @@ const Input = props => {
         disabled,
         required,
         autoComplete,
+        errorMessage,
         // hideNumberArrow,
     } = props
 
@@ -44,7 +46,7 @@ const handleIcon = () => {
 }
 
   return (
-    <div className={`app_input spacing-md grid ${inputError && "form__error"} app_input-number`}>
+    <div className={`app_input grid spacing-sm ${inputError && "form__error"} app_input-number`}>
         <label className="form__label">{label}  <span className="danger">{label && required && "*"} </span> </label>
         <input
             className="form__field" 
@@ -58,12 +60,20 @@ const handleIcon = () => {
         />
         {
             type === "password" && (
-                <div className="app_input-password flex flex__center">
+                <span className="app_input-password">
                     { !showIcon ? <BiShow onClick={handleIcon} /> : <BiHide onClick={handleIcon} />}
+                </span>
+            )
+        }
+        {
+            inputError && (
+                <div className="form__error_box">
+                    <ErrorBox>
+                        {errorMessage || inputError} 
+                    </ErrorBox>
                 </div>
             )
         }
-        <p className="form__error-paragraph smalltext__avenir">{inputError} </p>
     </div>
   )
 }

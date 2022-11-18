@@ -2,17 +2,21 @@
 /* input */
 /* ============================== */
 
+/* .app_input{
+  position: relative;
+} */
   
 .app_input-password{
-    grid-column: 12 / 13;
-    grid-row: 2;
-
-    margin-top: 0.1em;
     width: 100%;
     background: transparent;
 
     font-size: 1rem;
     cursor: pointer;
+    
+    grid-column: 12/13;
+    grid-row: 2;
+    margin-right: 0.5em;
+    margin-top: 0.75rem;
   }
 
 /* Chrome, Safari, Edge, Opera */

@@ -1,56 +1,68 @@
-.MgQcv,
-.cgiTwl,
-.jJOXFI,
-.bTrUwy {
+.phonenumber_form__field{
+    grid-column: 1 / 13;
+    grid-row: 2;
+
+    width: 100%;
+    background: transparent;
+    border: 0.1px solid rgba(102, 102, 102, 0.3);
+    font-size: 0.9375rem;
+    height: 2.5rem;
+    color: #666;
+    border-radius: 5px;
+}
+
+.phonenumber_form__field > div > div {
     width: 100% !important;
     background: transparent !important;
-    border-bottom: 0.1px solid var(--color-softblue) !important;
+    border-bottom: none !important;
     border-left: none !important;
     border-top: none !important;
     border-right: none !important;
     border-radius: 0 !important;
     font-size: 1rem !important;
-    margin-top: 0.1em !important;
-    padding-left: .5em !important;
-    padding-right: .5em !important;
-    padding-top: .5em !important;
-    padding-bottom: .5em !important;
+    margin: 0 !important;
+    padding-left: 0.5em !important;
+    padding-right: 0.5em !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     box-shadow: none !important;
     display: grid !important;
     grid-template-columns: auto auto 1fr;
     align-items: center !important;
     justify-content: center !important;
     box-shadow: none !important;
+    display: flex !important;
+    grid-template-columns: auto auto 1fr !important;
 }
 
-.kJCncL svg
-.isCYvt svg{
+/* country logo */
+.phonenumber_form__field > div > div > button {
+    /* flex: 1  !important; */
+}
+
+.phonenumber_form__field > div > div > button svg{
     width: 1.2rem !important;
     height: 1.2rem !important;
 }
 
-.hyGZHN,
-.jkaLYY {
+
+/* +234 */
+.phonenumber_form__field > div > div > div {
     font-size: 0.8rem !important;
+    display: none;
 }
 
-.xTUVe,
-.kunQDr{
-    width: 100% !important;
-    grid-column: 3 / 4;
-    grid-row: 1;
+/* Input text */
+.phonenumber_form__field > div > div > input{
+    font-size: 0.9375rem !important;
+    color: #666 !important;
+    min-width: 5rem !important;
+    flex: 1  !important;
 }
 
-.hyGZHN,
-.jkaLYY {
-    width: auto !important;
-    grid-column: 2 / 3;
-    grid-row: 1;
-}
-
-.fzRoTu,
-.fbTEDd{
-    width: auto !important;
-    grid-column: 1 / 2;
-    grid-row: 1;
+@media screen and (min-width: 300px){
+    /* +234 */
+    .phonenumber_form__field > div > div > div{
+        display: block;
+    }
 }

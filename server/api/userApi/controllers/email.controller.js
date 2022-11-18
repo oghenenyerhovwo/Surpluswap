@@ -41,17 +41,18 @@ export const signUp = async(req, res) => {
 }
 
 export const signIn = async(req, res) => {
-    const {emailOrPhoneNumber, password} = req.body
+    const {emailOrUsernameOrPhoneNumber, password} = req.body
     
-    const foundUserByEmail = await findUser({email: emailOrPhoneNumber}) 
-    const foundUserByPhoneNumberText = await findUser({phoneNumberText: emailOrPhoneNumber}) 
-    const foundUserByPhoneNumberTextWithCode = await findUser({phoneNumberTextWithCode: emailOrPhoneNumber}) 
+    const foundUserByEmail = await findUser({email: emailOrUsernameOrPhoneNumber}) 
+    const foundUserByUsername = await findUser({userName: emailOrUsernameOrPhoneNumber}) 
+    const foundUserByPhoneNumberText = await findUser({phoneNumberText: emailOrUsernameOrPhoneNumber}) 
+    const foundUserByPhoneNumberTextWithCode = await findUser({phoneNumberTextWithCode: emailOrUsernameOrPhoneNumber}) 
 
-    if(!foundUserByEmail && !foundUserByPhoneNumberText && !foundUserByPhoneNumberTextWithCode){
-        return res.status(401).send({message: "No account has been created with this email or phone number"})
+    if(!foundUserByEmail && !foundUserByUsername && !foundUserByPhoneNumberText && !foundUserByPhoneNumberTextWithCode){
+        return res.status(401).send({message: "No account has been created with this email, username or phone number"})
     } 
 
-    const foundUser = foundUserByEmail || foundUserByPhoneNumberText || foundUserByPhoneNumberTextWithCode
+    const foundUser = foundUserByEmail || foundUserByUsername || foundUserByPhoneNumberText || foundUserByPhoneNumberTextWithCode
     if(!bcrypt.compareSync(password, foundUser.password)){
         return res.status(401).send({message: "Password is incorrect"})
     } 

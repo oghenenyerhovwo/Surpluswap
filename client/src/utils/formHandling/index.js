@@ -38,7 +38,6 @@ export const onChangeError = (name, value, form, error, setError) => {
   
         else {
           if(typeof(form[key]) === "object" ){
-            console.log(key)
             if(key === "phoneNumber" && !form[key].phone ){
               keyObject[key] = "This field must not be empty"
               isError = true

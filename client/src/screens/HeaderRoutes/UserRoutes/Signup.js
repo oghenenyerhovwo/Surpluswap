@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 // component
-import { Spinner, MessageBox, Form, Button } from "../../../components"
+import { Spinner, MessageBox, Form } from "../../../components"
 
 // css
 import styles from "./signup.module.css"
@@ -26,21 +26,21 @@ const SignUp = () => {
   const initialFormState = {
     email: "",
     password: "",
+    userName: "",
     firstName: "",
-    lastName: "",
     phoneNumber: { isoCode:"ng" },
     confirmPassword: "",
   }
   const [form, setForm] = useState({
     ...initialFormState,
     phoneNumberText: "",
+    lastName: "",
     phoneNumberTextWithCode: "",
   })
   const [error, setError] = useState({
     ...initialFormState,
     phoneNumber: "",
   })
-  const [submitError, setSubmitError] = useState(false)
 
   useEffect(() => {
     // redirect user to signUser if user sign User is successful
@@ -60,12 +60,9 @@ const SignUp = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    setSubmitError(false)
     if(!onSubmitError(form, error, setError)){
       dispatch(signUpUser(form))
-    } else{
-      setSubmitError(true)
-    }
+    } 
   }
 
   const handleChange = e => {
@@ -87,12 +84,13 @@ const SignUp = () => {
   }
 
   return (
-    <div className={`grid ${styles.signup}`}>
+    <div className={`${styles.signup} spacing-lg`}>
 
       <div className={`${styles.form}`}>
+        <h2 className="spacing-md">Create Account </h2>
+
         <div className={`${styles.form_container}`}>
             {/* <img className="logo__small spacing-md" src={logo} alt="logo" /> */}
-          <h2 className="spacing-md">Create Account </h2>
 
           <div className={`${styles.google} spacing-md`}>
             {/* <Google /> */}
@@ -103,6 +101,15 @@ const SignUp = () => {
             {loadingSignUser && <Spinner />}
             {errorSignUser && <MessageBox variant="danger">{errorSignUser} </MessageBox>}
 
+            <Form.Input 
+              label="Username"
+              onChange={handleChange}
+              value={form.userName}
+              type="text"
+              name="userName"
+              error={error.userName}
+              errorMessage="Username is required"
+            />
 
             <Form.Input 
               label="First Name"
@@ -111,6 +118,7 @@ const SignUp = () => {
               type="text"
               name="firstName"
               error={error.firstName}
+              errorMessage="First Name is required"
             />
 
             <Form.Input 
@@ -119,7 +127,6 @@ const SignUp = () => {
               value={form.lastName}
               type="text"
               name="lastName"
-              error={error.lastName}
             />
 
             <Form.Input 
@@ -129,6 +136,7 @@ const SignUp = () => {
               type="email"
               name="email"
               error={error.email}
+              errorMessage="Provide an email"
             />
 
             <Form.PhoneNumber 
@@ -137,6 +145,7 @@ const SignUp = () => {
                 value={form.phoneNumber}
                 error={error.phoneNumber}
                 name="phoneNumber"
+                errorMessage="Provide a mobile telephone number"
               />
 
             <Form.Input 
@@ -147,6 +156,7 @@ const SignUp = () => {
               name="password"
               error={error.password}
               autoComplete={"true"}
+              errorMessage="Password is required"
             />
 
             <Form.Input 
@@ -157,22 +167,30 @@ const SignUp = () => {
               name="confirmPassword"
               error={error.confirmPassword}
               autoComplete={"true"}
+              errorMessage="Password does not match"
             />
-
-
-            <Button variant="primary" error={submitError}  disabled={error.password && true} className="btn btn-primary btn-signin spacing-md" type="submit">
-              Sign Up
-            </Button>
-
           
           </form>
 
-          <p className="spacing-md">
-            Already have an account? 
-            <Link 
-              to="/user/signin"
-            >Log In</Link></p>
-          </div>        
+          <div className={`${styles.form_buttons}`}>
+            <Link to="#">
+              <button 
+                onClick={handleSubmit} 
+                disabled={error.password && true} 
+                type="submit"
+                >
+                  Sign Up
+              </button>
+            </Link>
+
+            <Link to="/user/signin">
+              <button>
+                  Log In
+              </button>
+            </Link>
+          </div>
+
+        </div>        
 
       </div>
       {/* <div className={styles.image_col}>
