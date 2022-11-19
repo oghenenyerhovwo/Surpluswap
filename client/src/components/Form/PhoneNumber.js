@@ -12,6 +12,8 @@ const PhoneNumber = props => {
         error,
         value,
         errorMessage,
+        activateRef,
+        name,
     }= props
 
     const [inputError, setInputError] = useState()
@@ -22,7 +24,7 @@ const PhoneNumber = props => {
 
     return (
         <div  className={` grid spacing-sm ${inputError && "form__error"}`}>
-            <label className="form__label">{label}  <span className="danger">{label && required && "*"} </span> </label>
+            <label className="form__label">{label}  <span className="icon_required">{label && required && "*"} </span> </label>
             <div className="phonenumber_form__field">
                 <PhoneInput
                     // placeholder="Enter your phone number"
@@ -33,9 +35,12 @@ const PhoneNumber = props => {
             {
                 inputError && (
                     <div className="form__error_box">
-                        <ErrorBox>
-                            {errorMessage || inputError} 
-                        </ErrorBox>
+                        <ErrorBox 
+                            activateRef={activateRef} 
+                            inputError={error} 
+                            errorMessage={errorMessage || inputError} 
+                            name={name}
+                        />
                     </div>
                 )
             }

@@ -1,23 +1,65 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AnimatePresence, motion, useAnimation } from "framer-motion"
 
 import {BsFillTriangleFill} from "react-icons/bs"
+import {FaTimes} from "react-icons/fa"
+import { pageAnimations } from '../../utils/index'
 
 // importing css
 import "./index.css"
 
 const ErrorBox = props => {
+    const {
+        activateRef,
+        inputError,
+        errorMessage,
+        ownerError,
+        name,
+    } = props
+
     const elErrorBox = useRef();
+    const animation =useAnimation()
+
+    const [showError, setShowError] = useState(false)
+
+    
 
     useEffect(() => {
-        window.scrollTo(0, elErrorBox.current.offsetTop)
-    }, [props.children])
+        if(inputError){
+            if(activateRef === "unique" || (activateRef && name && activateRef === name)){
+                window.scrollTo(-20, elErrorBox.current.offsetTop)
+            }
+            setShowError(true)
+        } else{
+            animation.start("exit")
+            setShowError(false)
+        }
+    }, [inputError, animation, activateRef, name])
     
     return (
-        <div ref={elErrorBox}  className="error_box" >
-            <BsFillTriangleFill className="error_box-triangle" />
-            {props.children}
-            {props.ownerError && <span>Go to <Link to="/">Home Page</Link> </span>}
+        <div ref={elErrorBox} >
+            <AnimatePresence mode="wait">
+                {
+                    showError  && (
+                        <motion.div 
+                            variants={pageAnimations.swipeLeftRight}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            key="modal"
+                            className="error_box" 
+                        >
+                            <BsFillTriangleFill className="error_box-triangle" />
+                            {errorMessage}
+                            <div className="cancel_button">
+                                <FaTimes onClick={() => setShowError(false)} />
+                            </div>
+                            {ownerError && <span>Go to <Link to="/">Home Page</Link> </span>}
+                        </motion.div>
+                    )
+                }
+            </AnimatePresence>
         </div>
     )
 }

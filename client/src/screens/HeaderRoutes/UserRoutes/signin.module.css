@@ -54,7 +54,7 @@
     font-family: var(--font-rubik);
 }
 
-.form_buttons a:first-child button{
+.form_buttons a:last-child button{
     margin-bottom: 1rem;
     transition: ease-in-out .5s;
     background-color: #3ba1da;
@@ -63,11 +63,11 @@
     4px 3px 0px;
 }
 
-.form_buttons a:first-child:hover button{
+.form_buttons a:last-child:hover button{
     background-color: #44b0ec;
 }
 
-.form_buttons a:last-child button{
+.form_buttons a:first-child button{
     transition: ease-in-out .5s;
     background-color: var(--color-light-grey);
     color: var(--color-dark-grey);
@@ -75,7 +75,7 @@
     4px 3px 0px;
 }
 
-.form_buttons a:last-child:hover button{
+.form_buttons a:first-child:hover button{
     background-color: #e5e5e5;
 }
 

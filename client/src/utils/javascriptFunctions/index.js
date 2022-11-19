@@ -46,3 +46,31 @@ export const objectToArray = object => {
 
   return arr
 }
+
+export const objectToArrayWithKeys = object => {
+  const values = []
+  const keys = []
+  for (const key in object) {
+    if (object.hasOwnProperty.call(object, key)) {
+      values.push(object[key])
+      keys.push(key)
+    }
+  }
+
+  return {values, keys}
+}
+
+export const reverseObject = object => {
+  const {values, keys} = objectToArrayWithKeys(object)
+
+  const reverseValues =values.reverse()
+  const reverseKeys =keys.reverse()
+
+  let revereObject = {}
+
+  for (let index = 0; index < reverseValues.length; index++) {
+    revereObject = {...revereObject, [reverseKeys[index]]: reverseValues[index] };
+  }
+
+  return revereObject
+}

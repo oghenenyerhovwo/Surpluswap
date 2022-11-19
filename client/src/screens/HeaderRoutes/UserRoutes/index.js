@@ -1,17 +1,22 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation  } from "react-router-dom"
+import { AnimatePresence } from "framer-motion"
 
 // screens
 import Signup from "./Signup"
 import Signin from "./Signin"
 
 const UserRoutes = () => {
+  const location = useLocation()
+
     return (
-      <Routes>
-        <Route path="/user/">
-          <Route path="signup" element={<Signup />} exact></Route>
-          <Route path="signin" element={<Signin />} exact></Route>
-        </Route>
-      </Routes>
+      <AnimatePresence mode="wait" onExitComplete={() => {} }>
+        <Routes location={location} key={location.key}>
+          <Route path="/user/">
+            <Route path="signup" element={<Signup />} exact></Route>
+            <Route path="signin" element={<Signin />} exact></Route>
+          </Route>
+        </Routes>
+      </AnimatePresence>
     )
 }
 

@@ -14,13 +14,18 @@ import {
   setTagArray,
   truncate,
   objectToArray,
+  reverseObject,
+  objectToArrayWithKeys,
 } from "./javascriptFunctions"
 import {
   isAdmin,
   isSuperAdmin,
   isAuthor,
 } from "./auth"
-import { scrollAnimations } from "./animations"
+import { 
+  scrollAnimations,
+  pageAnimations,
+} from "./animations"
 
 
 
@@ -43,4 +48,7 @@ export {
     aboutSectionArray,
 
     scrollAnimations,
+    pageAnimations,
+    reverseObject,
+    objectToArrayWithKeys,
 }

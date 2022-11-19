@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { motion } from "framer-motion"
 
 // components
-import { Spinner, MessageBox, Form } from "../../../components"
+import { Spinner, ErrorBox, Form } from "../../../components"
 
 // css
 import styles from "./signin.module.css"
 
 // functions
 import { signInUser } from "../../../actions"
-import { onSubmitError, onChangeError } from '../../../utils/index'
+import { onSubmitError, onChangeError, pageAnimations,objectToArrayWithKeys } from '../../../utils/index'
 
 // type
 import { SIGN_USER_RESET } from '../../../constants/userConstants'
@@ -29,6 +30,7 @@ const SignIn = () => {
   }
   const [form, setForm] = useState(initialFormState)
   const [error, setError] = useState(initialFormState)
+  const [activateRef, setActivateRef] = useState("")
 
   useEffect(() => {
     if(successSignUser || currentUser.email){
@@ -46,7 +48,11 @@ const SignIn = () => {
   const handleSubmit = e => {
     e.preventDefault()
     if(!onSubmitError(form, error, setError)){
+      setActivateRef("")
       dispatch(signInUser(form))
+    }else {
+      const {keys} = objectToArrayWithKeys(error)
+      setActivateRef(keys[0])
     }
   }
 
@@ -57,7 +63,13 @@ const SignIn = () => {
   }
 
   return (
-    <div className={`${styles.signin} spacing-lg`}>
+    <motion.div 
+      className={`${styles.signin} spacing-lg`}
+      variants={pageAnimations.swipeRight}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
 
       <div className={`${styles.form}`}>
         <h2 className="spacing-md">Sign In </h2>
@@ -70,8 +82,14 @@ const SignIn = () => {
           <form className="spacing-md" onSubmit={handleSubmit}>
             
             {loadingSignUser && <Spinner />}
-            {errorSignUser && <MessageBox variant="danger">{errorSignUser} </MessageBox>}
-            
+            <div className="spacing-sm">
+              <ErrorBox 
+                    activateRef={"unique"} 
+                    inputError={errorSignUser} 
+                    errorMessage={errorSignUser}
+                />
+            </div>
+
             <Form.Input 
               label="Email, Username or Phone Number"
               onChange={handleChange}
@@ -80,6 +98,8 @@ const SignIn = () => {
               name="emailOrUsernameOrPhoneNumber"
               error={error.emailOrUsernameOrPhoneNumber}
               errorMessage="Provide an email, username or phone number"
+              activateRef={activateRef}
+              required={true}
             />
 
             <Form.Input 
@@ -90,23 +110,26 @@ const SignIn = () => {
               name="password"
               error={error.password}
               errorMessage="Password is required"
+              autoComplete={"true"}
+              activateRef={activateRef}
+              required={true}
             />
 
             
           </form>
 
           <div className={`${styles.form_buttons} spacing-sm`}>
+            <Link to="/user/signup">
+              <button>
+                  Sign Up
+              </button>
+            </Link>
+
             <Link to="#">
               <button 
                 onClick={handleSubmit}
                 type="submit">
                   Log In
-              </button>
-            </Link>
-
-            <Link to="/user/signup">
-              <button>
-                  Sign Up
               </button>
             </Link>
           </div>
@@ -128,7 +151,7 @@ const SignIn = () => {
 
       
        
-    </div>
+    </motion.div>
   )
 }
 

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { motion } from "framer-motion"
 
 // component
-import { Spinner, MessageBox, Form } from "../../../components"
+import { Spinner, ErrorBox, Form } from "../../../components"
 
 // css
 import styles from "./signup.module.css"
 
 // functions
 import { signUpUser } from "../../../actions"
-import { onSubmitError, onChangeError } from '../../../utils/index'
+import { onSubmitError, onChangeError, pageAnimations, objectToArrayWithKeys } from '../../../utils/index'
 
 // types
 import { SIGN_USER_RESET } from '../../../constants/userConstants'
@@ -21,14 +22,19 @@ const SignUp = () => {
   const navigate = useNavigate()
 
   // state
-  const {currentUser, errorSignUser, successSignUser, loadingSignUser} =  useSelector(state => state.userStore)
+  const {
+    currentUser, 
+    errorSignUser, 
+    successSignUser, 
+    loadingSignUser
+  } =  useSelector(state => state.userStore)
 
   const initialFormState = {
-    email: "",
-    password: "",
     userName: "",
     firstName: "",
+    email: "",
     phoneNumber: { isoCode:"ng" },
+    password: "",
     confirmPassword: "",
   }
   const [form, setForm] = useState({
@@ -41,6 +47,8 @@ const SignUp = () => {
     ...initialFormState,
     phoneNumber: "",
   })
+
+  const [activateRef, setActivateRef] = useState("")
 
   useEffect(() => {
     // redirect user to signUser if user sign User is successful
@@ -61,8 +69,12 @@ const SignUp = () => {
   const handleSubmit = e => {
     e.preventDefault()
     if(!onSubmitError(form, error, setError)){
+      setActivateRef("")
       dispatch(signUpUser(form))
-    } 
+    } else {
+      const {keys} = objectToArrayWithKeys(error)
+      setActivateRef(keys[0])
+    }
   }
 
   const handleChange = e => {
@@ -84,7 +96,13 @@ const SignUp = () => {
   }
 
   return (
-    <div className={`${styles.signup} spacing-lg`}>
+    <motion.div 
+      className={`${styles.signup} spacing-lg`}
+      variants={pageAnimations.swipeLeft}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
 
       <div className={`${styles.form}`}>
         <h2 className="spacing-md">Create Account </h2>
@@ -99,7 +117,13 @@ const SignUp = () => {
           <form className="spacing-md" onSubmit={handleSubmit}>
             
             {loadingSignUser && <Spinner />}
-            {errorSignUser && <MessageBox variant="danger">{errorSignUser} </MessageBox>}
+            <div className="spacing-sm">
+              <ErrorBox 
+                    activateRef={"unique"} 
+                    inputError={errorSignUser} 
+                    errorMessage={errorSignUser}
+                />
+            </div>
 
             <Form.Input 
               label="Username"
@@ -109,6 +133,8 @@ const SignUp = () => {
               name="userName"
               error={error.userName}
               errorMessage="Username is required"
+              activateRef={activateRef}
+              required={true}
             />
 
             <Form.Input 
@@ -119,6 +145,8 @@ const SignUp = () => {
               name="firstName"
               error={error.firstName}
               errorMessage="First Name is required"
+              activateRef={activateRef}
+              required={true}
             />
 
             <Form.Input 
@@ -137,16 +165,20 @@ const SignUp = () => {
               name="email"
               error={error.email}
               errorMessage="Provide an email"
+              activateRef={activateRef}
+              required={true}
             />
 
             <Form.PhoneNumber 
-                label="Phone Number"
-                onChange={handlePhone}
-                value={form.phoneNumber}
-                error={error.phoneNumber}
-                name="phoneNumber"
-                errorMessage="Provide a mobile telephone number"
-              />
+              label="Phone Number"
+              onChange={handlePhone}
+              value={form.phoneNumber}
+              error={error.phoneNumber}
+              name="phoneNumber"
+              errorMessage="Provide a mobile telephone number"
+              activateRef={activateRef}
+              required={true}
+            />
 
             <Form.Input 
               label="Password"
@@ -157,6 +189,8 @@ const SignUp = () => {
               error={error.password}
               autoComplete={"true"}
               errorMessage="Password is required"
+              activateRef={activateRef}
+              required={true}
             />
 
             <Form.Input 
@@ -168,6 +202,8 @@ const SignUp = () => {
               error={error.confirmPassword}
               autoComplete={"true"}
               errorMessage="Password does not match"
+              activateRef={activateRef}
+              required={true}
             />
           
           </form>
@@ -176,7 +212,6 @@ const SignUp = () => {
             <Link to="#">
               <button 
                 onClick={handleSubmit} 
-                disabled={error.password && true} 
                 type="submit"
                 >
                   Sign Up
@@ -190,18 +225,11 @@ const SignUp = () => {
             </Link>
           </div>
 
-        </div>        
+        </div>       
 
       </div>
-      {/* <div className={styles.image_col}>
-        <div className={styles.image_col_container}>
-            <h1 className="spacing-sm"><span>Become</span> a Member </h1>
-            <h2 className="spacing-sm">Be the hope of a <span>dying</span> generation</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex, dignissimos doloremque ducimus a eaque impedit aut rem facere earum magnam nobis delectus? Saepe iusto ad, dolorum architecto minus dolorem nemo!</p>
-        </div>
-      </div> */}
       
-    </div>
+    </motion.div>
   )
 }
 

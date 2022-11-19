@@ -17,7 +17,7 @@ export const onChangeError = (name, value, form, error, setError) => {
 }
   
   
-   export const onSubmitError = (form, error, setError) => {
+  export const onSubmitError = (form, error, setError) => {
     let keyObject = {}
     let isError = false
   

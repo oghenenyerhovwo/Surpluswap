@@ -6,11 +6,11 @@ import AppContainer from "../AppContainer"
 
 const RoutesContainer = () => {
     return (
-        <>
-            <AppContainer> 
+        <AppContainer> 
+            <>
                 <HeaderRoutes />
-            </AppContainer>
-        </>
+            </>
+        </AppContainer>
     )
 }
 

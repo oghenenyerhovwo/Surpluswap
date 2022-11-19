@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 
 // screens
 import HomeScreen from "./Home"
@@ -13,6 +13,8 @@ import {
 import "./index.css"
 
 const HeaderRoutes = () => {
+    const location = useLocation()
+
     return (
       <>
         <section className="header spacing-lg">
@@ -21,10 +23,12 @@ const HeaderRoutes = () => {
           </div>
         </section>
         <section className="body">
-          <Routes>
-              <Route path="/" element={<HomeScreen />}></Route>
-          </Routes>
-          <UserRoutes />
+          <>
+            <Routes location={location} key={location.key}>
+                <Route path="/" element={<HomeScreen />}></Route>
+            </Routes>
+            <UserRoutes />
+          </>
         </section>
       </>
     )
