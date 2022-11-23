@@ -25,6 +25,8 @@ import {
 import { 
   scrollAnimations,
   pageAnimations,
+  slideAnimations,
+  rotateAnimations,
 } from "./animations"
 
 
@@ -46,9 +48,11 @@ export {
     isSuperAdmin,
     isAuthor,
     aboutSectionArray,
+    reverseObject,
+    objectToArrayWithKeys,
 
     scrollAnimations,
     pageAnimations,
-    reverseObject,
-    objectToArrayWithKeys,
+    slideAnimations,
+    rotateAnimations,
 }

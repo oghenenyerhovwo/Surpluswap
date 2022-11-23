@@ -13,7 +13,7 @@ export const googleSignIn =  (googleData ) => (dispatch) => {
     dispatch({type: GOOGLE_SIGN_IN_REQUEST, payload: googleData })
   
      axios
-        .post(`${backend_url}/users/thirdparty/google/signin`, {token: googleData.tokenId})
+        .post(`${backend_url}/users/thirdparty/google/signin`, {token: googleData})
         .then(res => {
           dispatch({type: GOOGLE_SIGN_IN_SUCCESS})
           dispatch({type: SIGN_USER_SUCCESS, payload: res.data})

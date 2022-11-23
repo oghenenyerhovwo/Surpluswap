@@ -12,6 +12,11 @@ import {
     GOOGLE_SIGN_IN_FAIL,
     GOOGLE_SIGN_IN_RESET,
 
+    GET_GOOGLE_DATA_REQUEST,
+    GET_GOOGLE_DATA_SUCCESS,
+    GET_GOOGLE_DATA_FAIL,
+    GET_GOOGLE_DATA_RESET,
+
     CONFIRM_EMAIL_REQUEST,
     CONFIRM_EMAIL_SUCCESS,
     CONFIRM_EMAIL_FAIL,
@@ -69,6 +74,12 @@ const initialState = {
     errorGoogleSignIn: "",
     successGoogleSignIn: false,
     loadingGoogleSignIn: false,
+
+    // Get google Data
+    errorGoogleData: "",
+    successGoogleData: false,
+    loadingGoogleData: false,
+    googleData: {},
 
 
     // Confirm Email
@@ -212,6 +223,33 @@ const userReducers =  (state = initialState, action) => {
             errorGoogleSignIn: "",
             successGoogleSignIn: false,
             loadingGoogleSignIn: false,
+        }
+
+    case GET_GOOGLE_DATA_REQUEST:
+        return {
+            ...state,
+            loadingGoogleData:  true,
+            errorGoogleData: "",
+        }
+    case GET_GOOGLE_DATA_SUCCESS:
+        return {
+            ...state,
+            loadingGoogleData:  false,
+            successGoogleData: true,
+            googleData: action.payload,
+        }
+    case GET_GOOGLE_DATA_FAIL:
+        return {
+            ...state,
+            loadingGoogleData:  false,
+            errorGoogleData: action.payload,
+        }
+    case GET_GOOGLE_DATA_RESET:
+        return {
+            ...state,
+            errorGoogleData: "",
+            successGoogleData: false,
+            loadingGoogleData: false,
         }
 
 

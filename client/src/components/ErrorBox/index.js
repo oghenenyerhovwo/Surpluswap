@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AnimatePresence, motion, useAnimation } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 
 import {BsFillTriangleFill} from "react-icons/bs"
 import {FaTimes} from "react-icons/fa"
@@ -19,7 +19,6 @@ const ErrorBox = props => {
     } = props
 
     const elErrorBox = useRef();
-    const animation =useAnimation()
 
     const [showError, setShowError] = useState(false)
 
@@ -28,14 +27,13 @@ const ErrorBox = props => {
     useEffect(() => {
         if(inputError){
             if(activateRef === "unique" || (activateRef && name && activateRef === name)){
-                window.scrollTo(-20, elErrorBox.current.offsetTop)
+                window.scrollTo(-40, elErrorBox.current.offsetTop)
             }
             setShowError(true)
         } else{
-            animation.start("exit")
             setShowError(false)
         }
-    }, [inputError, animation, activateRef, name])
+    }, [inputError, activateRef, name])
     
     return (
         <div ref={elErrorBox} >

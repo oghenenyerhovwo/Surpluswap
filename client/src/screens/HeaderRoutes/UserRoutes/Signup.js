@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion"
 
 // component
-import { Spinner, ErrorBox, Form } from "../../../components"
+import { Spinner, ErrorBox, Form, Google } from "../../../components"
 
 // css
 import styles from "./signup.module.css"
@@ -26,7 +26,9 @@ const SignUp = () => {
     currentUser, 
     errorSignUser, 
     successSignUser, 
-    loadingSignUser
+    loadingSignUser,
+    errorGoogleData,
+    loadingGoogleData,
   } =  useSelector(state => state.userStore)
 
   const initialFormState = {
@@ -110,18 +112,14 @@ const SignUp = () => {
         <div className={`${styles.form_container}`}>
             {/* <img className="logo__small spacing-md" src={logo} alt="logo" /> */}
 
-          <div className={`${styles.google} spacing-md`}>
-            {/* <Google /> */}
-          </div>
-
           <form className="spacing-md" onSubmit={handleSubmit}>
             
-            {loadingSignUser && <Spinner />}
+          {(loadingSignUser || loadingGoogleData) && <Spinner />}
             <div className="spacing-sm">
               <ErrorBox 
                     activateRef={"unique"} 
-                    inputError={errorSignUser} 
-                    errorMessage={errorSignUser}
+                    inputError={errorSignUser || errorGoogleData} 
+                    errorMessage={errorSignUser || errorGoogleData}
                 />
             </div>
 
@@ -223,6 +221,9 @@ const SignUp = () => {
                   Log In
               </button>
             </Link>
+          </div>
+          <div className={`${styles.google}`}>
+            <Google />
           </div>
 
         </div>       

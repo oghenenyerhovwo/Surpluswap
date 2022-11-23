@@ -37,11 +37,16 @@
   --color-light-grey: #ececec;
 }
 
+html{
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: var(--font-rubik);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
 }
 
 code {

@@ -10,6 +10,7 @@ import Spinner from "./Spinner"
 import MessageBox from "./MessageBox"
 import Form from "./Form"
 import ErrorBox from "./ErrorBox"
+import Google from "./Google"
 
 export {
     Header,
@@ -23,4 +24,5 @@ export {
     MessageBox,
     Form,
     ErrorBox,
+    Google,
 }

@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { motion } from "framer-motion"
 
 // components
-import { Spinner, ErrorBox, Form } from "../../../components"
+import { Spinner, ErrorBox, Form, Google } from "../../../components"
 
 // css
 import styles from "./signin.module.css"
@@ -23,7 +23,15 @@ const SignIn = () => {
   const location = useLocation()
 
   // state
-  const {currentUser, errorSignUser, successSignUser, loadingSignUser} =  useSelector(state => state.userStore)
+  const {
+    currentUser, 
+    errorSignUser, 
+    successSignUser, 
+    loadingSignUser,
+    errorGoogleData,
+    loadingGoogleData,
+  } =  useSelector(state => state.userStore)
+
   const initialFormState = {
     emailOrUsernameOrPhoneNumber: "",
     password: "",
@@ -81,12 +89,12 @@ const SignIn = () => {
           </div>
           <form className="spacing-md" onSubmit={handleSubmit}>
             
-            {loadingSignUser && <Spinner />}
+            {(loadingSignUser || loadingGoogleData) && <Spinner />}
             <div className="spacing-sm">
               <ErrorBox 
                     activateRef={"unique"} 
-                    inputError={errorSignUser} 
-                    errorMessage={errorSignUser}
+                    inputError={errorSignUser || errorGoogleData} 
+                    errorMessage={errorSignUser || errorGoogleData}
                 />
             </div>
 
@@ -133,9 +141,15 @@ const SignIn = () => {
               </button>
             </Link>
           </div>
+
+          <div className={`${styles.google} spacing-sm`}>
+            <Google />
+          </div>
+
           <div className={`${styles.forgot_passowrd}`}>
               <Link to="/forgotpassword">Forgot Password?</Link>
           </div>
+          
         </div>
 
           

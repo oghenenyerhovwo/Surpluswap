@@ -90,6 +90,23 @@
     }
 }
 
+.google{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+.google > div{
+    width: 100%;
+    max-width: 13.5rem;
+}
+
+@media screen and (min-width: 300px){
+    .google{
+        flex-direction: row;
+    }
+}
+
 .forgot_passowrd{
     color: var(--color-dark-grey);
     font-size: 0.9375rem;

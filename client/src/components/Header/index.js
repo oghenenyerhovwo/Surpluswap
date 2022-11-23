@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 
 // importing components
@@ -10,6 +10,9 @@ import { FaTimes } from 'react-icons/fa';
 // import Avatar from "../Avatar"
 import { Link } from 'react-router-dom'
 
+import { AnimatePresence, motion, } from "framer-motion"
+
+
 // actions
 import { changeLightMode, signOut } from "../../actions"
 
@@ -18,6 +21,19 @@ import styles from "./header.module.css"
 
 // assets
 // import { impexLogo } from "../../assets"
+import { slideAnimations, rotateAnimations } from "../../utils"
+
+const headerVariant = {
+  hidden: {
+      padding: "0.2rem 0",
+    },
+  scrollVisible: {
+    padding: "2rem 0",
+      transition: { duration: 1, },
+  },
+  viewport: {once: false},
+}
+
 
 const NavLinks = () => {
   const dispatch = useDispatch()
@@ -60,87 +76,121 @@ const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false)
   const [toggleSearch, setToggleSearch] = useState(false)
 
-  // const closeMenu = e => {
-  //   const navItemElement = document.querySelector(`.${styles.nav_items}`)
-  //   if(menuRef.current && toggleMenu && !menuRef.current.contains(e.target)){
-  //     navItemElement.style.top = "-1000%"
-  //     setToggleMenu(false)
-  //   } 
-  // }
+  const closeMenu = e => {
+    setToggleMenu(false)
+  }
 
-  // useEffect(() => {
-  //   document.addEventListener('mousedown', closeMenu)
-  //   return () => {
-  //     document.removeEventListener('mousedown', closeMenu)
-  //   };
-  // })
- 
-  // const closeMenuLinks = e => {
-  //   const navItemElement = document.querySelector(`.${styles.nav_items}`)
-  //   navItemElement.style.top = "-1000%"
-  //   setToggleMenu(false)
-  // }
+  useEffect(() => {
+    document.addEventListener('mousedown', closeMenu)
+    return () => {
+      document.removeEventListener('mousedown', closeMenu)
+    };
+  })
 
   const handleToggleMenu = e => {
     setToggleMenu(prevToggle => !prevToggle)
-    const navItemElement = document.querySelector(`.${styles.nav_collapse}`)
-    if(toggleMenu){
-      navItemElement.style.height = "0rem"
-      navItemElement.style.opacity = "0"
-      navItemElement.style.padding = "0 3em"
-    } else {
-      navItemElement.style.opacity = "1"
-      navItemElement.style.height = "21.3rem"
-      navItemElement.style.padding = "3em 3em"
-    }
   }
 
   const handleToggleSearch = e => {
     setToggleSearch(prevToggle => !prevToggle)
-    const navItemElement = document.querySelector(`.${styles.nav_items}`)
-    const searchElement = document.querySelector(`.${styles.search_items}`)
-    if(toggleSearch){
-      searchElement.style.top = "-4rem"
-      searchElement.style.opacity = "0"
-      navItemElement.style.top = "0"
-      navItemElement.style.opacity = "1"
-    } else {
-      navItemElement.style.top = "2rem"
-      navItemElement.style.opacity = "0"
-      searchElement.style.top = "0"
-      searchElement.style.opacity = "1"
-    }
   }
 
   const handleLightMode = () => dispatch(changeLightMode())
 
   return (
-    <header className={`${styles.app_header_container}`}>
+    <motion.header 
+      className={`${styles.app_header_container}`}
+      variants={headerVariant}
+      viewport={headerVariant.viewport}
+      whileInView="scrollVisible"
+    >
       <div className={`${styles.navbar}`}>
         <div className={`${styles.nav_brand}`}>
           <Link to="/">Surpluswap</Link>
         </div>
-        <nav className={`${styles.search_items} grid`}>
-            <input placeholder="Search ..." />
-            <FaTimes onClick={handleToggleSearch} />
-        </nav> 
-        <nav ref={menuRef} className={`${styles.nav_items}`}>
-            <ul>
-                <NavLinks />
-            </ul>
-            <ul>
-              <li>{lightMode ? <FaMoon className={styles.moon_icon} onClick={handleLightMode} /> : <BsFillSunFill onClick={handleLightMode} />}</li>  
-              <li><BsSearch className={styles.search_icon} onClick={handleToggleSearch} /></li>  
-            </ul>  
-            <ul>
-              <li className={`${styles.menu_icon}`} ><GiHamburgerMenu onClick={handleToggleMenu} /></li> 
-            </ul>          
-        </nav>
+        <AnimatePresence mode="wait">
+            {
+              toggleSearch ? (
+                <motion.nav 
+                  className={`${styles.search_items} grid`}
+                  variants={slideAnimations.slideUp}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  key="search_items"
+                >
+                    <input placeholder="Search ..." />
+                    <FaTimes onClick={handleToggleSearch} />
+                </motion.nav> 
+              ): (
+                <motion.nav 
+                  ref={menuRef} 
+                  className={`${styles.nav_items}`}
+                  variants={slideAnimations.slideDown}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  key="nav_items"
+                >
+                    <ul>
+                        <NavLinks />
+                    </ul>
+                    <ul>
+                      <li>{lightMode ? <FaMoon className={styles.moon_icon} onClick={handleLightMode} /> : <BsFillSunFill onClick={handleLightMode} />}</li>  
+                      <li><BsSearch className={styles.search_icon} onClick={handleToggleSearch} /></li>  
+                    </ul>  
+                    <ul>
+                      <AnimatePresence mode="wait">
+                          {
+                            !toggleMenu ? (
+                              <motion.li
+                                className={`${styles.menu_icon}`} 
+                                variants={rotateAnimations.fullTurn}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                key="hamburger"
+                              >
+                                <GiHamburgerMenu onClick={handleToggleMenu} />
+                              </motion.li>
+                            ) : (
+                              <motion.li
+                                variants={rotateAnimations.fullTurn}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                key="times"
+                                className={`${styles.menu_icon}`} 
+                              >
+                                <FaTimes onClick={handleToggleMenu} />
+                              </motion.li>
+                            )
+                          }
+                      </AnimatePresence>
+                    </ul>          
+                </motion.nav>
+              )
+            }
+        </AnimatePresence>
+        
       </div>
-      <ul className={styles.nav_collapse}>
-          <NavLinks />
-      </ul>
-    </header>
+      <AnimatePresence mode="wait">
+          {
+            toggleMenu && (
+              <motion.ul 
+                className={styles.nav_collapse}
+                variants={slideAnimations.rollDown}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                key="nav_collapse"
+              >
+                <NavLinks />
+            </motion.ul>
+            )
+          }
+      </AnimatePresence>
+    </motion.header>
   )
 }
 

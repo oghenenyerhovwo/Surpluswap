@@ -10,14 +10,12 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
 import { generateToken }  from "../../../utils/index.js"
 import { findUser } from "./userFunctions.js"
 
-const sendUser = async (req, res, email, name) => {
+const sendUser = async (req, res, userDetails) => {
     try {
-        const foundUser = await findUser({email:email})
+        const foundUser = await findUser({email:userDetails.email})
         if(!foundUser){
             const newUser= {
-                email: email,
-                fullName: name,
-                isVerified: true,
+                ...userDetails,
                 password: bcrypt.hashSync(process.env.SECRET_PASSWORD, 8)
             }
             const createdUser = await User.create(newUser)
@@ -44,9 +42,16 @@ export const GoogleSignIn = async(req, res) => {
             idToken: token,
             audience: process.env.CLIENT_ID
         });
-        const { email, name } = ticket.getPayload(); 
-        console.log(ticket.getPayload())
-        sendUser(req, res, email, name) 
+        const { email,  given_name, family_name } = ticket.getPayload();
+        const userDetails = {
+            firstName: given_name,
+            lastName: family_name,
+            userName: given_name,
+            email,
+            phoneNumberText: "Not available",
+            phoneNumberTextWithCode: "Not available",
+        }
+        sendUser(req, res, userDetails) 
         
     } catch (error) {
         console.log(error)

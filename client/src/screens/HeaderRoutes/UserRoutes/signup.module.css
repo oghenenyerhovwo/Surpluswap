@@ -89,3 +89,20 @@
         max-width: 13.5rem;
     }
 }
+
+.google{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+.google > div{
+    width: 100%;
+    max-width: 13.5rem;
+}
+
+@media screen and (min-width: 300px){
+    .google{
+        flex-direction: row;
+    }
+}

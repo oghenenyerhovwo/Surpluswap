@@ -17,3 +17,6 @@ export const setHeader = (token) => {
     }
   }
  }
+
+//  clientId = 179116266006-dmhoh73l8ri7gh2ms9q99dfu1d0oaeqb.apps.googleusercontent.com
+// secret = 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
