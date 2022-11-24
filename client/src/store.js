@@ -32,11 +32,6 @@ const productionStore = createStore(
     )
 );
 
-const stores = {
-  developmentStore,
-  productionStore,
-}
+const store = process.env.REACT_APP_REDUX_STORE === "developmentStore" ? developmentStore: productionStore
 
-// const store = process.env.NODE_ENV === "development" ? developmentStore: productionStore
-const store = stores[process.env.REACT_APP_REDUX_STORE]
 export default store;
