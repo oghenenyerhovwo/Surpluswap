@@ -107,7 +107,7 @@ const Header = ({stickBarToTop}) => {
 
   return (
     <motion.header 
-      className={`${styles.app_header_container}`}
+      className={`${styles.app_header_container} ${!lightMode && styles.app_header_container_light}`}
       animate={animation}
     >
       <div className={`${styles.navbar}`}>

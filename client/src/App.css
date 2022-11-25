@@ -2,7 +2,7 @@
 /* ============================== */
 
 .app_container_dark{
-  background: #081b33;
+  background: var(--color-dark-mode);
   color: #fff;
 }
 

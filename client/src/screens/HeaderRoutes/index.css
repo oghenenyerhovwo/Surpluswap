@@ -25,3 +25,11 @@
       width: min(80%, 90rem);
     }
 }
+
+
+/* light mode */
+
+.app_container_dark .header{
+  background: var(--color-dark-mode);
+}
+

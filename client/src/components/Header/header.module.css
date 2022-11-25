@@ -169,3 +169,9 @@
         width: 70%;
     }
 }
+
+
+/* light mode */
+.app_header_container_light .navbar{
+    color: var(--color-light-grey);
+}
