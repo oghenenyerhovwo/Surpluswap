@@ -31,5 +31,6 @@
 
 .app_container_dark .header{
   background: var(--color-dark-mode);
+  border-bottom: 1px solid #fff;
 }
 

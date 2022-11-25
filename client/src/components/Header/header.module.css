@@ -133,6 +133,7 @@
     padding: 1em 1em;
     border-bottom: 1px solid var(--color-light-grey);
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .nav_collapse ul li:hover,
@@ -143,6 +144,11 @@
 
 .moon_icon{
     transform: rotate(10deg);
+}
+
+.search_items svg:hover{
+    color: var(--color-light-blue);
+    cursor: pointer;
 }
 
 .search_icon{
@@ -172,6 +178,24 @@
 
 
 /* light mode */
-.app_header_container_light .navbar{
+.app_header_container_light .navbar,
+.app_header_container_light svg{
+    color: var(--color-light-grey);
+}
+
+.app_header_container_light .nav_collapse,
+.app_header_container_light .search_items,
+.app_header_container_light .search_items input{
+    background: var(--color-dark-mode);
+    color: var(--color-light-grey);
+}
+
+.app_header_container_light .nav_collapse ul li{
+    border-bottom: 1px solid rgba(110, 152, 242, 0.4);
+}
+
+.app_header_container_light  .nav_collapse ul li:hover,
+.app_header_container_light  .nav_collapse ul li:active{
+    background-color: var(--color-light-blue);;
     color: var(--color-light-grey);
 }
