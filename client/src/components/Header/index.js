@@ -10,7 +10,7 @@ import { FaTimes } from 'react-icons/fa';
 // import Avatar from "../Avatar"
 import { Link } from 'react-router-dom'
 
-import { AnimatePresence, motion, } from "framer-motion"
+import { AnimatePresence, motion, useAnimation } from "framer-motion"
 
 
 // actions
@@ -22,18 +22,6 @@ import styles from "./header.module.css"
 // assets
 // import { impexLogo } from "../../assets"
 import { slideAnimations, rotateAnimations } from "../../utils"
-
-const headerVariant = {
-  hidden: {
-      padding: "0.2rem 0",
-    },
-  scrollVisible: {
-    padding: "2rem 0",
-      transition: { duration: 1, },
-  },
-  viewport: {once: false},
-}
-
 
 const NavLinks = () => {
   const dispatch = useDispatch()
@@ -63,10 +51,11 @@ const NavLinks = () => {
   )
 }
 
-const Header = () => {
+const Header = ({stickBarToTop}) => {
   
   const menuRef = useRef(null)
   const dispatch = useDispatch()
+  const animation = useAnimation()
 
   // global state
   const { 
@@ -79,6 +68,25 @@ const Header = () => {
   const closeMenu = e => {
     setToggleMenu(false)
   }
+
+  useEffect(() => {
+    if(stickBarToTop){
+      animation.start({
+        position: "sticky",
+        top: 0,
+        padding: "0.4em 0",
+        fontSize: "0.8rem",
+        transition: { duration: 1, },
+      })
+    } else {
+      animation.start({
+        position: "static",
+        padding: "2em 0",
+        fontSize: "0.9rem",
+        transition: { duration: 1, },
+      })
+    }
+  }, [stickBarToTop, animation])
 
   useEffect(() => {
     document.addEventListener('mousedown', closeMenu)
@@ -100,9 +108,7 @@ const Header = () => {
   return (
     <motion.header 
       className={`${styles.app_header_container}`}
-      variants={headerVariant}
-      viewport={headerVariant.viewport}
-      whileInView="scrollVisible"
+      animate={animation}
     >
       <div className={`${styles.navbar}`}>
         <div className={`${styles.nav_brand}`}>
@@ -150,8 +156,9 @@ const Header = () => {
                                 animate="visible"
                                 exit="exit"
                                 key="hamburger"
+                                onClick={handleToggleMenu} 
                               >
-                                <GiHamburgerMenu onClick={handleToggleMenu} />
+                                <GiHamburgerMenu />
                               </motion.li>
                             ) : (
                               <motion.li
@@ -161,8 +168,9 @@ const Header = () => {
                                 exit="exit"
                                 key="times"
                                 className={`${styles.menu_icon}`} 
+                                onClick={handleToggleMenu} 
                               >
-                                <FaTimes onClick={handleToggleMenu} />
+                                <FaTimes />
                               </motion.li>
                             )
                           }

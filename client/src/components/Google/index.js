@@ -57,7 +57,7 @@ const GoogleAuth = () => {
           <GoogleLogin
             onSuccess={handleSuccess}
             onError={handleFailure}
-        />;
+        />
       </GoogleOAuthProvider>
       <div className="app_google">
           <FcGoogle />
