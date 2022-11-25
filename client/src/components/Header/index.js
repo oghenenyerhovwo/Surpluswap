@@ -69,6 +69,10 @@ const Header = ({stickBarToTop}) => {
     setToggleMenu(false)
   }
 
+  const openMenu = e => {
+    setToggleMenu(true)
+  }
+
   useEffect(() => {
     if(stickBarToTop){
       animation.start({
@@ -94,10 +98,6 @@ const Header = ({stickBarToTop}) => {
       document.removeEventListener('mousedown', closeMenu)
     };
   })
-
-  const handleToggleMenu = e => {
-    setToggleMenu(prevToggle => !prevToggle)
-  }
 
   const handleToggleSearch = e => {
     setToggleSearch(prevToggle => !prevToggle)
@@ -156,7 +156,7 @@ const Header = ({stickBarToTop}) => {
                                 animate="visible"
                                 exit="exit"
                                 key="hamburger"
-                                onClick={handleToggleMenu} 
+                                onClick={openMenu} 
                               >
                                 <GiHamburgerMenu />
                               </motion.li>
@@ -168,7 +168,7 @@ const Header = ({stickBarToTop}) => {
                                 exit="exit"
                                 key="times"
                                 className={`${styles.menu_icon}`} 
-                                onClick={handleToggleMenu} 
+                                onClick={closeMenu} 
                               >
                                 <FaTimes />
                               </motion.li>
