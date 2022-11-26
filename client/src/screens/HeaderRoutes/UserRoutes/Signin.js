@@ -32,6 +32,10 @@ const SignIn = () => {
     loadingGoogleData,
   } =  useSelector(state => state.userStore)
 
+  const { 
+    lightMode,
+  }=  useSelector(state => state.generalStore)
+
   const initialFormState = {
     emailOrUsernameOrPhoneNumber: "",
     password: "",
@@ -72,7 +76,7 @@ const SignIn = () => {
 
   return (
     <motion.div 
-      className={`${styles.signin} spacing-lg`}
+      className={`${styles.signin} spacing-lg ${!lightMode && styles.signin_light}`}
       variants={pageAnimations.swipeRight}
       initial="hidden"
       animate="visible"
@@ -126,7 +130,7 @@ const SignIn = () => {
             
           </form>
 
-          <div className={`${styles.form_buttons} spacing-sm`}>
+          <div className={`${styles.form_buttons}`}>
             <Link to="/user/signup">
               <button>
                   Sign Up

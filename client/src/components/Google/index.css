@@ -6,7 +6,7 @@
 .app_google_container > div:first-child{
     opacity: 0;
     position: relative;
-    z-index: 99
+    z-index: 99;
 }
 
 .app_google{
@@ -20,7 +20,7 @@
     padding: 0 1rem;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items:center;
 
     letter-spacing: 0.04em;
@@ -38,6 +38,11 @@
 
 .app_google span{
     text-align: right;
+}
+
+.app_google svg,
+.app_google span {
+    margin: 0 0.2rem;
 }
 
 .app_google_container > div:first-child:hover ~ .app_google{
