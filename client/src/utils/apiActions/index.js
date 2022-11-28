@@ -1,10 +1,10 @@
 // offline
-// export const backend_url = "http://localhost:5000/api"
-// export const frontend_url = "http://localhost:3000/"
+export const backend_url = "http://localhost:5000/api"
+export const frontend_url = "http://localhost:3000/"
 
 // 
-export const backend_url = "https://surpluswap.herokuapp.com/"
-export const frontend_url =  "https://surpluswap.vercel.app/"
+// export const backend_url = "https://surpluswap.herokuapp.com/api"
+// export const frontend_url =  "https://surpluswap.vercel.app/"
 
 export const setError = (err) => {
     return err.response && err.response.data.message ? err.response.data.message : err.message
