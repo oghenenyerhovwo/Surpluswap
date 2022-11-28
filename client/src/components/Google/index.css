@@ -1,3 +1,7 @@
+.app_google_container{
+    cursor: pointer;
+}
+
 .app_google_container > div{
     grid-column: 1/ 13;
     grid-row: 1;
@@ -26,7 +30,7 @@
     letter-spacing: 0.04em;
     font-size: 0.93175rem;
     line-height: 1.2rem;
-    background-color: var(--color-light-blue);
+    background-color: var(--color-dark-blue);
     color: #fff;
     border-radius: 0.25rem;
     border: none;
@@ -46,7 +50,7 @@
 }
 
 .app_google_container > div:first-child:hover ~ .app_google{
-    background-color: var(--color-light-blue);
+    background-color: var(--color-dark-blue);
     color: #fff;
 }
 

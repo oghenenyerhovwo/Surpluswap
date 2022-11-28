@@ -49,29 +49,28 @@
     cursor: pointer;
     border-radius: 0.25rem;
     border: none;
-  
-    border-width: 0px!important;
     font-family: var(--font-rubik);
 }
 
 .form_buttons a:last-child button{
     transition: ease-in-out .5s;
-    background-color: #3ba1da;
+    background-color: #4a77d7;
     color: #fff;
     box-shadow: rgba(17,12,46,0.15) 0px
     4px 3px 0px;
 }
 
 .form_buttons a:last-child:hover button{
-    background-color: #44b0ec;
+    background-color: var(--color-light-blue);
 }
 
 .form_buttons a:first-child button{
     transition: ease-in-out .5s;
-    background-color: var(--color-light-grey);
+    background-color:#fff;
     color: var(--color-dark-grey);
     box-shadow: rgba(17,12,46,0.15) 0px
     4px 3px 0px;
+    border: 1px solid rgba(74, 119, 215,0.3);
 }
 
 .form_buttons a:first-child:hover button{

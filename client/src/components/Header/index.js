@@ -45,7 +45,7 @@ const NavLinks = () => {
         }
       </li>
       <li><Link className={`${styles.nav_links}`} to="/story">Password Reset</Link></li>
-      <li><Link className={`${styles.nav_links}`} to="/event">Register</Link></li>
+      <li><Link className={`${styles.nav_links}`} to="/user/signup">Register</Link></li>
       <li><Link className={`${styles.nav_links}`} to="/faq">Uncategorised</Link></li>
     </ul>
   )
@@ -78,7 +78,7 @@ const Header = ({stickBarToTop}) => {
       animation.start({
         position: "sticky",
         top: 0,
-        padding: "0.4em 0",
+        padding: "1em 0",
         fontSize: "0.8rem",
         transition: { duration: 1, },
       })

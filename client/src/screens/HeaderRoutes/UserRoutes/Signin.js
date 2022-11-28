@@ -155,19 +155,8 @@ const SignIn = () => {
           </div>
           
         </div>
-
-          
-        </div>
-
-      {/* <div className={styles.image_col}>
-        <div className={styles.image_col_container}>
-            <h1 className="spacing-sm"><span>Welcome </span>back </h1>
-            <h2 className="spacing-sm">Let us make <span>impact</span> together</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex, dignissimos doloremque ducimus a eaque impedit aut rem facere earum magnam nobis delectus? Saepe iusto ad, dolorum architecto minus dolorem nemo!</p>
-        </div>
-      </div> */}
-
-      
+ 
+      </div>
        
     </motion.div>
   )
