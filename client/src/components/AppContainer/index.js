@@ -43,14 +43,14 @@ const AppContainer =props => {
 
   return (
     <motion.div 
-      className="app_container"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
       whileInView="scrollVisible"
       whileHover="hoverVisible"
+      className={` "app_container" ${lightMode && "app_container_light"} ${!lightMode && "app_container_dark"}`}
     >
-      <div className={`${"app_container_light"} ${!lightMode && "app_container_dark"}`}>{props.children}</div> 
+      {props.children}
     </motion.div>
   )
 }

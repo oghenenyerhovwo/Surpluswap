@@ -149,9 +149,9 @@
 .app_container_dark{
   background: var(--color-dark-mode);
   color: #fff;
-  min-height: 100vh;
 }
 
 .app_container_light{
-  min-height: 100vh;
+  background: #fff;
+  color: #000;
 }
