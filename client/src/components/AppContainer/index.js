@@ -48,7 +48,7 @@ const AppContainer =props => {
       animate="visible"
       whileInView="scrollVisible"
       whileHover="hoverVisible"
-      className={` "app_container" ${lightMode && "app_container_light"} ${!lightMode && "app_container_dark"}`}
+      className={` app_container ${lightMode && "app_container_light"} ${!lightMode && "app_container_dark"}`}
     >
       {props.children}
     </motion.div>
