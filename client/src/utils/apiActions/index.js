@@ -3,7 +3,7 @@
 // export const frontend_url = "http://localhost:3000/"
 
 // online
-export const backend_url = "https://surpluswap.herokuapp.com/api"
+export const backend_url = "https://surpluswap.onrender.com/api"
 export const frontend_url =  "https://surpluswap.vercel.app/"
 
 export const setError = (err) => {
