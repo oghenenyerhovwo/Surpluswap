@@ -36,6 +36,10 @@
   --color-dark-grey: #666;
   --color-light-grey: #ececec;
   --color-dark-mode: #081b33;
+  --color-success: #20a020;
+  --color-error: #a02020;
+  --color-light-error: #ffe0e0e0;
+  --color-light-success: #eeffe0;
 }
 
 html{

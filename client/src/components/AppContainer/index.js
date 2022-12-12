@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 // functions
 import { getUser } from "../../actions"
+import LoadingBox from "../LoadingBox"
 
 const containerVariants = {
   hidden: {
@@ -51,6 +52,7 @@ const AppContainer =props => {
       className={` app_container ${lightMode && "app_container_light"} ${!lightMode && "app_container_dark"}`}
     >
       {props.children}
+      <LoadingBox />
     </motion.div>
   )
 }

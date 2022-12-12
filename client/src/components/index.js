@@ -11,6 +11,7 @@ import MessageBox from "./MessageBox"
 import Form from "./Form"
 import ErrorBox from "./ErrorBox"
 import Google from "./Google"
+import LoadingBox from "./LoadingBox"
 
 export {
     Header,
@@ -25,4 +26,5 @@ export {
     Form,
     ErrorBox,
     Google,
+    LoadingBox,
 }

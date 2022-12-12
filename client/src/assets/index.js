@@ -9,6 +9,11 @@ import {
     blueBlob,
 } from "./images"
 
+import {
+    CheckMark,
+    Circle,
+} from "./icons"
+
 export {
     impexLogo,
     introInterpreter,
@@ -18,4 +23,6 @@ export {
     coreValuesIcon,
     yellowCurve,
     blueBlob,
+    Circle,
+    CheckMark,
 }

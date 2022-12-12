@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
 
 // component
-import { Spinner, ErrorBox, Form, Google } from "../../../components"
+import { ErrorBox, Form, Google } from "../../../components"
 
 // css
 import styles from "./signup.module.css"
@@ -19,16 +19,13 @@ import { SIGN_USER_RESET } from '../../../constants/userConstants'
 
 const SignUp = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   // state
   const {
     currentUser, 
     errorSignUser, 
     successSignUser, 
-    loadingSignUser,
     errorGoogleData,
-    loadingGoogleData,
   } =  useSelector(state => state.userStore)
 
   const { 
@@ -62,9 +59,8 @@ const SignUp = () => {
 
     if(successSignUser || currentUser.email){
       dispatch({type: SIGN_USER_RESET})
-      navigate("/dashboard")
     }
-  }, [currentUser,successSignUser,dispatch,navigate])
+  }, [currentUser,successSignUser,dispatch])
 
   useEffect(() => {
     dispatch({type: SIGN_USER_RESET})
@@ -118,7 +114,6 @@ const SignUp = () => {
 
           <form className="spacing-md" onSubmit={handleSubmit}>
             
-          {(loadingSignUser || loadingGoogleData) && <Spinner />}
             <div className="spacing-sm">
               <ErrorBox 
                     activateRef={"unique"} 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { motion } from "framer-motion"
 
 // components
-import { Spinner, ErrorBox, Form, Google } from "../../../components"
+import { ErrorBox, Form, Google } from "../../../components"
 
 // css
 import styles from "./signin.module.css"
@@ -19,7 +19,6 @@ import { SIGN_USER_RESET } from '../../../constants/userConstants'
 
 const SignIn = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const location = useLocation()
 
   // state
@@ -27,9 +26,7 @@ const SignIn = () => {
     currentUser, 
     errorSignUser, 
     successSignUser, 
-    loadingSignUser,
     errorGoogleData,
-    loadingGoogleData,
   } =  useSelector(state => state.userStore)
 
   const { 
@@ -46,10 +43,9 @@ const SignIn = () => {
 
   useEffect(() => {
     if(successSignUser || currentUser.email){
-      dispatch({type: SIGN_USER_RESET})
-      navigate("/dashboard" )
+      dispatch({type: SIGN_USER_RESET})  
     }
-  }, [currentUser,successSignUser,dispatch,navigate, location])
+  }, [currentUser,successSignUser,dispatch, location])
 
   useEffect(() => {
     dispatch({type: SIGN_USER_RESET})
@@ -87,13 +83,8 @@ const SignIn = () => {
         <h2 className="spacing-md">Sign In </h2>
 
         <div className={`${styles.form_container}`}>
-          {/* <img className="logo__small spacing-md" src={logo} alt="logo" /> */}
-          <div className={`${styles.google} spacing-md`}>
-            {/* <Google /> */}
-          </div>
           <form className="spacing-md" onSubmit={handleSubmit}>
-            
-            {(loadingSignUser || loadingGoogleData) && <Spinner />}
+
             <div className="spacing-sm">
               <ErrorBox 
                     activateRef={"unique"} 

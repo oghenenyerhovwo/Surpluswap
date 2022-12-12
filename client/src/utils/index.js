@@ -27,6 +27,7 @@ import {
   pageAnimations,
   slideAnimations,
   rotateAnimations,
+  pathAnimations,
 } from "./animations"
 
 
@@ -55,4 +56,5 @@ export {
     pageAnimations,
     slideAnimations,
     rotateAnimations,
+    pathAnimations,
 }
