@@ -39,7 +39,7 @@ export const signUp = async(req, res) => {
         const createdUser = await User.create(newUser)
         const token = generateToken(createdUser)
         res.send({user: createdUser, token})
-        createdUser.email && sendConfirmationEmail(createdUser.email, createdUser.fullName, token)
+        createdUser.email && sendConfirmationEmail(createdUser.email, createdUser.firstName, token)
 
     } catch (error) {
         console.log(error)
