@@ -1,6 +1,8 @@
 import mailgun from "mailgun-js"
 import { frontend_url } from "./constant.js"
+import dotenv from "dotenv"
 
+dotenv.config()
 
 const mg = mailgun({
     apiKey: process.env.MAILGUN_KEY, 
@@ -18,7 +20,8 @@ const sendEmailMessage = (recipient, subject, body,) => {
     };
 
     mg.messages().send(data, function (error, body) {
-        console.log(body);
+        console.log(`Mail sending Error-Body: ${body}`);
+        console.log(`Mail sending Error: ${error}`);
     });
 }
 
