@@ -3,10 +3,10 @@ import { frontend_url } from "./constant.js"
 
 
 const mg = mailgun({
-    apiKey: MAILGUN_KEY, 
+    apiKey: process.env.MAILGUN_KEY, 
     domain: process.env.MAIL_PASSWORD
 });
-
+ 
 
 const sendEmailMessage = (recipient, subject, body,) => {
 
