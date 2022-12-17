@@ -4,27 +4,29 @@ import sgMail from '@sendgrid/mail'
 
 dotenv.config()
 
+// Install with: npm install @trycourier/courier
+import { CourierClient } from "@trycourier/courier";
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const courier = CourierClient({ authorizationToken: process.env.COURIER_AUTH_TOKEN });
 
  
 
 const sendEmailMessage = async (recipientEmail, subject, body,) => {
 
-    const data = {
-        to: recipientEmail,
-        from: 'emakuneyioghenenyerhovwo@gmail.com',
-        subject: subject,
-        text: 'Surpluswap',
-        html: body,
-    };
-
-    try {
-        await sgMail.send(data)
-        console.log('Email sent from ' + process.env.SENDGRID_API_KEY)
-    } catch (error) {
-        console.error(error)
-    }
+    const { requestId } = await courier.send({
+        message: {
+          to: {
+            email: recipientEmail,
+          },
+          template: "DFENRB6P8DM7JYM47TAJNTDGHKPG",
+          data: {
+            variables: "awesomeness",
+          },
+        },
+      });
+      
+      console.log(requestId)
+      
 }
 
 export const sendConfirmationEmail = (email, name, confirmationCode) => {
