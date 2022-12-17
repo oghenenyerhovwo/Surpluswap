@@ -1,28 +1,30 @@
-import mailgun from "mailgun-js"
 import { frontend_url } from "./constant.js"
 import dotenv from "dotenv"
+import sgMail from '@sendgrid/mail'
 
 dotenv.config()
 
-const mg = mailgun({
-    apiKey: process.env.MAILGUN_KEY, 
-    domain: process.env.MAIL_PASSWORD
-});
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
  
 
-const sendEmailMessage = (recipient, subject, body,) => {
+const sendEmailMessage = async (recipientEmail, subject, body,) => {
 
     const data = {
-        from: 'Surpluswap',
-        to: recipient,
+        to: recipientEmail,
+        from: 'emakuneyioghenenyerhovwo@gmail.com',
         subject: subject,
-        text: body,
+        text: 'Surpluswap',
+        html: body,
     };
 
-    mg.messages().send(data, function (error, body) {
-        console.log(`Mail sending Error-Body: ${body}`);
-        console.log(`Mail sending Error: ${error}`);
-    });
+    try {
+        await sgMail.send(data)
+        console.log('Email sent from ' + process.env.SENDGRID_API_KEY)
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 export const sendConfirmationEmail = (email, name, confirmationCode) => {
@@ -39,7 +41,6 @@ export const sendConfirmationEmail = (email, name, confirmationCode) => {
     } catch (error) {
         console.log(error)
     }
-    
 }
 
 export const sendPasswordResetEmail = (email,name, confirmationCode) => {

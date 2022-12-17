@@ -106,7 +106,8 @@
     }
 }
 
-.signup_light .form label,
-.signup_light .forgot_passowrd{
+/* dark mode */
+.signup_dark .form label,
+.signup_dark .forgot_passowrd{
     color: #fff;
 }

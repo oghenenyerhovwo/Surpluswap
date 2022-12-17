@@ -33,26 +33,35 @@ const LoadingBox = () => {
     }, [loadingData])
 
     useEffect(() => {
+        let interval
+        let timer1
+        let timer2
         if(loadingData.state === "success" || loadingData.state === "error"){
             const timeOutTime = loadingData.state === "success" ? 7000 : 6000
-            setInterval(() => {
+            interval = setInterval(() => {
                 setCount(prevCount => prevCount-1)
             }, 1000);
-            setTimeout(() => {
+
+           timer1 =  setTimeout(() => {
                 setDisplay(false)
-                dispatch({type: LOADING_RESET})
+                setCount(7)
+                clearInterval(interval)
+                if(loadingData.state === "success" && loadingData.redirectLink){
+                    navigate(loadingData.redirectLink)
+                }
+            dispatch({type: LOADING_RESET})
             }, timeOutTime);
 
-            if(loadingData.state === "success" && loadingData.redirectLink){
-                setTimeout(() => {
-                    navigate(loadingData.redirectLink)
-                }, timeOutTime);
-            }
+            
+            
         }
+
         return () => {
-            clearTimeout()
-            clearInterval()
+            timer1 && clearTimeout(timer1)
+            timer2 && clearTimeout(timer2)
+            interval && clearInterval(interval)
           };
+        
     }, [dispatch, loadingData.state, loadingData.redirectLink, navigate])
     
     
@@ -98,10 +107,10 @@ const LoadingBox = () => {
                                 </div>
                                 <div className="loader_body">
                                     <p className="spacing-xs">{loadingData.body}</p>
-                                    <button className="spacing-xs" onClick={loadingData.btnAction}>{loadingData.btnText}</button>
+                                    {loadingData.btnText && <button className="spacing-xs" onClick={loadingData.btnAction}>{loadingData.btnText}</button>}
                                     {
                                         (loadingData.state === "success" && loadingData.redirectText) && (
-                                            <p>{loadingData.redirectText} in {count} </p>
+                                            <p>{loadingData.redirectText} in {count < 7 && count} </p>
                                         )
                                     }
                                 </div>

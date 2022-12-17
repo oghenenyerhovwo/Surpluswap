@@ -8,9 +8,6 @@ import {
 } from "../../constants/userConstants.js";
 import { loadData } from "../generalActions"
 
-const resendVerificationMessage = () => {
-  console.log("verification link")
-}
 
 export const signUserIn = (dispatch, api,userData) => {
     dispatch({type: SIGN_USER_REQUEST, payload:  userData})
@@ -25,9 +22,7 @@ export const signUserIn = (dispatch, api,userData) => {
           dispatch({type: SIGN_USER_SUCCESS, payload: res.data})
           loadData(dispatch, {
             title: "Login successful",
-            body: !res.data.isVerified && "Account is yet to be verified, please check your email for verification link or click the button below",
-            btnText: "Resend Verification",
-            btnAction: resendVerificationMessage,
+            body: !res.data.isVerified && "Account is yet to be verified, please check your email for verification link or got to profile to resend link",
             state: "success",
             redirectText: "Redirecting to dashboard",
             redirectLink: "/dashboard",

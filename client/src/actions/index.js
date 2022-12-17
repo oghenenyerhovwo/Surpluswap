@@ -9,7 +9,7 @@ import { changeLightMode } from "./generalActions"
 // import { getRents } from "./rentActions/getActions"
 
 import { signUpUser, signInUser, confirmEmail, signOut, } from "./userActions/email.action"
-import { resetPassword, getResetPasswordEmail } from "./userActions/password.action"
+import { resetPassword, sendResetPasswordEmail } from "./userActions/password.action"
 import { getUser, getUserById, deleteUser, updateUser, getUsers } from "./userActions/control.action"
 import { googleSignIn } from "./userActions/thirdparty.action"
 
@@ -50,7 +50,7 @@ export {
     signInUser,
     confirmEmail,
     signOut,
-    getResetPasswordEmail,
+    sendResetPasswordEmail,
     resetPassword,
     googleSignIn,
     getUser,

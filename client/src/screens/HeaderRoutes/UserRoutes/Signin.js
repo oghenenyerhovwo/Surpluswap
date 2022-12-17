@@ -72,7 +72,7 @@ const SignIn = () => {
 
   return (
     <motion.div 
-      className={`${styles.signin} spacing-lg ${!lightMode && styles.signin_light}`}
+      className={`${styles.signin} spacing-lg ${!lightMode && styles.signin_dark}`}
       variants={pageAnimations.swipeRight}
       initial="hidden"
       animate="visible"
@@ -142,7 +142,7 @@ const SignIn = () => {
           </div>
 
           <div className={`${styles.forgot_passowrd}`}>
-              <Link to="/forgotpassword">Forgot Password?</Link>
+              <Link to="/user/password/forgot">Forgot Password?</Link>
           </div>
           
         </div>

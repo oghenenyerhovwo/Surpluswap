@@ -99,7 +99,7 @@ const SignUp = () => {
 
   return (
     <motion.div 
-      className={`${styles.signup} spacing-lg ${!lightMode && styles.signup_light}`}
+      className={`${styles.signup} spacing-lg ${!lightMode && styles.signup_dark}`}
       variants={pageAnimations.swipeLeft}
       initial="hidden"
       animate="visible"

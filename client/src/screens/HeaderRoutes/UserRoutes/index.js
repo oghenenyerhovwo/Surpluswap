@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion"
 // screens
 import Signup from "./Signup"
 import Signin from "./Signin"
+import ForgotPassword from "./ForgotPassword"
 
 const UserRoutes = () => {
   const location = useLocation()
@@ -14,6 +15,7 @@ const UserRoutes = () => {
           <Route path="/user/">
             <Route path="signup" element={<Signup />} exact></Route>
             <Route path="signin" element={<Signin />} exact></Route>
+            <Route path="password/forgot" element={<ForgotPassword />} exact></Route>
           </Route>
         </Routes>
       </AnimatePresence>
