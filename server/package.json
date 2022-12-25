@@ -9,7 +9,6 @@
     "server": "nodemon server.js"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.7.0",
     "@trycourier/courier": "^4.1.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -17,10 +16,8 @@
     "express": "^4.18.2",
     "google-auth-library": "^8.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mailgun-js": "^0.22.0",
     "mongoose": "^6.7.0",
     "node-fetch": "^3.3.0",
-    "nodemailer": "^6.8.0",
     "path": "^0.12.7"
   },
   "devDependencies": {
