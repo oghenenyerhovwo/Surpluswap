@@ -37,7 +37,7 @@ const LoadingBox = () => {
         let timer1
         let timer2
         if(loadingData.state === "success" || loadingData.state === "error"){
-            const timeOutTime = loadingData.state === "success" ? 7000 : 6000
+            const timeOutTime = loadingData.state === "success" ? 7000 : 2000
             interval = setInterval(() => {
                 setCount(prevCount => prevCount-1)
             }, 1000);

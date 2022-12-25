@@ -21,7 +21,7 @@ export const sendResetPasswordEmail =  (userData) => (dispatch) => {
     })
       
       axios
-        .post(`${backend_url}/users/password/forgot`, userData)
+        .post(`${backend_url}/users/password/recovery`, userData)
         .then(res => {
           dispatch({type: FORGOT_PASSWORD_SUCCESS, payload: res.data})
           loadData(dispatch, {
@@ -32,8 +32,7 @@ export const sendResetPasswordEmail =  (userData) => (dispatch) => {
         .catch(err => {
           dispatch({type: FORGOT_PASSWORD_FAIL, payload: setError(err)})
           loadData(dispatch, {
-            title: "Something went wrong",
-            body: "Make sure the email is valid",
+            title: setError(err),
             state: "error"
           })
         });
@@ -41,27 +40,31 @@ export const sendResetPasswordEmail =  (userData) => (dispatch) => {
   
   export const resetPassword =  (userData) => (dispatch,getState) => {
     dispatch({type: RESET_PASSWORD_REQUEST, payload:  userData})
-    const resetToken= getState().userStore.resetToken  
+    const resetPasswordToken= getState().userStore.resetPasswordToken  
+    loadData(dispatch, {
+      title: "Resetting Password",
+      state: "loading"
+    })
+
       axios
         .post(
           `${backend_url}/users/password/reset`, 
           userData,
-          setHeader(resetToken)
+          setHeader(resetPasswordToken)
           )
         .then(res => {
           dispatch({type: RESET_PASSWORD_SUCCESS, payload: res.data})
           loadData(dispatch, {
             title: "Password reset successfully",
-            btnText: "Resend Verification",
             state: "success",
             redirectText: "Redirecting to signin",
-            redirectLink: "/users/signin",
+            redirectLink: "/user/signin",
           })
         })
         .catch(err => {
           dispatch({type: RESET_PASSWORD_FAIL, payload: setError(err)})
           loadData(dispatch, {
-            title: "Login failed",
+            title: setError(err),
             state: "error"
           })
         });

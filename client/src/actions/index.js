@@ -8,7 +8,8 @@ import { changeLightMode } from "./generalActions"
 // import { createRent, updateRent } from "./rentActions/postActions"
 // import { getRents } from "./rentActions/getActions"
 
-import { signUpUser, signInUser, confirmEmail, signOut, } from "./userActions/email.action"
+import { signUpUser, signInUser, signOut, resendEmail } from "./userActions/email.action"
+import { confirmToken, signInToken } from "./userActions/token.action"
 import { resetPassword, sendResetPasswordEmail } from "./userActions/password.action"
 import { getUser, getUserById, deleteUser, updateUser, getUsers } from "./userActions/control.action"
 import { googleSignIn } from "./userActions/thirdparty.action"
@@ -48,7 +49,9 @@ export {
 
     signUpUser,
     signInUser,
-    confirmEmail,
+    resendEmail,
+    confirmToken,
+    signInToken,
     signOut,
     sendResetPasswordEmail,
     resetPassword,

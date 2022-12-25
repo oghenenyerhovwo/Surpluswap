@@ -5,8 +5,8 @@ import User from "../../../models/userModel.js"
 
 
 // functions and middleware
-import { generateToken, sendConfirmationEmail }  from "../../../utils/index.js"
-import { findUser, updateUserFunc } from "./userFunctions.js"
+import { generateToken, sendConfirmationEmail, sendPasswordResetEmail }  from "../../../utils/index.js"
+import { findUser } from "./userFunctions.js"
 
 export const signUp = async(req, res) => {
     try {
@@ -37,9 +37,10 @@ export const signUp = async(req, res) => {
             password: bcrypt.hashSync(req.body.password, 8)
         }
         const createdUser = await User.create(newUser)
-        const token = generateToken(createdUser)
-        res.send({user: createdUser, token})
-        createdUser.email && sendConfirmationEmail(createdUser.email, createdUser.firstName, token)
+        const signInToken = generateToken(({user: createdUser, tokenType: "sign_in"}))
+        const emailToken = generateToken({user: createdUser, tokenType: "email_verify"})
+        res.send({user: createdUser, token: signInToken})
+        createdUser.email && sendConfirmationEmail(createdUser.email, createdUser.firstName, emailToken)
 
     } catch (error) {
         console.log(error)
@@ -49,43 +50,55 @@ export const signUp = async(req, res) => {
 }
 
 export const signIn = async(req, res) => {
-    const {emailOrUsernameOrPhoneNumber, password} = req.body
+    try {
+        const {emailOrUsernameOrPhoneNumber, password} = req.body
     
-    const foundUserByEmail = await findUser({email: emailOrUsernameOrPhoneNumber}) 
-    const foundUserByUsername = await findUser({userName: emailOrUsernameOrPhoneNumber}) 
-    const foundUserByPhoneNumberText = await findUser({phoneNumberText: emailOrUsernameOrPhoneNumber}) 
-    const foundUserByPhoneNumberTextWithCode = await findUser({phoneNumberTextWithCode: emailOrUsernameOrPhoneNumber}) 
-
-    if(!foundUserByEmail && !foundUserByUsername && !foundUserByPhoneNumberText && !foundUserByPhoneNumberTextWithCode){
-        return res.status(401).send({message: "No account has been created with this email, username or phone number"})
-    } 
-
-    const foundUser = foundUserByEmail || foundUserByUsername || foundUserByPhoneNumberText || foundUserByPhoneNumberTextWithCode
-    if(!bcrypt.compareSync(password, foundUser.password)){
-        return res.status(401).send({message: "Password is incorrect"})
-    } 
-
-    res.send({user: foundUser, token: generateToken(foundUser)})
+        const foundUserByEmail = await findUser({email: emailOrUsernameOrPhoneNumber}) 
+        const foundUserByUsername = await findUser({userName: emailOrUsernameOrPhoneNumber}) 
+        const foundUserByPhoneNumberText = await findUser({phoneNumberText: emailOrUsernameOrPhoneNumber}) 
+        const foundUserByPhoneNumberTextWithCode = await findUser({phoneNumberTextWithCode: emailOrUsernameOrPhoneNumber}) 
+    
+        if(!foundUserByEmail && !foundUserByUsername && !foundUserByPhoneNumberText && !foundUserByPhoneNumberTextWithCode){
+            return res.status(401).send({message: "No account has been created with this email, username or phone number"})
+        } 
+    
+        const foundUser = foundUserByEmail || foundUserByUsername || foundUserByPhoneNumberText || foundUserByPhoneNumberTextWithCode
+        if(!bcrypt.compareSync(password, foundUser.password)){
+            return res.status(401).send({message: "Password is incorrect"})
+        } 
+    
+        res.send({user: foundUser, token: generateToken(({user: foundUser, tokenType: "sign_in"}))})
+    } catch (error) {
+        console.log(error)
+        res.status(404).send({message: "Unable to sign in user"})
+    }
  }
 
-
- export const confirmEmail = async(req,res) => {
+ export const resendEmail = async(req, res) => {
     try {
-        const foundUser = await findUser({email: req.user.email})
-        
+        const { email, type } = req.body
+    
+        const foundUser = await findUser({email: email}) 
+    
         if(!foundUser){
-            return res.status(404).send({message: "User Not Found"})
+            return res.status(401).send({message: "No account has been created with this email"})
         } 
-        const data ={
-            ...foundUser, 
-            isVerified: true
-        }
-        req.body.confirmationType === "signin" ? updateUserFunc(res, foundUser,data):
-        req.body.confirmationType === "reset" ? res.send({resetToken:generateToken(foundUser), user: {} }):
-        null
+
+
+        const emailToken = generateToken({user: foundUser, tokenType: type})
+
+        if(type === "email_verify") {
+            const { isMessageSent } = await sendConfirmationEmail(foundUser.email, foundUser.firstName, emailToken)
+            if(!isMessageSent){
+                return res.status(401).send({message: "Message was not sent"})
+            }
+            return res.send({isMessageSent: true})
+        } 
+       
+
         
     } catch (error) {
         console.log(error)
-        res.status(404).send({message: "Unable to confirm email"})
+        res.status(404).send({message: "Unable to resend email"})
     }
-}
+ }

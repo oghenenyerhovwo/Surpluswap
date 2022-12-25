@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { motion } from "framer-motion"
 
 // component
@@ -19,6 +19,7 @@ import { SIGN_USER_RESET } from '../../../constants/userConstants'
 
 const SignUp = () => {
   const dispatch = useDispatch()
+  const location = useLocation()
 
   // state
   const {
@@ -53,6 +54,10 @@ const SignUp = () => {
 
   const [activateRef, setActivateRef] = useState("")
 
+  const backLink = location.search.split("=")[1]
+  const redirectLink = backLink || "/dashboard"
+  const signInLink = backLink ? `/user/signin/?redirect=${backLink}` : "/user/signin/"
+
   useEffect(() => {
     // redirect user to signUser if user sign User is successful
     // reset form state and sign User state
@@ -72,7 +77,7 @@ const SignUp = () => {
     e.preventDefault()
     if(!onSubmitError(form, error, setError)){
       setActivateRef("")
-      dispatch(signUpUser(form))
+      dispatch(signUpUser(form, redirectLink))
     } else {
       const {keys} = objectToArrayWithKeys(error)
       setActivateRef(keys[0])
@@ -215,7 +220,7 @@ const SignUp = () => {
               </button>
             </Link>
 
-            <Link to="/user/signin">
+            <Link to={signInLink}>
               <button>
                   Log In
               </button>

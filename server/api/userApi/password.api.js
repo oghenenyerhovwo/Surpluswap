@@ -11,7 +11,7 @@ const router = express.Router();
 
 // Get password reset email
 router.post(
-    "/resetrequest",
+    "/recovery",
     async (req, res) => {
         getPasswordEmail(req,res)
 });

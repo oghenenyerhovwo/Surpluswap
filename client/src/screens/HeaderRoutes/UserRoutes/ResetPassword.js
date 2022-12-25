@@ -7,48 +7,50 @@ import { motion } from "framer-motion"
 import { ErrorBox, Form } from '../../../components'
 
 // css
-import styles from "./forgotpassword.module.css"
+import styles from "./resetpassword.module.css"
 
 // functions
-import { sendResetPasswordEmail } from "../../../actions"
+import { resetPassword } from "../../../actions"
 
 // type
-import { FORGOT_PASSWORD_RESET } from '../../../constants/userConstants'
+import { RESET_PASSWORD_RESET } from '../../../constants/userConstants'
 
 // objects and functions
 import { pageAnimations, onSubmitError, onChangeError, objectToArrayWithKeys } from '../../../utils/index'
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
   const dispatch = useDispatch()
 
   // state
   const { 
     lightMode,
   }=  useSelector(state => state.generalStore)
-  const {errorForgotPassword, successForgotPassword } =  useSelector(state => state.userStore)
+  const { errorResetPassword, successResetPassword, resetPasswordEmail } =  useSelector(state => state.userStore)
   const initialFormState = {
-    email: "",
+    password: "",
+    confirmPassword: "",
   }
   const [form, setForm] = useState(initialFormState)
   const [error, setError] = useState(initialFormState)
   const [activateRef, setActivateRef] = useState("")
 
+
   useEffect(() => {
-    if(successForgotPassword){
+    if(successResetPassword){
       setForm({
         email: "",
+        password: "",
+        confirmPassword: "",
       })
-      setTimeout(() => {
-        dispatch({type: FORGOT_PASSWORD_RESET})
-      }, 10000);
+      dispatch({type: RESET_PASSWORD_RESET})
     }
-  }, [successForgotPassword,dispatch])
+  }, [successResetPassword,dispatch])
 
   const handleSubmit = e => {
     e.preventDefault()
     if(!onSubmitError(form, error, setError)){
       setActivateRef("")
-      dispatch(sendResetPasswordEmail(form))
+      dispatch(resetPassword(form))
     }else {
       const {keys} = objectToArrayWithKeys(error)
       setActivateRef(keys[0])
@@ -63,36 +65,59 @@ const ForgotPassword = () => {
 
   return (
     <motion.div 
-        className={`${styles.forgotpassword} spacing-lg ${!lightMode && styles.forgotpassword_light}`}
+        className={`${styles.resetpassword} spacing-lg ${!lightMode && styles.resetpassword_light}`}
         variants={pageAnimations.swipeLeft}
         initial="hidden"
         animate="visible"
         exit="exit"
     >
         <div className={`${styles.form}`}>
-            <h2 className="spacing-md">Forgot Password?</h2>
+            <h2 className="spacing-md">Reset Password?</h2>
             <div className={`${styles.form_container}`}>
 
                 <form className="flex__column flex__center" onSubmit={handleSubmit}>
                     <div className="spacing-sm">
                         <ErrorBox 
                             activateRef={"unique"} 
-                            inputError={errorForgotPassword} 
-                            errorMessage={errorForgotPassword}
+                            inputError={errorResetPassword} 
+                            errorMessage={errorResetPassword}
                         />
                     </div>
 
                     <Form.Input 
                         label="Email"
-                        onChange={handleChange}
-                        value={form.email}
                         type="text"
                         name="email"
-                        error={error.email}
-                        errorMessage="Enter email of the account that needs reset"
+                        placeholder={resetPasswordEmail}
+                        disabled={true}
+                    />
+
+                    <Form.Input 
+                        label="Password"
+                        onChange={handleChange}
+                        value={form.password}
+                        type="password"
+                        name="password"
+                        error={error.password}
+                        autoComplete={"true"}
+                        errorMessage="Password is required"
                         activateRef={activateRef}
                         required={true}
-                    />
+                      />
+
+                      <Form.Input 
+                        label="Reenter Password"
+                        onChange={handleChange}
+                        value={form.confirmPassword}
+                        type="password"
+                        name="confirmPassword"
+                        error={error.confirmPassword}
+                        autoComplete={"true"}
+                        errorMessage="Password does not match"
+                        activateRef={activateRef}
+                        required={true}
+                      />
+
                 </form>
             
                 <div className={`${styles.form_buttons}`}>
@@ -101,12 +126,7 @@ const ForgotPassword = () => {
                             onClick={handleSubmit}
                             type="submit"
                           >
-                            Submit Email
-                        </button>
-                    </Link>
-                    <Link to="/user/signin">
-                        <button>
-                            Sign In
+                            Reset Password
                         </button>
                     </Link>
                 </div>
@@ -118,4 +138,4 @@ const ForgotPassword = () => {
   )
 }
 
-export default ForgotPassword
+export default ResetPassword

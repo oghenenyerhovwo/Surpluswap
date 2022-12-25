@@ -12,6 +12,10 @@ import Form from "./Form"
 import ErrorBox from "./ErrorBox"
 import Google from "./Google"
 import LoadingBox from "./LoadingBox"
+import Sidebar from "./Sidebar"
+import PublicRoute from "./PublicRoute"
+import PrivateRoute from "./PrivateRoute"
+import LoadingBoxTwo from "./LoadingBoxTwo"
 
 export {
     Header,
@@ -27,4 +31,8 @@ export {
     ErrorBox,
     Google,
     LoadingBox,
+    Sidebar,
+    PublicRoute,
+    PrivateRoute,
+    LoadingBoxTwo,
 }

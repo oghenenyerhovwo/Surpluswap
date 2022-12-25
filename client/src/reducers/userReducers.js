@@ -17,10 +17,15 @@ import {
     GET_GOOGLE_DATA_FAIL,
     GET_GOOGLE_DATA_RESET,
 
-    CONFIRM_EMAIL_REQUEST,
-    CONFIRM_EMAIL_SUCCESS,
-    CONFIRM_EMAIL_FAIL,
-    CONFIRM_EMAIL_RESET,
+    CONFIRM_TOKEN_REQUEST,
+    CONFIRM_TOKEN_SUCCESS,
+    CONFIRM_TOKEN_FAIL,
+    CONFIRM_TOKEN_RESET,
+
+    SIGNIN_TOKEN_REQUEST,
+    SIGNIN_TOKEN_SUCCESS,
+    SIGNIN_TOKEN_FAIL,
+    SIGNIN_TOKEN_RESET,
 
     FORGOT_PASSWORD_REQUEST,
     FORGOT_PASSWORD_SUCCESS,
@@ -55,6 +60,11 @@ import {
     DELETE_USER_SUCCESS,
     DELETE_USER_FAIL,
     DELETE_USER_RESET,
+
+    RESEND_EMAIL_REQUEST,
+    RESEND_EMAIL_SUCCESS,
+    RESEND_EMAIL_FAIL,
+    RESEND_EMAIL_RESET,
     
 } from "../constants/userConstants";
 
@@ -62,8 +72,9 @@ import {
 
 const initialState = {
     currentUser: "",
-    token: localStorage.getItem("lmcp_user_token") ? JSON.parse(localStorage.getItem("lmcp_user_token")) : "",
-    
+    token: localStorage.getItem("surpluswap_user_token") ? JSON.parse(localStorage.getItem("surpluswap_user_token")) : "",
+    completeTokenSignIn: false,
+
     // sign out user
     successSignOut: false,
 
@@ -85,9 +96,14 @@ const initialState = {
 
 
     // Confirm Email
-    errorConfirmEmail: "",
-    successConfirmEmail: false,
-    loadingConfirmEmail: false,
+    errorConfirmToken: "",
+    successConfirmToken: false,
+    loadingConfirmToken: false,
+
+    // Sign in with token
+    errorSignInToken: "",
+    successSignInToken: false,
+    loadingSignInToken: false,
 
     // Forgot password
     errorForgotPassword: "",
@@ -98,7 +114,8 @@ const initialState = {
     errorResetPassword: "",
     successResetPassword: false,
     loadingResetPassword: false,
-    resetToken: "",
+    resetPasswordEmail: "",
+    resetPasswordToken: "",
 
     // Get user with token
     errorGetUser: "",
@@ -127,6 +144,11 @@ const initialState = {
     errorDeleteUser: "",
     successDeleteUser: false,
     loadingDeleteUser: false,
+
+    // Resend email verification
+    errorResendEmail: "",
+    successResendEmail: false,
+    loadingResendEmail: false,
 
 }
 
@@ -160,33 +182,63 @@ const userReducers =  (state = initialState, action) => {
             loadingSignUser: false,
         }
 
-    case CONFIRM_EMAIL_REQUEST:
+    case CONFIRM_TOKEN_REQUEST:
         return {
             ...state,
-            loadingConfirmEmail:  true,
-            errorConfirmEmail: "",
+            loadingConfirmToken:  true,
+            errorConfirmToken: "",
         }
-    case CONFIRM_EMAIL_SUCCESS:
+    case CONFIRM_TOKEN_SUCCESS:
         return {
             ...state,
-            loadingConfirmEmail:  false,
-            successConfirmEmail: true,
+            loadingConfirmToken:  false,
+            successConfirmToken: true,
+            resetPasswordEmail: action.payload.resetPasswordEmail || "",
+            resetPasswordToken: action.payload.resetPasswordToken || "",
+        }
+    case CONFIRM_TOKEN_FAIL:
+        return {
+            ...state,
+            loadingConfirmToken:  false,
+            errorConfirmToken: action.payload,
+        }
+    case CONFIRM_TOKEN_RESET:
+        return {
+            ...state,
+            errorConfirmToken: "",
+            successConfirmToken: false,
+            loadingConfirmToken: false,
+        }
+
+    case SIGNIN_TOKEN_REQUEST:
+        return {
+            ...state,
+            loadingSignInToken:  true,
+            errorSignInToken: "",
+        }
+    case SIGNIN_TOKEN_SUCCESS:
+        return {
+            ...state,
+            loadingSignInToken:  false,
+            successSignInToken: true,
             currentUser: action.payload.user,
-            token: action.payload.token,
-            resetToken: action.payload.resetToken,
+            completeTokenSignIn: true,
         }
-    case CONFIRM_EMAIL_FAIL:
+    case SIGNIN_TOKEN_FAIL:
         return {
             ...state,
-            loadingConfirmEmail:  false,
-            errorConfirmEmail: action.payload,
+            loadingSignInToken:  false,
+            errorSignInToken: action.payload,
+            token: "",
+            currentUser: {},
+            completeTokenSignIn:true,
         }
-    case CONFIRM_EMAIL_RESET:
+    case SIGNIN_TOKEN_RESET:
         return {
             ...state,
-            errorConfirmEmail: "",
-            successConfirmEmail: false,
-            loadingConfirmEmail: false,
+            errorSignInToken: "",
+            successSignInToken: false,
+            loadingSignInToken: false,
         }
     case SIGNOUT_USER:
             return {
@@ -305,7 +357,8 @@ const userReducers =  (state = initialState, action) => {
             errorResetPassword: "",
             successResetPassword: false,
             loadingResetPassword: false,
-            resetToken: "",
+            resetPasswordEmail: "",
+            resetPasswordToken: "",
         }
 
     case GET_USER_REQUEST:
@@ -440,6 +493,35 @@ const userReducers =  (state = initialState, action) => {
             errorDeleteUser: "",
             successDeleteUser: false,
             loadingDeleteUser: false,
+        }
+
+    case RESEND_EMAIL_REQUEST:
+        return {
+            ...state,
+            loadingResendEmail:  true,
+            errorResendEmail: "",
+        }
+
+    case RESEND_EMAIL_SUCCESS:
+        return {
+            ...state,
+            loadingResendEmail:  false,
+            successResendEmail: action.payload,
+        }
+
+    case RESEND_EMAIL_FAIL:
+        return {
+            ...state,
+            loadingResendEmail:  false,
+            errorResendEmail: action.payload.isMessageSent,
+        }
+
+     case RESEND_EMAIL_RESET:
+        return {
+            ...state,
+            errorResendEmail: "",
+            successResendEmail: false,
+            loadingResendEmail: false,
         }
      
     default:

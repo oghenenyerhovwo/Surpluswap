@@ -4,7 +4,7 @@ import {isAuth} from "../../utils/index.js"
 import { 
     signIn, 
     signUp, 
-    confirmEmail,
+    resendEmail,
 }from "./controllers/index.js";
 
 const router = express.Router();
@@ -22,12 +22,10 @@ router.post(
         signUp(req, res)
 });
 
-// email confirmation route
+// resend email
 router.post(
-    "/confirmation",
-    isAuth,
+    "/resend", 
     (req, res) => {
-        confirmEmail(req, res)
+        resendEmail(req, res)
 });
-
 export default router;

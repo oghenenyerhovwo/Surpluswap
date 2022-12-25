@@ -17,7 +17,7 @@ export const googleSignIn =  (googleData ) => (dispatch) => {
         .then(res => {
           dispatch({type: GOOGLE_SIGN_IN_SUCCESS})
           dispatch({type: SIGN_USER_SUCCESS, payload: res.data})
-          localStorage.setItem("lmcp_user_token", JSON.stringify(res.data.token))
+          localStorage.setItem("surpluswap_user_token", JSON.stringify(res.data.token))
         })
         .catch(err => dispatch({type: GOOGLE_SIGN_IN_FAIL, payload: setError(err)}));
 };

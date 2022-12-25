@@ -9,7 +9,7 @@ import {
 import { loadData } from "../generalActions"
 
 
-export const signUserIn = (dispatch, api,userData) => {
+export const signUserIn = (dispatch, api,userData,redirectLink) => {
     dispatch({type: SIGN_USER_REQUEST, payload:  userData})
     loadData(dispatch, {
       title: "Logging in. please wait",
@@ -25,9 +25,9 @@ export const signUserIn = (dispatch, api,userData) => {
             body: !res.data.isVerified && "Account is yet to be verified, please check your email for verification link or got to profile to resend link",
             state: "success",
             redirectText: "Redirecting to dashboard",
-            redirectLink: "/dashboard",
+            redirectLink: redirectLink,
           })
-          localStorage.setItem("lmcp_user_token", JSON.stringify(res.data.token))
+          localStorage.setItem("surpluswap_user_token", JSON.stringify(res.data.token))
         })
         .catch(err => {
           dispatch({type: SIGN_USER_FAIL, payload: setError(err)})

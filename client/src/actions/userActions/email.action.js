@@ -1,43 +1,38 @@
-import axios from "axios";
-import {setError, backend_url,setHeader} from "../../utils"
+import axios from "axios"
+import {setError, backend_url} from "../../utils"
 import { 
-  
-    CONFIRM_EMAIL_REQUEST,
-    CONFIRM_EMAIL_SUCCESS,
-    CONFIRM_EMAIL_FAIL,
-
     SIGNOUT_USER,
     SIGNOUT_USER_RESET,
+
+    RESEND_EMAIL_REQUEST,
+    RESEND_EMAIL_SUCCESS,
+    RESEND_EMAIL_FAIL,
 } from "../../constants/userConstants.js";
 
 import { signUserIn } from "./sign.util"
 
-export const signUpUser=(userData) => dispatch =>  {
-    signUserIn(dispatch, "email/signup", userData)
+export const signUpUser=(userData, redirectLink) => dispatch =>  {
+    signUserIn(dispatch, "email/signup", userData, redirectLink)
 }
 
-export const signInUser=(userData) => dispatch =>  {
-    signUserIn(dispatch, "email/signin", userData)
+export const signInUser=(userData, redirectLink) => dispatch =>  {
+    signUserIn(dispatch, "email/signin", userData, redirectLink)
 }
 
-export const confirmEmail=(confirmationCode, confirmationType) => dispatch =>  { 
-  dispatch({type: CONFIRM_EMAIL_REQUEST, payload:  confirmationCode})
-
-    axios
-      .post(
-        `${backend_url}/user/email/confirmation`,
-        {confirmationType},
-        setHeader(confirmationCode)
-      )
-      .then(res => {
-        dispatch({type: CONFIRM_EMAIL_SUCCESS, payload: res.data})
-        confirmationType === "signin" && localStorage.setItem("lmcp_user_token", JSON.stringify(res.data.token))
-      })
-      .catch(err => dispatch({type: CONFIRM_EMAIL_FAIL, payload: setError(err)}));
-  }
 
 export const signOut = () => dispatch => {
     dispatch({type: SIGNOUT_USER})
     dispatch({type: SIGNOUT_USER_RESET})
-    localStorage.removeItem("lmcp_user_token")
+    localStorage.removeItem("surpluswap_user_token")
+};
+
+export const resendEmail =  (detail ) => (dispatch) => {
+    dispatch({type: RESEND_EMAIL_REQUEST, payload: detail })
+  
+     axios
+        .post(`${backend_url}/users/email/resend`, detail)
+        .then(res => {
+          dispatch({type: RESEND_EMAIL_SUCCESS, payload: res.data})
+        })
+        .catch(err => dispatch({type: RESEND_EMAIL_FAIL, payload: setError(err)}));
 };

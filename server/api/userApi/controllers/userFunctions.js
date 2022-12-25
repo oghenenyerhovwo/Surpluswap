@@ -1,7 +1,5 @@
 import User from "../../../models/userModel.js"
 
-import { generateToken } from "../../../utils/index.js"
-
 export const findUser = async(object) => {
     try {
         const foundUser = await User.findOne(object)
@@ -13,7 +11,7 @@ export const findUser = async(object) => {
 } 
 
 export const updateUserFunc = async (res, user, data) => {
-    const updatedUser = await User.findByIdAndUpdate(user.id, data)
+    const updatedUser = await User.findByIdAndUpdate(user._id, data)
 
-    res.send({user: updatedUser, token: generateToken(updatedUser),})
+    res.send({user: updatedUser})
  }

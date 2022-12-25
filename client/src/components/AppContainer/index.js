@@ -3,7 +3,9 @@ import { motion } from "framer-motion"
 import { useSelector, useDispatch } from 'react-redux'
 
 // functions
-import { getUser } from "../../actions"
+import { signInToken } from "../../actions"
+import { SIGNIN_TOKEN_RESET, SIGNOUT_USER_RESET } from "../../constants/userConstants"
+
 import LoadingBox from "../LoadingBox"
 
 const containerVariants = {
@@ -21,7 +23,11 @@ const AppContainer =props => {
   const { 
     currentUser, 
     token ,
+    successSignOut,
+    successSignInToken,
+    loadingSignInToken,
     // successDeleteUser,
+
     // successSignOut,
     // successUpdateUser,
   }=  useSelector(state => state.userStore)
@@ -31,14 +37,26 @@ const AppContainer =props => {
   }=  useSelector(state => state.generalStore)
 
   useEffect(() => {
-    if(token && !currentUser.email){
-      dispatch(getUser())
+    if(token && !currentUser.email && !loadingSignInToken){
+      dispatch(signInToken())
     }
-  }, [currentUser, token, dispatch])
+  }, [currentUser.email, token, dispatch, loadingSignInToken])
+
+  useEffect(() => {
+    if( successSignInToken ){
+      dispatch({type: SIGNIN_TOKEN_RESET})
+    }
+  }, [dispatch, successSignInToken])
+
+  useEffect(() => {
+    if( successSignOut){
+      dispatch({type: SIGNOUT_USER_RESET})
+    }
+  }, [dispatch, successSignOut])
 
   // useEffect(() => {
   //   if(successDeleteUser || successSignOut || successUpdateUser){
-  //     dispatch(getUser())
+  //     dispatch(signInToken())
   //   }
   // }, [dispatch, successDeleteUser, successSignOut, successUpdateUser])
 
@@ -52,6 +70,7 @@ const AppContainer =props => {
       className={` app_container ${lightMode && "app_container_light"} ${!lightMode && "app_container_dark"}`}
     >
       {props.children}
+
       <LoadingBox />
     </motion.div>
   )

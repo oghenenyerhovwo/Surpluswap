@@ -19,14 +19,14 @@ const sendUser = async (req, res, userDetails) => {
                 password: bcrypt.hashSync(process.env.SECRET_PASSWORD, 8)
             }
             const createdUser = await User.create(newUser)
-            res.send({user: createdUser, token: generateToken(newUser),})
+            res.send({user: createdUser, token: generateToken({user: newUser, tokenType: "sign_in"}),})
         } else {
             // const user = await db.user.upsert({ 
             //     where: { email: email },
             //     update: { name, picture },
             //     create: { name, email, picture }
             // })
-            res.send({user: foundUser, token: generateToken(foundUser),})
+            res.send({user: foundUser, token: generateToken({user: foundUser, tokenType: "sign_in"}),})
         }
     } catch (error) {
         console.log(error)

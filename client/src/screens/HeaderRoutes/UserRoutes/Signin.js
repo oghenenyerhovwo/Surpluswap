@@ -41,6 +41,11 @@ const SignIn = () => {
   const [error, setError] = useState(initialFormState)
   const [activateRef, setActivateRef] = useState("")
 
+
+  const backLink = location.search.split("=")[1]
+  const redirectLink = backLink || "/dashboard"
+  const signUpLink = backLink ? `/user/signup/?redirect=${backLink}` : "/user/signup/"
+
   useEffect(() => {
     if(successSignUser || currentUser.email){
       dispatch({type: SIGN_USER_RESET})  
@@ -57,7 +62,7 @@ const SignIn = () => {
     e.preventDefault()
     if(!onSubmitError(form, error, setError)){
       setActivateRef("")
-      dispatch(signInUser(form))
+      dispatch(signInUser(form, redirectLink))
     }else {
       const {keys} = objectToArrayWithKeys(error)
       setActivateRef(keys[0])
@@ -122,7 +127,7 @@ const SignIn = () => {
           </form>
 
           <div className={`${styles.form_buttons}`}>
-            <Link to="/user/signup">
+            <Link to={signUpLink}>
               <button>
                   Sign Up
               </button>
@@ -142,7 +147,7 @@ const SignIn = () => {
           </div>
 
           <div className={`${styles.forgot_passowrd}`}>
-              <Link to="/user/password/forgot">Forgot Password?</Link>
+              <Link to="/user/password/recovery">Forgot Password?</Link>
           </div>
           
         </div>
