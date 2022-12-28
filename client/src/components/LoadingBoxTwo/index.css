@@ -93,4 +93,10 @@
 }
 
 
+/* dark mode */
+.loading_box_two_container_dark{
+  background: var(--color-dark-mode)
+}
+
+
 

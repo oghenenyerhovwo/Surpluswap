@@ -156,7 +156,7 @@ const SidebarLinks = () => {
         >
           <li>
               <Form.CheckBoxTwo
-                value={lightMode}
+                value={!lightMode}
                 onChange={handleLightMode}
                 label="Dark mode"
               />

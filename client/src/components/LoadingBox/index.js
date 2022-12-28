@@ -21,7 +21,9 @@ const LoadingBox = () => {
 
     const { 
         loadingData,
+        lightMode,
     }=  useSelector(state => state.generalStore)
+    
 
     const [display, setDisplay] = useState(false)
     const [count, setCount] = useState(7)
@@ -78,7 +80,7 @@ const LoadingBox = () => {
                                 animate="visible"
                                 exit="exit"
                                 key="modal"
-                                className={`loading_box loading_box_${loadingData.state}`} 
+                                className={`loading_box loading_box_${loadingData.state} ${!lightMode && "loading_box_dark"}`} 
                             >
                                 <div className="circle_container">
                                         {/* <Circle animate={true} /> */}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from "framer-motion"
+import { useSelector } from 'react-redux'
 
 // importing css
 import "./index.css"
@@ -13,7 +14,12 @@ const fadeInOut = {
 const LoadingBoxTwo = props => {
     const { isLoading } = props
 
+    const { 
+        lightMode,
+      }=  useSelector(state => state.generalStore)
+
     const [display, setDisplay] = useState(false)
+    
 
     useEffect(() => {
         if(isLoading){
@@ -28,7 +34,7 @@ const LoadingBoxTwo = props => {
                 {
                     display  && (
                         <div 
-                            className={`loading_box_two_container`}
+                            className={`loading_box_two_container ${!lightMode && "loading_box_two_container_dark"}`}
                         >
                             <motion.div 
                                 variants={fadeInOut}

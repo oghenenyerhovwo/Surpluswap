@@ -297,3 +297,8 @@
   margin: 5px 0 0 5px;
   background: #fff;
 }
+
+/* dark mode */
+.loading_box_dark{
+  background: var(--color-dark-mode)
+}
