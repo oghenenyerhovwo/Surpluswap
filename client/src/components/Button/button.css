@@ -58,6 +58,12 @@
   transition: ease-in-out .5s;
 }
 
+.btn-md{
+  transition: ease-in-out .5s;
+  padding: 0.7em 0.8em;
+  font-size: 0.75rem;
+}
+
 .btn-sm{
   transition: ease-in-out .5s;
   padding: 0.3em 0.6em;
@@ -68,6 +74,12 @@
 .btn-primary{
   color: var(--color-dark-blue);
   background: var(--color-orange);
+  transition: ease-in-out .5s;
+}
+
+.btn-danger{
+  color: #fff;
+  background: var(--color-error);
   transition: ease-in-out .5s;
 }
 
@@ -99,4 +111,16 @@
 .btn:disabled{
   cursor: not-allowed;
   filter: lighten(90%);
+}
+
+
+/* Dark mode */
+.app_container_dark .btn-danger{
+  background: #DE8EC3;
+  color: var(--color-dark-blue);
+}
+
+.app_container_dark .btn-primary{
+  background: #1AABFA;
+  color: #fff;
 }

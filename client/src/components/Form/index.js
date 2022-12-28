@@ -7,6 +7,7 @@ import File from "./File";
 import Date from "./Date";
 import PhoneNumber from "./PhoneNumber";
 import DateTime from "./DateTime";
+import CheckBoxTwo from "./CheckBoxTwo"
 
 import "./index.css"
 
@@ -20,6 +21,7 @@ const Form = {
     Dropdown,
     PhoneNumber,
     DateTime,
+    CheckBoxTwo,
 }
 
 export default Form

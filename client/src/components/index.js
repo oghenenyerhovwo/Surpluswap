@@ -16,6 +16,9 @@ import Sidebar from "./Sidebar"
 import PublicRoute from "./PublicRoute"
 import PrivateRoute from "./PrivateRoute"
 import LoadingBoxTwo from "./LoadingBoxTwo"
+import Avatar from "./Avatar"
+import RadioOptions from "./RadioOptions"
+import Modal  from "./Modal"
 
 export {
     Header,
@@ -35,4 +38,7 @@ export {
     PublicRoute,
     PrivateRoute,
     LoadingBoxTwo,
+    Avatar,
+    RadioOptions,
+    Modal,
 }

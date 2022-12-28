@@ -11,7 +11,7 @@ import { changeLightMode } from "./generalActions"
 import { signUpUser, signInUser, signOut, resendEmail } from "./userActions/email.action"
 import { confirmToken, signInToken } from "./userActions/token.action"
 import { resetPassword, sendResetPasswordEmail } from "./userActions/password.action"
-import { getUser, getUserById, deleteUser, updateUser, getUsers } from "./userActions/control.action"
+import { getUser,  deleteUser, updateUser, getUsers } from "./userActions/control.action"
 import { googleSignIn } from "./userActions/thirdparty.action"
 
 // import { createComment,  deleteComment } from "./commentActions/postActions"
@@ -57,7 +57,6 @@ export {
     resetPassword,
     googleSignIn,
     getUser,
-    getUserById,
     deleteUser,
     updateUser,
     getUsers,

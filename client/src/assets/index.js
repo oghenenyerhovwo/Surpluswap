@@ -7,11 +7,14 @@ import {
     coreValuesIcon,
     yellowCurve,
     blueBlob,
+    MaleAvatar,
+    blankProfilePic,
 } from "./images"
 
 import {
     CheckMark,
     Circle,
+    FemaleAvatar, 
 } from "./icons"
 
 export {
@@ -25,4 +28,7 @@ export {
     blueBlob,
     Circle,
     CheckMark,
+    FemaleAvatar, 
+    MaleAvatar,
+    blankProfilePic,
 }

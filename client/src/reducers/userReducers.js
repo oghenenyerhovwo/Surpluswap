@@ -41,11 +41,6 @@ import {
     GET_USER_SUCCESS,
     GET_USER_FAIL,
 
-    GET_USER_BY_ID_REQUEST,
-    GET_USER_BY_ID_SUCCESS,
-    GET_USER_BY_ID_FAIL,
-    GET_USER_BY_ID_RESET,
-
     GET_USERS_REQUEST,
     GET_USERS_SUCCESS,
     GET_USERS_FAIL,
@@ -121,12 +116,7 @@ const initialState = {
     errorGetUser: "",
     successGetUser: false,
     loadingGetUser: false,
-
-    // Get user with id
-    errorGetUserById: "",
-    successGetUserById: false,
-    loadingGetUserById: false,
-    userByID: {},
+    user: {},
 
     // Get users
     errorGetUsers: "",
@@ -372,43 +362,13 @@ const userReducers =  (state = initialState, action) => {
             ...state,
             loadingGetUser:  false,
             successGetUser: true,
-            currentUser: action.payload.user,
+            user: action.payload.user,
         }
     case GET_USER_FAIL:
         return {
             ...state,
             loadingGetUser:  false,
             errorGetUser: action.payload,
-            token: "",
-            currentUser: {},
-        }
-
-    case GET_USER_BY_ID_REQUEST:
-        return {
-            ...state,
-            loadingGetUserById:  true,
-            errorGetUserById: "",
-        }
-    case GET_USER_BY_ID_SUCCESS:
-        return {
-            ...state,
-            loadingGetUserById:  false,
-            successGetUserById: true,
-            userByID: action.payload.user,
-        }
-    case GET_USER_BY_ID_FAIL:
-        return {
-            ...state,
-            loadingGetUserById:  false,
-            errorGetUserById: action.payload,
-        }
-
-     case GET_USER_BY_ID_RESET:
-        return {
-            ...state,
-            errorGetUserById: "",
-            successGetUserById: false,
-            loadingGetUserById: false,
         }
 
     case GET_USERS_REQUEST:

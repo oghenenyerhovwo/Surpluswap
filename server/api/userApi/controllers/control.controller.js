@@ -18,10 +18,10 @@ const deleteActivitiesOfAccount = async (Model, account) => {
 
 export const getUser = async(req, res) => {
     try {
-        const foundUser = await findUser({email: req.user.email})
+        const foundUser= await User.findById(req.params.id);
         
         if(!foundUser){
-            return res.status(404).send({message: "User Not Found"})
+            return res.status(404).send({message: "User was not Found"})
         }
         res.status(200).send({user: foundUser})    
     } catch (error) {
@@ -31,7 +31,7 @@ export const getUser = async(req, res) => {
 }
 
 
-export const getAllUsers = async(req, res) => {
+export const getUsers = async(req, res) => {
     try {
         const superAdminUsers= await User.find({role: "superAdmin"});
         const adminUsers= await User.find({role: "admin"});
@@ -40,19 +40,6 @@ export const getAllUsers = async(req, res) => {
     } catch (error) {
         console.log(error)
         res.status(404).send({message: "Server error: Could not find all users"})
-    }
-}
-
-export const getUserById = async(req, res) => {
-    try {
-        const foundUser= await User.findById(req.params.id);
-        if(!foundUser){
-            return res.status(404).send({message: "Profile Not Found"})
-        }
-        res.json({user: foundUser});       
-    } catch (error) {
-        console.log(error)
-        res.status(404).send({message: "Server error: Could not get profile"})
     }
 }
 
@@ -69,9 +56,9 @@ export const deleteUser = async(req, res) => {
             return res.status(404).send({message: "Only admins or owner of account is allowed"})
         } 
         
-        await deleteActivitiesOfAccount(Story, foundUser)
-        await deleteActivitiesOfAccount(Comment, foundUser)
-        await deleteActivitiesOfAccount(Event, foundUser)
+        // await deleteActivitiesOfAccount(Story, foundUser)
+        // await deleteActivitiesOfAccount(Comment, foundUser)
+        // await deleteActivitiesOfAccount(Event, foundUser)
 
 
         const deletedUser= await User.findByIdAndDelete(req.params.id);

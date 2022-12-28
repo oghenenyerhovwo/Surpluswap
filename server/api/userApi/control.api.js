@@ -1,30 +1,23 @@
 import express from "express";
 
-import { getAllUsers, getUser, getUserById, deleteUser, updateUser }from "./controllers/index.js";
+import { getUsers, getUser, deleteUser, updateUser }from "./controllers/index.js";
 import { isAuth } from "../../utils/index.js"
 
 const router = express.Router();
 
+// get all users
 router.get(
     "/", 
+    async(req, res) => {
+        getUsers(req,res)
+    }
+);
+
+router.get(
+    "/:id", 
     isAuth,
     async(req, res) => {
         getUser(req, res)
-    }
-);
-
-// get all users
-router.get(
-    "/all", 
-    async(req, res) => {
-        getAllUsers(req,res)
-    }
-);
-
-router.get(
-    "/:id",
-    async(req, res) => {
-        getUserById(req, res)
     }
 );
 
@@ -44,6 +37,5 @@ router.delete(
     }
 );
 
-// git subtree push --prefix server heroku master
 
 export default router;

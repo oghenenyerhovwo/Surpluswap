@@ -7,7 +7,7 @@ const Dashboard = () => {
   
   return (
     <>
-        Dashboardss
+        Dashboard
     </>
   )
 }

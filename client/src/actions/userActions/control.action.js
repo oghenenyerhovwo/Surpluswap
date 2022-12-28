@@ -5,10 +5,6 @@ import {
     GET_USER_SUCCESS,
     GET_USER_FAIL,
 
-    GET_USER_BY_ID_REQUEST,
-    GET_USER_BY_ID_SUCCESS,
-    GET_USER_BY_ID_FAIL,
-
     GET_USERS_REQUEST,
     GET_USERS_SUCCESS,
     GET_USERS_FAIL,
@@ -22,14 +18,16 @@ import {
     DELETE_USER_FAIL,
 } from "../../constants/userConstants.js";
 
-export const getUser=() => (dispatch, getState) =>  { 
-  dispatch({type: GET_USER_REQUEST})
+import { loadData } from "../generalActions"
+
+export const getUser=(id) => (dispatch, getState) =>  { 
+  dispatch({type: GET_USER_REQUEST, payload: id})
 
   const token= getState().userStore.token
 
     axios
       .get(
-        `${backend_url}/users/control/`,
+        `${backend_url}/users/control/${id}`,
         setHeader(token)
       )
       .then(res => {
@@ -38,21 +36,6 @@ export const getUser=() => (dispatch, getState) =>  {
       .catch(err => dispatch({type: GET_USER_FAIL, payload: setError(err)}));
   }
 
-  export const getUserById=(id) => (dispatch, getState) =>  { 
-    dispatch({type: GET_USER_BY_ID_REQUEST, payload:  id})
-
-    const token= getState().userStore.token
-  
-      axios
-        .get(
-          `${backend_url}/users/control/${id}`,
-          setHeader(token)
-        )
-        .then(res => {
-          dispatch({type: GET_USER_BY_ID_SUCCESS, payload: res.data})
-        })
-        .catch(err => dispatch({type: GET_USER_BY_ID_FAIL, payload: setError(err)}));
-    }
 
   export const getUsers=() => (dispatch, getState) =>  { 
     dispatch({type: GET_USERS_REQUEST})
@@ -72,7 +55,10 @@ export const getUser=() => (dispatch, getState) =>  {
 
 export const deleteUser =(id) => (dispatch, getState) =>  { 
     dispatch({type: DELETE_USER_REQUEST, payload:  id})
-
+    loadData(dispatch, {
+      title: "Deleting account",
+      state: "loading"
+    })
     const token= getState().userStore.token
   
       axios
@@ -82,8 +68,18 @@ export const deleteUser =(id) => (dispatch, getState) =>  {
         )
         .then(res => {
           dispatch({type: DELETE_USER_SUCCESS, payload: res.data})
+          loadData(dispatch, {
+            title: "Account has been deleted deleted",
+            state: "success",
+          })
         })
-        .catch(err => dispatch({type: DELETE_USER_FAIL, payload: setError(err)}));
+        .catch(err => {
+          dispatch({type: DELETE_USER_FAIL, payload: setError(err)})
+          loadData(dispatch, {
+            title: setError(err),
+            state: "error"
+          })
+        });
   }
 
 export const updateUser =(form, id,) => (dispatch, getState) =>  { 

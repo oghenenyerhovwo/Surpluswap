@@ -8,7 +8,7 @@ import { FaMoon } from 'react-icons/fa';
 import { BsFillSunFill } from 'react-icons/bs';
 import { FaTimes } from 'react-icons/fa';
 // import Avatar from "../Avatar"
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { AnimatePresence, motion, useAnimation } from "framer-motion"
 
@@ -55,6 +55,7 @@ const Header = ({stickBarToTop}) => {
   
   const menuRef = useRef(null)
   const dispatch = useDispatch()
+  const location = useLocation()
   const animation = useAnimation()
 
   // global state
@@ -69,9 +70,19 @@ const Header = ({stickBarToTop}) => {
     setToggleMenu(false)
   }
 
+  const closeMenuWhnClickOutside = e => {
+    if(menuRef.current && toggleMenu && !menuRef.current.contains(e.target)){
+      setToggleMenu(false)
+    }
+  }
+
   const openMenu = e => {
     setToggleMenu(true)
   }
+
+  useEffect(() => {
+    setToggleMenu(false)
+  }, [location.pathname])
 
   useEffect(() => {
     if(stickBarToTop){
@@ -93,9 +104,9 @@ const Header = ({stickBarToTop}) => {
   }, [stickBarToTop, animation])
 
   useEffect(() => {
-    document.addEventListener('mousedown', closeMenu)
+    document.addEventListener('mousedown', closeMenuWhnClickOutside)
     return () => {
-      document.removeEventListener('mousedown', closeMenu)
+      document.removeEventListener('mousedown', closeMenuWhnClickOutside)
     };
   })
 
@@ -130,7 +141,6 @@ const Header = ({stickBarToTop}) => {
                 </motion.nav> 
               ): (
                 <motion.nav 
-                  ref={menuRef} 
                   className={`${styles.nav_items}`}
                   variants={slideAnimations.slideDown}
                   initial="hidden"
@@ -192,6 +202,7 @@ const Header = ({stickBarToTop}) => {
                 animate="visible"
                 exit="exit"
                 key="nav_collapse"
+                ref={menuRef} 
               >
                 <NavLinks />
             </motion.ul>

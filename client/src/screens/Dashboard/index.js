@@ -1,12 +1,11 @@
 import { Routes, Route, useLocation } from "react-router-dom"
-import { useInView } from "react-intersection-observer"
 
 // screens
 import HomeScreen from "./Home"
+import Profile from "./Profile"
 
 // components
 import { 
-  Header,
   Sidebar,
   PrivateRoute,
 } from "../../components"
@@ -17,23 +16,16 @@ import "./index.css"
 
 const Dashboard = () => {
     const location = useLocation()
-    const { ref, inView } = useInView({threshold: 0.1})
 
     return (
       <>
-       <>
-        <section className="header spacing-lg">
-            <div className="home_container">
-              {/* <Header stickBarToTop={!inView} /> */}
-              <Sidebar />
-            </div>
-          </section>
-          <div ref={ref} className="monitor_header"></div>
-        </>
-        <section className="body">
+        <Sidebar />
+        <section className="main">
           <>
             <Routes location={location} key={location.key}>
                 <Route path="/">
+                  <Route path="profile/:id" element={<PrivateRoute.User>  <Profile /> </PrivateRoute.User>} exact></Route>
+                  <Route path="profile/:id/edit" element={<PrivateRoute.User>  <Profile /> </PrivateRoute.User>} exact></Route>
                   <Route path="" element={<PrivateRoute.User>  <HomeScreen /> </PrivateRoute.User>} exact></Route>
                 </Route>
             </Routes>

@@ -35,7 +35,7 @@
   --color-light-blue: #6E98F2;
   --color-dark-grey: #666;
   --color-light-grey: #ececec;
-  --color-dark-mode: #081b33;
+  --color-dark-mode: hsl(239,100%,10%);
   --color-success: #20a020;
   --color-error: #a02020;
   --color-light-error: #ffe0e0e0;

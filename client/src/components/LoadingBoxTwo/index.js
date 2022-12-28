@@ -18,6 +18,8 @@ const LoadingBoxTwo = props => {
     useEffect(() => {
         if(isLoading){
             setDisplay(true)
+        } else {
+            setDisplay(false)
         }
     }, [isLoading])    
     
