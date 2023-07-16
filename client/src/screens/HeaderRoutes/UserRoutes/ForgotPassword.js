@@ -16,19 +16,22 @@ import { sendResetPasswordEmail } from "../../../actions"
 import { FORGOT_PASSWORD_RESET } from '../../../constants/userConstants'
 
 // objects and functions
-import { pageAnimations, onSubmitError, onChangeError, objectToArrayWithKeys } from '../../../utils/index'
+import { pageAnimations, onSubmitError, onChangeError } from '../../../utils/index'
 
 const ForgotPassword = () => {
   const dispatch = useDispatch()
 
   // state
   const { 
-    lightMode,
+    darkMode,
   }=  useSelector(state => state.generalStore)
   const {errorForgotPassword, successForgotPassword } =  useSelector(state => state.userStore)
   const initialFormState = {
     email: "",
   }
+  const errorKeysInOrder = [
+    "email",
+  ]
   const [form, setForm] = useState(initialFormState)
   const [error, setError] = useState(initialFormState)
   const [activateRef, setActivateRef] = useState("")
@@ -46,24 +49,23 @@ const ForgotPassword = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if(!onSubmitError(form, error, setError)){
+    const {isError, errorObject} = onSubmitError(form, error, errorKeysInOrder, setActivateRef)
+    setError(errorObject)
+    if(!isError){
       setActivateRef("")
       dispatch(sendResetPasswordEmail(form))
-    }else {
-      const {keys} = objectToArrayWithKeys(error)
-      setActivateRef(keys[0])
     }
   }
 
   const handleChange = e => {
     const {name,value} = e.target
     setForm({...form, [name]: value})
-    onChangeError(name, value, form, error, setError)
+    setError(onChangeError(name, value, form, error))
   }
 
   return (
     <motion.div 
-        className={`${styles.forgotpassword} spacing-lg ${!lightMode && styles.forgotpassword_light}`}
+        className={`${styles.forgotpassword} spacing-lg ${darkMode && styles.forgotpassword_light}`}
         variants={pageAnimations.swipeLeft}
         initial="hidden"
         animate="visible"
@@ -92,6 +94,7 @@ const ForgotPassword = () => {
                         errorMessage="Enter email of the account that needs reset"
                         activateRef={activateRef}
                         required={true}
+                        setError={setError}
                     />
                 </form>
             

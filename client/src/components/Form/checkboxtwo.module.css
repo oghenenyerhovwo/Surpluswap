@@ -1,0 +1,15 @@
+.checkboxtwo > label > span:last-child{
+    color: var(--color-dark-grey) !important;
+}
+
+/* dark */
+
+.checkboxtwo_dark > label > span > span{
+    border-color: #4a77d7 !important;
+    background-color: #4670ca!important;
+}
+
+.checkboxtwo_dark > label > span:last-child{
+    color: #fff !important;
+}
+

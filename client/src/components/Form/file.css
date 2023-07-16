@@ -113,3 +113,16 @@
         height: min(100%, 11.5rem);
     }
   }
+
+  /* dark mode */
+  .app_container_dark .file_largescreen > div > div:first-child,
+  .app_container_dark .file_smallscreen > div > div:first-child{
+    border: 0.1px solid rgba(102, 102, 102, 0.3) !important;
+    background: transparent;
+  }
+
+  /* error */
+  .app_container_dark .app_file_error .file_largescreen > div > div:first-child,
+  .app_container_dark .app_file_error .file_smallscreen > div > div:first-child{
+    background-color: rgba(254,72,73,0.1);
+}

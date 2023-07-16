@@ -1,0 +1,202 @@
+.transaction_card{
+    border-radius: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border: 1px solid var(--color-light-grey);
+}
+
+.transaction_client_details{
+    display: flex;
+    align-items: center;
+}
+
+.transaction_client_details > .icon {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.25rem;
+    font-size: 0.6rem;
+}
+
+.transaction_client_details > .icon > span > svg{
+    font-size: 0.6rem;
+}
+
+.icon_span-buy > span{
+    color: rgb(118, 122, 164);
+}
+.icon_span-buy > span > svg path{
+    stroke: rgb(118, 122, 164);
+}
+
+.icon_span-sell > span{
+    color: #d76b05;
+}
+
+.icon_span-sell > span > svg path{
+    stroke: #d76b05;
+}
+
+
+.transaction_client_details p{
+    font-size: 0.45rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+}
+
+.transaction__details{
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    justify-items: space-between;
+    align-items: center;
+}
+
+.transaction__details > div{
+    margin: 0 0.2rem;
+    grid-column: span 6;
+    grid-row: 1;
+}
+
+.transaction__date{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.transaction__date > p{
+    padding: 0.2rem;
+    background: var(--color-light-grey);
+    color: var(--color-dark-grey);
+    border-radius: 0.2rem;
+    text-align: center;
+    font-size: 0.3rem;
+}
+
+.transaction__status > p{
+    font-size: 0.3rem;
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+    text-align: center;
+}
+
+.transaction__status-non-active > p{
+    color: #ffc107;
+    background-color: #fae7ae;
+}
+
+.transaction__status-pending-admin-approval > p,
+.transaction__status-pending-admin-approval > p{
+    color: #2020a0;
+    background-color: #e0e0ff;
+}
+
+.transaction__status-completed > p,
+.transaction__status-approved-by-admin > p{
+    color: #20a020;
+    background-color: #eeffe0;
+}
+
+.transaction__status-rejected-by-admin > p,
+.transaction__status-rejected-by-client > p{
+    color: #a02020;
+    background-color: #ffe0e0e0;
+}
+
+.transaction__amount{
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+}
+
+.transaction__amount > p{
+    color: hsl(182,74%,20%);
+    font-size: 0.45rem
+}
+
+.transaction__amount > p > span{
+    font-size: 0.3rem;
+}
+
+.transaction__menu{
+    grid-column: span 1;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-items: flex-end;
+    margin-left: 2rem;
+}
+
+.transaction__menu > div > svg{
+    font-size: 0.7rem !important;
+}
+
+@media screen and (min-width: 400px){
+    .transaction_client_details p,
+    .transaction__amount > p{
+        font-size: 0.6rem;
+    }
+
+    .transaction__date > p,
+    .transaction__status > p{
+        font-size: 0.45rem;
+    }
+
+    .transaction__menu > div > svg{
+        font-size: 0.85rem !important;
+    }
+}
+
+@media screen and (min-width: 550px){
+    .transaction_client_details > .icon {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-right: 0.5rem;
+    }
+
+    .transaction_client_details > .icon > span > svg{
+        font-size: 0.8rem; 
+    }
+
+    .transaction_client_details p,
+    .transaction__amount > p{
+        font-size: 0.8rem;
+    }
+
+    .transaction__amount > p > span{
+        font-size: 0.4rem;
+    }
+
+    .transaction__date > p,
+    .transaction__status > p{
+        font-size: 0.6rem;
+    }
+}
+
+/* dark mode */
+.transaction_card_dark{
+    background: hsl(240,95%,15%);
+    color: #fff;
+    border: 1px solid rgb(219, 236, 255);
+}
+
+.transaction_card_dark .transaction_client_details p{
+    color: rgb(219, 236, 255);
+}
+
+.transaction_card_dark .transaction__amount > p{
+    color: rgb(219, 236, 255);
+}
+
+.transaction_card_dark .transaction__menu > div > button{
+    color: rgb(219, 236, 255);
+}
+
+

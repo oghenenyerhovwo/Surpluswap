@@ -110,7 +110,7 @@
 
 .btn:disabled{
   cursor: not-allowed;
-  filter: lighten(90%);
+  filter: lighten(60%);
 }
 
 

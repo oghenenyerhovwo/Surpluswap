@@ -13,9 +13,8 @@ import Form from "../Form"
 
 import { AnimatePresence, motion } from "framer-motion"
 
-
 // actions
-import { signOut, changeLightMode } from "../../actions"
+import { signOut, changeDarkMode } from "../../actions"
 
 // importing css
 import styles from "./sidebar.module.css"
@@ -113,14 +112,14 @@ const SidebarLinks = () => {
   }=  useSelector(state => state.userStore)
 
   const { 
-    lightMode,
+    darkMode,
   }=  useSelector(state => state.generalStore)
 
   const signUserOut = () => {
     dispatch(signOut())
   }
 
-  const handleLightMode = () => dispatch(changeLightMode())
+  const handleDarkMode = () => dispatch(changeDarkMode())
 
   return (
     <>
@@ -156,8 +155,8 @@ const SidebarLinks = () => {
         >
           <li>
               <Form.CheckBoxTwo
-                value={!lightMode}
-                onChange={handleLightMode}
+                value={darkMode}
+                onChange={handleDarkMode}
                 label="Dark mode"
               />
           </li>
@@ -173,7 +172,7 @@ const Sidebar = () => {
 
   // global state
   const { 
-    lightMode,
+    darkMode,
   }=  useSelector(state => state.generalStore)
   const [toggleMenu, setToggleMenu] = useState(false)
 
@@ -204,7 +203,7 @@ const Sidebar = () => {
 
   return (
         <AnimatePresence mode="wait">
-          <div className={`${styles.sidebar} ${!lightMode && styles.sidebar_dark}`}>
+          <div className={`${styles.sidebar} ${darkMode && styles.sidebar_dark}`}>
             <div className={`${styles.sidebar_largescreen}`}>
               <SidebarLinks />
             </div>

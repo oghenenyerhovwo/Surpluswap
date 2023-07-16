@@ -8,8 +8,10 @@ import {
     GOOGLE_SIGN_IN_FAIL,
 
 } from "../../constants/userConstants.js";
+
+import { loadData } from "../generalActions"
   
-export const googleSignIn =  (googleData ) => (dispatch) => {
+export const googleSignIn =  (googleData) => (dispatch) => {
     dispatch({type: GOOGLE_SIGN_IN_REQUEST, payload: googleData })
   
      axios
@@ -17,7 +19,21 @@ export const googleSignIn =  (googleData ) => (dispatch) => {
         .then(res => {
           dispatch({type: GOOGLE_SIGN_IN_SUCCESS})
           dispatch({type: SIGN_USER_SUCCESS, payload: res.data})
+          
+          const redirectLink = res.data.user.role === "admin" ?  `/admin/dashboard/` : `/dashboard/`;
+          loadData(dispatch, {
+            title: "Google login successful",
+            state: "success",
+            redirectText: "Redirecting to dashboard",
+            redirectLink: redirectLink,
+          })
           localStorage.setItem("surpluswap_user_token", JSON.stringify(res.data.token))
         })
-        .catch(err => dispatch({type: GOOGLE_SIGN_IN_FAIL, payload: setError(err)}));
+        .catch(err => {
+          dispatch({type: GOOGLE_SIGN_IN_FAIL, payload: setError(err)})
+          loadData(dispatch, {
+            title: setError(err),
+            state: "error"
+          })
+        });
 };

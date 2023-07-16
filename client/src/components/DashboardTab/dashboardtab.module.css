@@ -1,0 +1,67 @@
+.dashboard_tab_icon{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.dashboard_tab_icon_arrow{
+    cursor: pointer;
+}
+
+.dashboard_tab_icon_notification{
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    display: flex;
+}
+
+.dashboard_tab_icon_notification div{
+    font-size: 0.7rem;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.1rem;
+}
+
+.dashboard_tab_icon_notification_rejected{
+    background-color:#e91919;
+    color: #fff;
+    box-shadow: rgba(17,12,46,0.15) 0px
+    4px 3px 0px;
+}
+
+.dashboard_tab_icon_notification_approved{
+    background-color: #1de41d;
+    color: #fff;
+    box-shadow: rgba(17,12,46,0.15) 0px
+    4px 3px 0px;
+}
+
+.dashboard_tabs li{
+    width: 100%;
+    padding: 1.2rem 1rem;
+    transition: background-color 0.5s;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.dashboard_tabs li:hover{
+    background-color: #807FCF;
+    color: #fff;
+}
+
+.dashboard_tabs li div{
+    margin-bottom: -22%;
+}
+
+.dashboard_tab_active_link{
+    background-color: #807FCF; 
+    color: #fff;
+}

@@ -36,12 +36,32 @@ export const generateToken= (userData) => {
       }
   }
 
-export const isAdmin=(user) => {
-    return user.role == "admin"
+export const isNotBlocked = (req, res, next) => {
+    if(!req.user.isBlocked){
+      next()
+    } else {
+      res.status(401).send({message: "This account has been blocked, contact admin"})
+    }
+}
+
+export const isVerified = (req, res, next) => {
+    if(req.user.isVerified){
+      next()
+    } else {
+      res.status(401).send({message: "This user has not been verified"})
+    }
+}
+
+export const isAdmin = (req, res, next) => {
+    if(req.user.role == "admin"){
+      next()
+    } else {
+      res.status(401).send({message: "Only admin can access this route"})
+    }
 }
 
 export const isSuperAdmin=(user) => {
-  return user.role == "superAdmin"
+  return user.adminRole == "super"
 }
 
 export const isAuthor=(user, author) => {

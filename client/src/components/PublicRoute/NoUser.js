@@ -9,9 +9,10 @@ const NoUser = props => {
 
     useEffect(() => {
       if(token && (completeTokenSignIn && currentUser.email)){
-        navigate(`/dashboard`)
+        const redirectLink = currentUser.role === "admin" ?  `/admin/dashboard/` : `/dashboard/`
+        navigate(redirectLink)
       }
-    }, [navigate, currentUser.email, token, completeTokenSignIn])
+    }, [navigate, currentUser.email, token, completeTokenSignIn, currentUser.role])
 
     return (
         <>

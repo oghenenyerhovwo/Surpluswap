@@ -50,3 +50,13 @@
         order: 1;
     }
 }
+
+/* dark mode */
+.companyprofile_dark .companyprofile_container h2{
+    color: #fff
+}
+
+.companyprofile_dark .companyprofile_container p,
+.companyprofile_dark .companyprofile_container ul{
+    color: #747498;
+}

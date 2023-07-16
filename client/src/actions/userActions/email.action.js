@@ -13,12 +13,12 @@ import { signUserIn } from "./sign.util"
 
 import { loadData } from "../generalActions"
 
-export const signUpUser=(userData, redirectLink) => dispatch =>  {
-    signUserIn(dispatch, "email/signup", userData, redirectLink)
+export const signUpUser=(userData) => (dispatch, getState ) =>  {
+    signUserIn(dispatch, getState , "email/signup", userData)
 }
 
-export const signInUser=(userData, redirectLink) => dispatch =>  {
-    signUserIn(dispatch, "email/signin", userData, redirectLink)
+export const signInUser=(userData) => (dispatch, getState)  =>  {
+    signUserIn(dispatch, getState , "email/signin", userData)
 }
 
 

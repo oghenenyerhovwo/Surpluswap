@@ -11,9 +11,7 @@ function App() {
 
   return (
     <BrowserRouter>
-        {/* <AppContainer>  */}
         <RoutesContainer />
-        {/* </AppContainer> */}
     </BrowserRouter>
   );
 }

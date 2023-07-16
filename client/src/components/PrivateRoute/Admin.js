@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 
 import ErrorBox from "../ErrorBox"
 
 
 const Admin = props => {
-    const location = useLocation()
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -15,18 +14,18 @@ const Admin = props => {
     const [message, setMessage] = useState("")
 
     useEffect(() => {
+      let timer;
       if(!token || (completeTokenSignIn && currentUser._id && currentUser.role !== "admin")){
         setMessage("You need to be logged in an admin's account")
+        timer = setTimeout(() => {
+          navigate("/")
+        }, 3000);
       }
-
-      const timer = setTimeout(() => {
-        navigate("/")
-      }, 3000);
-
+      
       return () => {
         clearTimeout(timer)
       };
-    }, [currentUser.email,dispatch, navigate, token, completeTokenSignIn, currentUser._id , currentUser.role, location.pathname ])
+    }, [currentUser.email,dispatch, navigate, token, completeTokenSignIn, currentUser._id , currentUser.role])
 
     return (
         <>

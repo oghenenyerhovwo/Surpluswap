@@ -1,6 +1,6 @@
 //   Form error handling
 
-export const onChangeError = (name, value, form, error, setError) => {
+export const onChangeError = (name, value, form, error) => {
     let keyObject = {}
     if(typeof(error[name]) === "object" ){
       keyObject[name] = {...error[name], text: ""}
@@ -13,11 +13,11 @@ export const onChangeError = (name, value, form, error, setError) => {
         keyObject[name] = ""
       }
     }
-    setError({...error, ...keyObject})
+    return {...error, ...keyObject}
 }
   
   
-  export const onSubmitError = (form, error, setError) => {
+export const onSubmitError = (form, error, errorKeysInOrder, setActivateRef) => {
     let keyObject = {}
     let isError = false
   
@@ -25,17 +25,14 @@ export const onChangeError = (name, value, form, error, setError) => {
       if (form.hasOwnProperty.call(form, key)) {
   
         if(typeof(error[key]) === "object" ){
-          if (key === "images"){
-            let isObjError = false
+          let isObjError = false
 
-            if(error[key].min > form[key].length){
-              isObjError = true
-              keyObject[key] = {...error[key], text: `There must be at least ${error[key].min} image(s)`}
-            }
-            isError=isObjError
+          if(error[key].min > form[key].length){
+            isObjError = true
+            keyObject[key] = {...error[key], text: `There must be at least ${error[key].min} image(s)`}
           }
+          isError=isObjError
         }
-  
         else {
           if(typeof(form[key]) === "object" ){
             if(key === "phoneNumber" && !form[key].phone ){
@@ -53,10 +50,14 @@ export const onChangeError = (name, value, form, error, setError) => {
             isError = true
           }
         }
-        
-        
       }
     }
-    setError({...error, ...keyObject})
-    return isError
-  }
+    for (let index = 0; index < errorKeysInOrder.length; index++) {
+      const key = errorKeysInOrder[index];
+      if(keyObject[key]){
+        setActivateRef(key)
+        break
+      }
+    }
+    return {isError, errorObject: {...error, ...keyObject}}
+}

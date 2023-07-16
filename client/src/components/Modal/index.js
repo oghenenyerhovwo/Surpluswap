@@ -10,7 +10,7 @@ const backdropVariant = {
 
 const modalVariant = {
     hidden: {y: "-100vh", opacity: 0},
-    visible: {y: "200px", opacity: 1, transition: {delay: 0.5}},
+    visible: {y: "40%", opacity: 1, transition: {delay: 0.5}},
 }
 
 
@@ -37,13 +37,13 @@ const Modal = props => {
             {
                 showModal && (
                     <motion.div
-                        className={`${styles.backdrop}`}
+                        className={`${styles.backdrop} flex flex__column`}
                         initial="hidden" 
                         exit="hidden" 
                         animate="visible" 
                         variants={backdropVariant}
                     >
-                        <motion.div ref={modalRef} variants={modalVariant} className={`${styles.modal} container`}>
+                        <motion.div ref={modalRef} variants={modalVariant} className={`${styles.modal} flex flex__column flex__center`}>
                             {props.children}
                         </motion.div>
                     </motion.div>

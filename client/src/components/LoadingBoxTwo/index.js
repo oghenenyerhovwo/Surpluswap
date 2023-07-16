@@ -15,7 +15,7 @@ const LoadingBoxTwo = props => {
     const { isLoading } = props
 
     const { 
-        lightMode,
+        darkMode,
       }=  useSelector(state => state.generalStore)
 
     const [display, setDisplay] = useState(false)
@@ -34,7 +34,7 @@ const LoadingBoxTwo = props => {
                 {
                     display  && (
                         <div 
-                            className={`loading_box_two_container ${!lightMode && "loading_box_two_container_dark"}`}
+                            className={`loading_box_two_container ${darkMode && "loading_box_two_container_dark"}`}
                         >
                             <motion.div 
                                 variants={fadeInOut}
@@ -44,7 +44,7 @@ const LoadingBoxTwo = props => {
                                 key="modal"
                                 className={`loading_box_two`} 
                             >
-                                <div className="dot-pulse"></div>
+                                <div className={darkMode ? "dot-pulse" : "dot-pulse_dark"}></div>
                             </motion.div>
                         </div>
                     )

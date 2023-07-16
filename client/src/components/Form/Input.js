@@ -23,29 +23,35 @@ const Input = props => {
         errorMessage,
         // hideNumberArrow,
         activateRef,
+        setError,
     } = props
 
-const [showIcon, setShowIcon] = useState(false)
-const [inputType, setInputType] = useState("")
-const [inputError, setInputError] = useState()
+    const [showIcon, setShowIcon] = useState(false)
+    const [inputType, setInputType] = useState("")
+    const [inputError, setInputError] = useState("")
 
-useEffect(() => {
-    setInputType(type)
-}, [type])
+    useEffect(() => {
+        setInputType(type)
+    }, [type])
 
-useEffect(() => {
-    setInputError(error)
-}, [error])
+    useEffect(() => {
+        setInputError(error)
+    }, [error])
 
-const handleIcon = () => {
-    if(!showIcon){
-        setInputType("text")
-    } else{
-        setInputType("password")
+    const handleIcon = () => {
+        if(!showIcon){
+            setInputType("text")
+        } else{
+            setInputType("password")
+        }
+        setShowIcon(prevState => !prevState )
     }
-    setShowIcon(prevState => !prevState )
-    
-}
+
+    const clearError = () => {
+        setError(prevError => {
+            return {...prevError, [name]: ""}
+        })
+    }
 
   return (
     <div className={`app_input grid spacing-sm ${inputError && "form__error"} app_input-number`}>
@@ -73,6 +79,7 @@ const handleIcon = () => {
                 inputError={error} 
                 errorMessage={errorMessage || inputError} 
                 name={name}
+                clearError={clearError}
             />
         </div>
     </div>

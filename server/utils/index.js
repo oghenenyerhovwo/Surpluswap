@@ -1,5 +1,5 @@
 import { sendConfirmationEmail, sendPasswordResetEmail } from "./email.js"
-import { generateToken, isAuth, isAuthor, isAdmin, isSuperAdmin } from "./auth.js"
+import { generateToken, isAuth, isAuthor, isAdmin, isSuperAdmin, isNotBlocked, isVerified } from "./auth.js"
 
 
 export  {
@@ -10,6 +10,6 @@ export  {
   isAuthor,
   isAdmin,
   isSuperAdmin,
+  isNotBlocked,
+  isVerified,
 }
-
-

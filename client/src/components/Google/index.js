@@ -15,7 +15,7 @@ import { googleSignIn } from '../../actions/'
 // css
 import "./index.css"
 
-const GoogleAuth = () => {
+const GoogleAuth = props => {
   const dispatch = useDispatch()
 
   const {

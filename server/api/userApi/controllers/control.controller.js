@@ -1,11 +1,9 @@
 import User from "../../../models/userModel.js"
-import Story from "../../../models/storyModel.js";
-import Comment from "../../../models/commentModel.js";
-import Event from "../../../models/eventModel.js";
+import Transaction from "../../../models/transactionModel.js";
 
 import { findUser } from "./userFunctions.js"
 
-import { isAdmin, isAuthor, isSuperAdmin } from "../../../utils/index.js"
+import { isAdmin, isAuthor } from "../../../utils/index.js"
 
 const deleteActivitiesOfAccount = async (Model, account) => {
     const allActivities = await Model.find().populate("author")
@@ -33,9 +31,9 @@ export const getUser = async(req, res) => {
 
 export const getUsers = async(req, res) => {
     try {
-        const superAdminUsers= await User.find({role: "superAdmin"});
+        const superAdminUsers= await User.find({adminRole: "super"});
         const adminUsers= await User.find({role: "admin"});
-        const regularUsers= await User.find({role: "regular"});
+        const regularUsers= await User.find({role: "client"});
         res.json({users: [...superAdminUsers, ...adminUsers, ...regularUsers]});       
     } catch (error) {
         console.log(error)
@@ -56,13 +54,10 @@ export const deleteUser = async(req, res) => {
             return res.status(404).send({message: "Only admins or owner of account is allowed"})
         } 
         
-        // await deleteActivitiesOfAccount(Story, foundUser)
-        // await deleteActivitiesOfAccount(Comment, foundUser)
-        // await deleteActivitiesOfAccount(Event, foundUser)
-
+        await deleteActivitiesOfAccount(Transaction, foundUser)
 
         const deletedUser= await User.findByIdAndDelete(req.params.id);
-         res.json(deletedUser._id); 
+         res.json({id: deletedUser._id}); 
               
     } catch (error) {
         console.log(error)
@@ -84,6 +79,33 @@ export const updateUser = async(req, res) => {
         } 
         
         const updatedUser= await User.findByIdAndUpdate(req.params.id, req.body);
+        res.json({id: updatedUser._id}); 
+              
+    } catch (error) {
+        console.log(error)
+        res.status(404).send({message: "Server error: Could not update account"})
+
+    }
+}     
+
+export const blockUser = async(req, res) => {
+    try {
+        const foundUser = await findUser({email: req.user.email})
+        const foundClient = await   findUser({_id: req.params.id})
+
+        if(!foundUser || !foundClient){
+            return res.status(404).send({message: "Invalid account"})
+        } 
+
+        if(!isSuperAdmin(foundUser)){
+            return res.status(404).send({message: "Only super admins can block accounts"})
+        } 
+
+        if(isSuperAdmin(foundClient)){
+            return res.status(404).send({message: "Cannot block a super admin"})
+        } 
+        
+        const updatedUser= await User.findByIdAndUpdate(req.params.id, {isBlocked: req.body.isBlocked});
         res.json({id: updatedUser._id}); 
               
     } catch (error) {

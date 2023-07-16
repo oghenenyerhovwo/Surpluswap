@@ -74,3 +74,7 @@ export const reverseObject = object => {
 
   return revereObject
 }
+
+export const capitalizeFirstLetter = (str) => {
+  return str.charAt().toUpperCase()  + str.slice(1)
+}

@@ -14,6 +14,7 @@ const PhoneNumber = props => {
         errorMessage,
         activateRef,
         name,
+        setError,
     }= props
 
     const [inputError, setInputError] = useState()
@@ -21,6 +22,12 @@ const PhoneNumber = props => {
     useEffect(() => {
         setInputError(error)
     }, [error])
+
+    const clearError = () => {
+        setError(prevError => {
+            return {...prevError, [name]: ""}
+        })
+    }
 
     return (
         <div  className={` grid spacing-sm ${inputError && "form__error"}`}>
@@ -40,6 +47,7 @@ const PhoneNumber = props => {
                             inputError={error} 
                             errorMessage={errorMessage || inputError} 
                             name={name}
+                            clearError={clearError}
                         />
                     </div>
                 )

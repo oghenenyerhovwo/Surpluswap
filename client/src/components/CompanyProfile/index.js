@@ -1,4 +1,4 @@
-import React from 'react'
+import { useSelector } from 'react-redux'
 
 import { 
     aboutInterpreter,
@@ -8,8 +8,12 @@ import { aboutSectionArray} from "../../utils"
 import styles from "./companyprofile.module.css"
 
 const CompanyProfile = () => {
+  const { 
+    darkMode,
+  }=  useSelector(state => state.generalStore)
+
   return (
-    <section className={`${styles.companyprofile} spacing-lg`}>
+    <section className={`${styles.companyprofile} ${darkMode && styles.companyprofile_dark} spacing-lg`}>
         <div className={`${styles.container} ${styles.companyprofile_container}`}>
         <div className={styles.companyprofile_col1}>
             {

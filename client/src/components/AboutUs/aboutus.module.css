@@ -1,4 +1,6 @@
 .container{
+  width:  90%;
+  max-width: 90rem;
   width: min(90%, 90rem);
   margin: 0 auto;
 }
@@ -11,7 +13,9 @@
 
 @media screen and (min-width: 300px){
   .container{
-      width: min(80%, 90rem);
+    width:  80%;
+    max-width: 90rem;
+    width: min(80%, 90rem);
   }
 }
 
@@ -61,6 +65,8 @@
   color: var(--color-dark-grey);
   text-align: center;
   z-index: 999;
+  width:  95%;
+  max-width: 30rem;
   width: min(95%, 30rem);
   margin: 0 auto;
 }
@@ -69,3 +75,11 @@
   transform: rotate(-30deg);
 }
 
+/* dark mode */
+.about_us_dark .about_us_heading div{
+  color: #fff;
+}
+
+.about_us_dark .about_us_body  p{
+  color: #747498;
+}

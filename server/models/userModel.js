@@ -8,10 +8,15 @@ const userSchema = new Schema({
     email: {type: String, required:true, unique: true},
     password: {type: String, required:true},
     isVerified: {type: Boolean, default: false,},
+    isBlocked: {type: Boolean, default: false,},
     role: {
         type: String,
         default: "client",
-        enum: ["client", "admin", "superAdmin"]
+        enum: ["client", "admin"]
+    },
+    adminRole: {
+        type: String,
+        enum: ["regular", "super"]
     },
     phoneNumber: {type: Object, unique: true},
     phoneNumberText: {type: String, required: true},

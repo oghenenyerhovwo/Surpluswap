@@ -9,7 +9,7 @@ import {
 import { loadData } from "../generalActions"
 
 
-export const signUserIn = (dispatch, api,userData,redirectLink) => {
+export const signUserIn = (dispatch,getState, api,userData) => {
     dispatch({type: SIGN_USER_REQUEST, payload:  userData})
     loadData(dispatch, {
       title: "Logging in. please wait",
@@ -20,9 +20,10 @@ export const signUserIn = (dispatch, api,userData,redirectLink) => {
         .post(`${backend_url}/users/${api}`, userData)
         .then(res => {
           dispatch({type: SIGN_USER_SUCCESS, payload: res.data})
+          const redirectLink = res.data.user.role === "admin" ?  `/admin/dashboard/` : `/dashboard/`
           loadData(dispatch, {
             title: "Login successful",
-            body: !res.data.isVerified && "Account is yet to be verified, please check your email for verification link or got to profile to resend link",
+            body: !res.data.user.isVerified && "Account is yet to be verified, please check your email for verification link or got to profile to resend link",
             state: "success",
             redirectText: "Redirecting to dashboard",
             redirectLink: redirectLink,

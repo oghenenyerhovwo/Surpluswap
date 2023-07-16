@@ -83,7 +83,9 @@ const CreateEvent = () => {
   const handleSubmit = e => {
     e.preventDefault()
     setSubmitError(false)
-    if(!onSubmitError(form, error, setError)){
+    const {isError, errorObject} = onSubmitError(form, error)
+    setError(errorObject)
+    if(!isError){
         dispatch(createEvent(form))
     } else{
       setSubmitError(true)
@@ -93,7 +95,7 @@ const CreateEvent = () => {
   const handleChange = e => {
     const {name,value} = e.target
     setForm({...form, [name]: value})
-    onChangeError(name, value, form, error, setError)
+    setError(onChangeError(name, value, form, error))
   }
 
   const handleFileChange = (fileList, name) => {
@@ -173,6 +175,7 @@ const CreateEvent = () => {
           type="text"
           name="title"
           required={true}
+              setError={setError}
         />
 
         <Form.Input 
@@ -187,6 +190,7 @@ const CreateEvent = () => {
           label="Date"
           error={error.date}
           required={true}
+              setError={setError}
           onChange={handleDate}
           value={form.date}
           name="date"
@@ -196,6 +200,7 @@ const CreateEvent = () => {
           onChange={handleEditor}
           error={error.text}
           required={true}
+              setError={setError}
           placeholder="Write about this event"
         />
 

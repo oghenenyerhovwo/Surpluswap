@@ -1,5 +1,5 @@
 .loading_box{
-  z-index: 9999999;
+  z-index: 999999999;
   background: rgba(255, 255, 255, 0.9);
   position:fixed;
   top:0; bottom:0; left:0;right:0;
@@ -74,7 +74,7 @@
   /* margin-right: 2rem; */
   color: var(--color-dark-blue);
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   width: 60%;
 }
 
@@ -165,6 +165,7 @@
 
   .circle_text h3{
     margin-right: 2rem;
+    font-size: 1.1rem;
   }
   
 
@@ -177,8 +178,29 @@
     scale: 1;
   }
 
+  .circle_text h3{
+    margin-right: 2rem;
+    font-size: 1.3rem;
+  }
+
 }
 
+/* dark mode */
+.loading_box_dark{
+  background: var(--color-dark-mode);
+}
+
+.loading_box_dark .circle_container{
+  border:1px solid  #fff;
+}
+
+.loading_box_dark .circle_text h3{
+  color: #747498;
+}
+
+.loading_box_dark .circle{
+  background: #fff;
+}
 
 
 /* Success */
@@ -222,6 +244,94 @@
 .loading_box_error .circle{
   background: var(--color-error);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -296,9 +406,4 @@
   border-radius: 50%;
   margin: 5px 0 0 5px;
   background: #fff;
-}
-
-/* dark mode */
-.loading_box_dark{
-  background: var(--color-dark-mode)
 }

@@ -21,12 +21,12 @@ const LoadingBox = () => {
 
     const { 
         loadingData,
-        lightMode,
+        darkMode,
     }=  useSelector(state => state.generalStore)
     
 
     const [display, setDisplay] = useState(false)
-    const [count, setCount] = useState(7)
+    const [count, setCount] = useState(5)
 
     useEffect(() => {
         if(loadingData.title){
@@ -39,14 +39,14 @@ const LoadingBox = () => {
         let timer1
         let timer2
         if(loadingData.state === "success" || loadingData.state === "error"){
-            const timeOutTime = loadingData.state === "success" ? 7000 : 2000
+            const timeOutTime = 1500
             interval = setInterval(() => {
                 setCount(prevCount => prevCount-1)
-            }, 1000);
+            }, 300);
 
            timer1 =  setTimeout(() => {
                 setDisplay(false)
-                setCount(7)
+                setCount(5)
                 clearInterval(interval)
                 if(loadingData.state === "success" && loadingData.redirectLink){
                     navigate(loadingData.redirectLink)
@@ -80,7 +80,7 @@ const LoadingBox = () => {
                                 animate="visible"
                                 exit="exit"
                                 key="modal"
-                                className={`loading_box loading_box_${loadingData.state} ${!lightMode && "loading_box_dark"}`} 
+                                className={`loading_box loading_box_${loadingData.state} ${darkMode && "loading_box_dark"}`} 
                             >
                                 <div className="circle_container">
                                         {/* <Circle animate={true} /> */}

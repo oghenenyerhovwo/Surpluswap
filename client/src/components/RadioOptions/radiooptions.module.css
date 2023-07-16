@@ -1,2 +1,23 @@
+.radiooptions > fieldset > legend,
+.radiooptions > fieldset > div > div > div > label > span:last-child{
+    font-size: 1rem !important;
+    color: #000;
+}
 
+.radiooptions > fieldset > div > div > div > label > span:first-child {
+    border-color: #4a77d7 !important;
+}
+
+.radiooptions > fieldset > div > div > div > label > span:first-child::after  {
+    background: #4a77d7 !important;
+}
+
+
+/* dark mode */
+
+.radiooptions_dark > fieldset > legend,
+.radiooptions_dark > fieldset > div > div > div > label > span:last-child{
+    font-size: 1rem !important;
+    color: #fff !important;
+}
 

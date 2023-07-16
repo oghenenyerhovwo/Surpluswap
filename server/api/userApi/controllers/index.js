@@ -1,4 +1,4 @@
-import { getUsers, getUser, deleteUser, updateUser } from "./control.controller.js"
+import { getUsers, getUser, deleteUser, updateUser, blockUser } from "./control.controller.js"
 import { signUp,  signIn, resendEmail } from "./email.controller.js"
 import { confirmToken, tokenSignIn } from "./token.controller.js"
 import { getPasswordEmail, resetPassword } from "./password.controller.js"
@@ -17,4 +17,5 @@ export {
     deleteUser,
     updateUser,
     tokenSignIn,
+    blockUser,
 }

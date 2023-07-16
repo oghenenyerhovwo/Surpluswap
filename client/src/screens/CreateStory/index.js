@@ -77,7 +77,9 @@ const CreateStory = () => {
   const handleSubmit = e => {
     e.preventDefault()
     setSubmitError(false)
-    if(!onSubmitError(form, error, setError)){
+    const {isError, errorObject} = onSubmitError(form, error)
+    setError(errorObject)
+    if(!isError){
       dispatch(createStory(form))
     } else{
       setSubmitError(true)
@@ -87,7 +89,7 @@ const CreateStory = () => {
   const handleChange = e => {
     const {name,value} = e.target
     setForm({...form, [name]: value})
-    onChangeError(name, value, form, error, setError)
+    setError(onChangeError(name, value, form, error))
   }
 
   const handleFileChange = (fileList, name) => {
@@ -153,6 +155,7 @@ const CreateStory = () => {
           type="text"
           name="title"
           required={true}
+              setError={setError}
         />
 
         <Form.Input 
@@ -167,6 +170,7 @@ const CreateStory = () => {
           onChange={handleEditor}
           error={error.content}
           required={true}
+              setError={setError}
           placeholder="Write about something"
         />
 

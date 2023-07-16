@@ -7,6 +7,8 @@
     flex-direction: column;
     border-top: 1px solid var(--color-lightgrey);
     padding-top: 1em;
+    flex-wrap: wrap;
+    position: relative;
 }
 
 .profile:nth-of-type(6n + 1) h3{
@@ -119,123 +121,17 @@
     justify-self: end;
 }
 
-.btn_text{
-    z-index: 9;
-}
-
-.btn_top_text{
-    width: 1.1rem;
-    z-index: 99;
-    border-radius: 2rem;
-    background: #fff;
-    text-align: center;
+.admin_role{
     position: absolute;
-    top: -20%;
+    top: 0;
+    right: 0;
     font-size: 0.3rem
 }
 
-.role_button_superadmin{
-    border: none !important;
+.admin_role_text{
+    font-size: 0.5rem
 }
 
-.profile:nth-of-type(6n + 1) .role_button {
-    color: #d76b05;
-    border: 1px solid #d76b05;
-}
-
-.profile:nth-of-type(6n + 1) .role_button button:hover ~ h3,
-.profile:nth-of-type(6n + 1) .role_button button:hover{
-    color: #fff;
-    background:#d76b05;
-}
-
-.profile:nth-of-type(6n + 2) .role_button {
-    color: #da6d73;
-    border: 1px solid #da6d73;
-}
-
-.profile:nth-of-type(6n + 2) .role_button button:hover ~ h3,
-.profile:nth-of-type(6n + 2) .role_button button:hover{
-    color: #fff;
-    background:#da6d73;
-}
-
-.profile:nth-of-type(6n + 3) .role_button {
-    color: #b88b0b;
-    border: 1px solid #b88b0b;
-}
-.profile:nth-of-type(6n + 3) .role_button button:hover ~ h3,
-.profile:nth-of-type(6n + 3) .role_button button:hover{
-    color: #fff;
-    background:#b88b0b;
-}
-
-.profile:nth-of-type(6n + 4) .role_button {
-    color: #006400;
-    border: 1px solid #006400;
-}
-.profile:nth-of-type(6n + 4) .role_button button:hover ~ h3,
-.profile:nth-of-type(6n + 4) .role_button button:hover{
-    color: #fff;
-    background:#006400;
-}
-
-.profile:nth-of-type(6n + 5) .role_button {
-    color: #8b0000;
-    border: 1px solid #8b0000;
-}
-.profile:nth-of-type(6n + 5) .role_button button:hover ~ h3,
-.profile:nth-of-type(6n + 5) .role_button button:hover{
-    color: #fff;
-    background:#8b0000;
-}
-
-.profile:nth-of-type(6n + 6) .role_button {
-    color: #a52a2a;
-    border: 1px solid #a52a2a;
-}
-.profile:nth-of-type(6n + 6) .role_button button:hover ~ h3,
-.profile:nth-of-type(6n + 6) .role_button button:hover{
-    color: #fff;
-    background:#a52a2a;
-}
-
-.delete_overlay{
-    position: absolute;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.4);
-    height: 100%;
-    width: 100%;
-  }
-  
-  .delete_overlay_container{
-    width: min(70%, 20rem);
-    background: #fff;
-    padding: 1em 1em;
-    position: sticky;
-    z-index: 999;
-    top: 30%;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .delete_overlay_container_button{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-
-
-@media screen and (min-width: 250px){
-    .role_button{
-        align-self: flex-end;
-    }
-}
 
 @media screen and (min-width: 300px){
     .profile{

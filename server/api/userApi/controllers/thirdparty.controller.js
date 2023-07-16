@@ -55,7 +55,7 @@ export const GoogleSignIn = async(req, res) => {
         
     } catch (error) {
         console.log(error)
-        res.status(404).send({message: "Unable to sign up user"})
+        res.status(404).send({message: "Unable to logging with google"})
     }
    
 }

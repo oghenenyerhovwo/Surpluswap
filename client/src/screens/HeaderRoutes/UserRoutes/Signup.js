@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
 
 // component
@@ -11,7 +11,7 @@ import styles from "./signup.module.css"
 
 // functions
 import { signUpUser } from "../../../actions"
-import { onSubmitError, onChangeError, pageAnimations, objectToArrayWithKeys } from '../../../utils/index'
+import { onSubmitError, onChangeError, pageAnimations } from '../../../utils/index'
 
 // types
 import { SIGN_USER_RESET } from '../../../constants/userConstants'
@@ -19,7 +19,6 @@ import { SIGN_USER_RESET } from '../../../constants/userConstants'
 
 const SignUp = () => {
   const dispatch = useDispatch()
-  const location = useLocation()
 
   // state
   const {
@@ -30,7 +29,7 @@ const SignUp = () => {
   } =  useSelector(state => state.userStore)
 
   const { 
-    lightMode,
+    darkMode,
   }=  useSelector(state => state.generalStore)
 
   const initialFormState = {
@@ -41,6 +40,16 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   }
+
+  const errorKeysInOrder = [
+    "userName",
+    "firstName",
+    "email",
+    "phoneNumber",
+    "password",
+    "confirmPassword",
+  ]
+
   const [form, setForm] = useState({
     ...initialFormState,
     phoneNumberText: "",
@@ -51,12 +60,11 @@ const SignUp = () => {
     ...initialFormState,
     phoneNumber: "",
   })
+  
 
   const [activateRef, setActivateRef] = useState("")
 
-  const backLink = location.search.split("=")[1]
-  const redirectLink = backLink || "/dashboard"
-  const signInLink = backLink ? `/user/signin/?redirect=${backLink}` : "/user/signin/"
+  const signInLink = "/user/signin/"
 
   useEffect(() => {
     // redirect user to signUser if user sign User is successful
@@ -75,19 +83,18 @@ const SignUp = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if(!onSubmitError(form, error, setError)){
+    const {isError, errorObject} = onSubmitError(form, error, errorKeysInOrder, setActivateRef)
+    setError(errorObject)
+    if(!isError){
       setActivateRef("")
-      dispatch(signUpUser(form, redirectLink))
-    } else {
-      const {keys} = objectToArrayWithKeys(error)
-      setActivateRef(keys[0])
+      dispatch(signUpUser(form))
     }
   }
 
   const handleChange = e => {
     const {name,value} = e.target
     setForm({...form, [name]: typeof(value) === "object" ? value : value.trim()})
-    onChangeError(name, value, form, error, setError)
+    setError(onChangeError(name, value, form, error))
   }
 
   const handlePhone = phone => {
@@ -104,7 +111,7 @@ const SignUp = () => {
 
   return (
     <motion.div 
-      className={`${styles.signup} spacing-lg ${!lightMode && styles.signup_dark}`}
+      className={`${styles.signup} spacing-lg ${darkMode && styles.signup_dark}`}
       variants={pageAnimations.swipeLeft}
       initial="hidden"
       animate="visible"
@@ -121,9 +128,9 @@ const SignUp = () => {
             
             <div className="spacing-sm">
               <ErrorBox 
-                    activateRef={"unique"} 
-                    inputError={errorSignUser || errorGoogleData} 
-                    errorMessage={errorSignUser || errorGoogleData}
+                  activateRef={"unique"} 
+                  inputError={errorSignUser || errorGoogleData} 
+                  errorMessage={errorSignUser || errorGoogleData}
                 />
             </div>
 
@@ -137,6 +144,7 @@ const SignUp = () => {
               errorMessage="Username is required"
               activateRef={activateRef}
               required={true}
+              setError={setError}
             />
 
             <Form.Input 
@@ -149,6 +157,7 @@ const SignUp = () => {
               errorMessage="First Name is required"
               activateRef={activateRef}
               required={true}
+              setError={setError}
             />
 
             <Form.Input 
@@ -169,6 +178,7 @@ const SignUp = () => {
               errorMessage="Provide an email"
               activateRef={activateRef}
               required={true}
+              setError={setError}
             />
 
             <Form.PhoneNumber 
@@ -180,6 +190,7 @@ const SignUp = () => {
               errorMessage="Provide a mobile telephone number"
               activateRef={activateRef}
               required={true}
+              setError={setError}
             />
 
             <Form.Input 
@@ -193,6 +204,7 @@ const SignUp = () => {
               errorMessage="Password is required"
               activateRef={activateRef}
               required={true}
+              setError={setError}
             />
 
             <Form.Input 
@@ -206,6 +218,7 @@ const SignUp = () => {
               errorMessage="Password does not match"
               activateRef={activateRef}
               required={true}
+              setError={setError}
             />
           
           </form>
@@ -227,7 +240,7 @@ const SignUp = () => {
             </Link>
           </div>
           <div className={`${styles.google}`}>
-            <Google />
+            <Google/>
           </div>
 
         </div>       

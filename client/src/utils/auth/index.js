@@ -4,7 +4,7 @@ export const isAdmin=(user) => {
 }
 
 export const isSuperAdmin=(user) => {
-  return user.role === "superAdmin"
+  return user.adminRole === "super"
 }
 
 export const isAuthor=(user, author) => {

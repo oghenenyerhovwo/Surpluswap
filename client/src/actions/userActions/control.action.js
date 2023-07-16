@@ -37,21 +37,21 @@ export const getUser=(id) => (dispatch, getState) =>  {
   }
 
 
-  export const getUsers=() => (dispatch, getState) =>  { 
-    dispatch({type: GET_USERS_REQUEST})
+export const getUsers=() => (dispatch, getState) =>  { 
+  dispatch({type: GET_USERS_REQUEST})
 
-    const token= getState().userStore.token
-  
-      axios
-        .get(
-          `${backend_url}/users/control/all`,
-          setHeader(token)
-        )
-        .then(res => {
-          dispatch({type: GET_USERS_SUCCESS, payload: res.data})
-        })
-        .catch(err => dispatch({type: GET_USERS_FAIL, payload: setError(err)}));
-    }
+  const token= getState().userStore.token
+
+    axios
+      .get(
+        `${backend_url}/users/control/`,
+        setHeader(token)
+      )
+      .then(res => {
+        dispatch({type: GET_USERS_SUCCESS, payload: res.data})
+      })
+      .catch(err => dispatch({type: GET_USERS_FAIL, payload: setError(err)}));
+}
 
 export const deleteUser =(id) => (dispatch, getState) =>  { 
     dispatch({type: DELETE_USER_REQUEST, payload:  id})

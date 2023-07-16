@@ -14,7 +14,7 @@ import { AnimatePresence, motion, useAnimation } from "framer-motion"
 
 
 // actions
-import { changeLightMode, signOut } from "../../actions"
+import { changeDarkMode, signOut } from "../../actions"
 
 // importing css
 import styles from "./header.module.css"
@@ -60,7 +60,7 @@ const Header = ({stickBarToTop}) => {
 
   // global state
   const { 
-    lightMode,
+    darkMode,
   }=  useSelector(state => state.generalStore)
   // const { currentUser } =  useSelector(state => state.userStore)
   const [toggleMenu, setToggleMenu] = useState(false)
@@ -114,11 +114,11 @@ const Header = ({stickBarToTop}) => {
     setToggleSearch(prevToggle => !prevToggle)
   }
 
-  const handleLightMode = () => dispatch(changeLightMode())
+  const handleDarkMode = () => dispatch(changeDarkMode())
 
   return (
     <motion.header 
-      className={`${styles.app_header_container} ${!lightMode && styles.app_header_container_light}`}
+      className={`${styles.app_header_container} ${darkMode && styles.app_header_container_light}`}
       animate={animation}
     >
       <div className={`${styles.navbar}`}>
@@ -152,7 +152,7 @@ const Header = ({stickBarToTop}) => {
                         <NavLinks />
                     </ul>
                     <ul>
-                      <li>{lightMode ? <FaMoon className={styles.moon_icon} onClick={handleLightMode} /> : <BsFillSunFill onClick={handleLightMode} />}</li>  
+                      <li>{darkMode ? <FaMoon className={styles.moon_icon} onClick={handleDarkMode} /> : <BsFillSunFill onClick={handleDarkMode} />}</li>  
                       <li><BsSearch className={styles.search_icon} onClick={handleToggleSearch} /></li>  
                     </ul>  
                     <ul>

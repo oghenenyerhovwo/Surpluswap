@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from "framer-motion"
+import { useSelector } from 'react-redux'
 
 import { 
     yellowCurve,
@@ -13,9 +14,12 @@ import {
 import styles from "./aboutus.module.css"
 
 const AboutUs = () => {
+  const { 
+    darkMode,
+  }=  useSelector(state => state.generalStore)
 
   return (
-    <div className={styles.about_us}>
+    <div className={`${styles.about_us} ${darkMode && styles.about_us_dark}`}>
         <div className={`${styles.container} ${styles.about_us_container}`}>
             <div className={`${styles.about_us_heading} spacing-xs`}>
                 <motion.img 

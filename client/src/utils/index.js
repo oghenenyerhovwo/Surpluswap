@@ -9,13 +9,14 @@ import {
 // import {
 //   stateApi,
 // } from "./apis"
-// import firebaseStorage from "./firebase"
+import firebaseStorage from "./firebase"
 import {
   setTagArray,
   truncate,
   objectToArray,
   reverseObject,
   objectToArrayWithKeys,
+  capitalizeFirstLetter,
 } from "./javascriptFunctions"
 import {
   isAdmin,
@@ -30,8 +31,6 @@ import {
   pathAnimations,
 } from "./animations"
 
-
-
 export {
     onChangeError,
     onSubmitError,
@@ -41,7 +40,7 @@ export {
     setError,
     setHeader,
     // stateApi,
-    // firebaseStorage,
+    firebaseStorage,
     truncate,
     setTagArray,
     objectToArray,
@@ -51,6 +50,7 @@ export {
     aboutSectionArray,
     reverseObject,
     objectToArrayWithKeys,
+    capitalizeFirstLetter,
 
     scrollAnimations,
     pageAnimations,

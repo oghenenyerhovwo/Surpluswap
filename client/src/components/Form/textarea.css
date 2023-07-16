@@ -2,37 +2,11 @@
 /* text area */
 /* ============================== */
 
-.app__textarea-field {
-    height: 14.4375rem !important;
-    grid-column: 1 / 13;
-    grid-row: 2;
-
-    width: 100%;
-    background: transparent;
-    border: 0.1px solid var(--color-softblue);
-    font-size: 1rem;
-    margin-top: 0.1em;
-    padding-left: .5em;
-    padding-right: .5em;
-    padding-top: .5em;
-    padding-bottom: .5em;
+.app__textarea{
+    position: relative;
 }
 
-.app__textarea-field:focus,
-  .app__textarea-field:focus-visible{
-    outline: none;
-  }
-
-  .app__textarea-field:disabled{
-    border: none;
-    outline: none;
-    background: #F0F0F0;
-
-  }
-
-  /* error handling */
-  .form__error .app__textarea-field{
-    border: 1px solid var(--color-softred);
-
-  }
+.app__textarea-field {
+    height: 14.4375rem !important;
+}
   

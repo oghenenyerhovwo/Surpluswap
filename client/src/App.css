@@ -35,6 +35,8 @@
 }
 
 .container {
+  width: 80%;
+  max-width: 80rem;
   width: min(80%, 80rem);
   margin-left: auto;
   margin-right: auto;
@@ -63,6 +65,12 @@
 
 .word_break{
   word-break: break-all;
+}
+
+.text_overflow_ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
 }
 
 /* react rainbow */
@@ -99,8 +107,6 @@
   width: 0.8rem !important;
   height: 0.8rem !important;
 }
-
-
 
 .backdrop{
   position: fixed;
@@ -141,16 +147,70 @@
   background:#fff;
 }
 
+/* calendar */
+.react-calendar__tile--active {
+  background: #807FCF !important;
+}
+
 
 /* Light Mode */
 /* ============================== */
+
+.app_container_light{
+  background: #fff;
+  color: #000;
+}
 
 .app_container_dark{
   background: var(--color-dark-mode);
   color: #fff;
 }
 
-.app_container_light{
-  background: #fff;
-  color: #000;
+
+/* listbox */
+
+.list_box_react_rainbow_off .sc-pyfCe{
+  display: none !important;
 }
+
+.dark_mode_body .sc-pyfCe,
+.dark_mode_body .sc-pyfCe > div,
+.dark_mode_body .sc-pyfCe > div > ul{
+  background-color:  hsl(240,95%,15%) !important;
+}
+
+.dark_mode_body .sc-pyfCe > div > ul > li{
+  background-color:  hsl(240,95%,15%) !important;
+  color: var(--color-light-grey) !important;
+  cursor: pointer !important;
+}
+
+.dark_mode_body .sc-pyfCe > div > ul > li:hover{
+  background-color:  rgb(2, 2, 51) !important;
+  color: var(--color-light-grey) !important;
+}
+
+/* calendar */
+
+.app_container_dark .react-calendar button{
+  color: #fff;
+}
+
+.app_container_dark .react-calendar__month-view__days__day--weekend {
+  color: #d10000;
+}
+
+.app_container_dark .react-calendar__tile--active {
+  background: #807FCF !important;
+  color: var(--color-light-grey) !important;
+}
+
+.app_container_dark .react-calendar__tile--now {
+  background: var(--color-orange);
+  color: var(--color-light-grey) !important;
+}
+
+.app_container_dark .react-calendar__month-view__days__day--neighboringMonth {
+  color: #757575 !important;
+}
+

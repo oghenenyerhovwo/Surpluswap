@@ -16,18 +16,22 @@ const ErrorBox = props => {
         errorMessage,
         ownerError,
         name,
+        clearError,
     } = props
 
     const elErrorBox = useRef();
 
     const [showError, setShowError] = useState(false)
 
-    
+    const clearErrorBox = () => {
+        clearError()
+        setShowError(false)
+    }
 
     useEffect(() => {
         if(inputError){
             if(activateRef === "unique" || (activateRef && name && activateRef === name)){
-                window.scrollTo(-40, elErrorBox.current.offsetTop)
+                window.scrollTo(15, elErrorBox.current.offsetTop)
             }
             setShowError(true)
         } else{
@@ -51,7 +55,7 @@ const ErrorBox = props => {
                             <BsFillTriangleFill className="error_box-triangle" />
                             {errorMessage}
                             <div className="cancel_button">
-                                <FaTimes onClick={() => setShowError(false)} />
+                                {activateRef !== "unique"  && <FaTimes onClick={clearErrorBox} />}
                             </div>
                             {ownerError && <span>Go to <Link to="/">Home Page</Link> </span>}
                         </motion.div>

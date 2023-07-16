@@ -2,6 +2,8 @@
     margin-top: 2em;
     box-shadow: rgba(17,12,46,0.15) 0px
     4px 3px 0px;
+    width:  100%;
+    max-width: 25rem;
     width: min(100%, 25rem);
 }
 

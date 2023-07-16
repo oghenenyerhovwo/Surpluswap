@@ -134,6 +134,7 @@ const initialState = {
     errorDeleteUser: "",
     successDeleteUser: false,
     loadingDeleteUser: false,
+    idDeleteUser: "",
 
     // Resend email verification
     errorResendEmail: "",
@@ -157,6 +158,7 @@ const userReducers =  (state = initialState, action) => {
             successSignUser: true,
             currentUser: action.payload.user,
             token: action.payload.token,
+            completeTokenSignIn: true,
         }
     case SIGN_USER_FAIL:
         return {
@@ -439,6 +441,7 @@ const userReducers =  (state = initialState, action) => {
             ...state,
             loadingDeleteUser:  false,
             successDeleteUser: true,
+            idDeleteUser: action.payload.id,
         }
     case DELETE_USER_FAIL:
         return {
@@ -453,6 +456,7 @@ const userReducers =  (state = initialState, action) => {
             errorDeleteUser: "",
             successDeleteUser: false,
             loadingDeleteUser: false,
+            idDeleteUser: "",
         }
 
     case RESEND_EMAIL_REQUEST:

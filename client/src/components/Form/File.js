@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { FileSelector } from 'react-rainbow-components';
-import { FaTimes } from "react-icons/fa"
+import { ref, uploadBytesResumable, getDownloadURL, } from "firebase/storage"
 
-import VideoPlayer from "../VideoPlayer"
+
+import { firebaseStorage, onChangeError, objectToArray } from '../../utils/'
 
 import "./file.css"
 
 const LargeScreenFile = props => {
-  const { accept, icon, name, onChange, error, multiple } = props
+  const { accept, icon, name, onChange, errorFileMessage, multiple } = props
 
   return (
     <FileSelector
@@ -17,16 +18,16 @@ const LargeScreenFile = props => {
       bottomHelpText={multiple ? "Can select multiple files" :  "Select only one file"}
       variant="multiline"
       onChange={onChange}
-      error={error}
       accept={accept}
       name={name}
       multiple={multiple}
+      error={errorFileMessage}
     /> 
   )
 }
 
 const SmallScreenFile = props => {
-  const { accept, icon, name, onChange, error, multiple } = props
+  const { accept, icon, name, onChange, errorFileMessage, multiple } = props
 
   return (
     <FileSelector
@@ -35,7 +36,7 @@ const SmallScreenFile = props => {
       bottomHelpText={multiple ? "Can select multiple files" :  "Select only one file"}
       uploadIcon={icon}
       onChange={onChange}
-      error={error}
+      error={errorFileMessage}
       accept={accept}
       name={name}
       multiple={multiple}
@@ -46,24 +47,95 @@ const SmallScreenFile = props => {
 // Our app
 const FileComponent = props => {
 
-  const { label, type, preview, clearPreview, loadingPercent } = props
+  const { label, activateRef, name, errorMessage, setForm, setError, multiple, form, error, required } = props
+  const elFileComponent = useRef();
 
-  const [showPreview, setShowPreview] = useState(false)
+  const [uploadError, setUploadError] = useState({
+    [name]: "",
+  })
+  const [percent, setPercent] = useState({
+    [name]: 0,
+  });
 
-  const togglePreview = () => setShowPreview(prevToggle => !prevToggle)
+  useEffect(() => {
+      if(uploadError[name] || errorMessage){
+          if(activateRef === "unique" || (activateRef && name && activateRef === name)){
+              window.scrollTo(10, elFileComponent.current.offsetTop)
+          }
+      }
+  }, [uploadError, errorMessage, activateRef, name])
+
+
+  const handleMultipleFileChange = (fileList) => {
+    if(fileList && fileList[0]){
+      try {
+        const fileListArr = objectToArray(fileList)
+        fileListArr.map(async file => {
+          setUploadError("")
+          const storageRef = ref(firebaseStorage, `/files/${file.name}`)
+          const uploadTask = uploadBytesResumable(storageRef, file);
+      
+          await uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const currentPercent = Math.round(
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+      
+              // update progress
+              setPercent({...percent, [name]: currentPercent})
+            },
+            (err) => {
+              setUploadError({[name]: "Error while uploading file"})
+            },
+            async () => {
+              // download url
+              await getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                setPercent({...percent, [name]: 0})
+                if(multiple){
+                  setError(onChangeError(name, url, form, error))
+                }
+                
+                setForm(prevForm =>{ 
+                  return  {
+                    ...prevForm, 
+                    [name]: [...prevForm[name], {url: url, _id: prevForm[name].length + 1 }]
+                  }
+                  }
+                )
+              });
+            }
+          )
+        })
+      } catch (error) {
+        console.log(error)
+        setUploadError({[name]: "Error while uploading file"})
+      }
+    }
+  }
+
+  const onChange = multiple ? handleMultipleFileChange : () => {}
 
   return (
-    <div className="app_file spacing-md">
-        <label className="form__label spacing-sm">{label}</label>
+    <div ref={elFileComponent} className={`app_file ${(uploadError[name] || errorMessage) && "app_file_error"} spacing-md`}>
+        <label className="form__label spacing-sm">{label} <span className="icon_required">{label && required && "*"} </span></label>
         <div className="spacing-sm"></div>
-        {
+        <>
+          <div className="file_largescreen"> 
+              <LargeScreenFile {...props} errorFileMessage={uploadError[name] || errorMessage} onChange={onChange}/>
+          </div>
+          <div className="file_smallscreen">
+              <SmallScreenFile {...props} errorFileMessage={uploadError[name] || errorMessage} onChange={onChange}/>
+          </div>
+        </>
+        {/* {
           (!preview || preview.length < 1  ) ? (
             <>
               <div className="file_largescreen">
-                  <LargeScreenFile {...props} />
+                  <LargeScreenFile {...props} errorFileMessage={uploadError || errorMessage} />
               </div>
               <div className="file_smallscreen">
-                  <SmallScreenFile {...props} />
+                  <SmallScreenFile {...props} errorFileMessage={uploadError || errorMessage} />
               </div>
             </>
           )
@@ -152,11 +224,11 @@ const FileComponent = props => {
             } 
 
           </>
-      }
+      } */}
       {
-        loadingPercent > 0 &&
+        percent > 0 &&
         <div className="file_loader spacing-md">
-          <div style={{width: `${loadingPercent}%`}} className="file_loader_inner spacing-md"></div>
+          <div style={{width: `${percent}%`}} className="file_loader_inner spacing-md"></div>
         </div>
       }
   </div>

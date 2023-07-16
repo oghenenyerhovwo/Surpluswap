@@ -9,6 +9,7 @@ import {
     blueBlob,
     MaleAvatar,
     blankProfilePic,
+    gallery,
 } from "./images"
 
 import {
@@ -31,4 +32,5 @@ export {
     FemaleAvatar, 
     MaleAvatar,
     blankProfilePic,
+    gallery,
 }

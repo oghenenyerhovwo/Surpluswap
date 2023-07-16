@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
 
 // components
@@ -11,7 +11,7 @@ import styles from "./signin.module.css"
 
 // functions
 import { signInUser } from "../../../actions"
-import { onSubmitError, onChangeError, pageAnimations,objectToArrayWithKeys } from '../../../utils/index'
+import { onSubmitError, onChangeError, pageAnimations } from '../../../utils/index'
 
 // type
 import { SIGN_USER_RESET } from '../../../constants/userConstants'
@@ -19,7 +19,6 @@ import { SIGN_USER_RESET } from '../../../constants/userConstants'
 
 const SignIn = () => {
   const dispatch = useDispatch()
-  const location = useLocation()
 
   // state
   const {
@@ -30,27 +29,29 @@ const SignIn = () => {
   } =  useSelector(state => state.userStore)
 
   const { 
-    lightMode,
+    darkMode,
   }=  useSelector(state => state.generalStore)
 
   const initialFormState = {
     emailOrUsernameOrPhoneNumber: "",
     password: "",
   }
+
+  const errorKeysInOrder = [
+    "emailOrUsernameOrPhoneNumber",
+    "password",
+  ]
   const [form, setForm] = useState(initialFormState)
   const [error, setError] = useState(initialFormState)
   const [activateRef, setActivateRef] = useState("")
 
-
-  const backLink = location.search.split("=")[1]
-  const redirectLink = backLink || "/dashboard"
-  const signUpLink = backLink ? `/user/signup/?redirect=${backLink}` : "/user/signup/"
+  const signUpLink = "/user/signup/"
 
   useEffect(() => {
     if(successSignUser || currentUser.email){
       dispatch({type: SIGN_USER_RESET})  
     }
-  }, [currentUser,successSignUser,dispatch, location])
+  }, [currentUser,successSignUser,dispatch])
 
   useEffect(() => {
     dispatch({type: SIGN_USER_RESET})
@@ -60,24 +61,23 @@ const SignIn = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if(!onSubmitError(form, error, setError)){
+    const {isError, errorObject} =  onSubmitError(form, error, errorKeysInOrder, setActivateRef)
+    setError(errorObject)
+    if(!isError){
       setActivateRef("")
-      dispatch(signInUser(form, redirectLink))
-    }else {
-      const {keys} = objectToArrayWithKeys(error)
-      setActivateRef(keys[0])
+      dispatch(signInUser(form))
     }
   }
 
   const handleChange = e => {
     const {name,value} = e.target
     setForm({...form, [name]: typeof(value) === "object" ? value : value.trim()})
-    onChangeError(name, value, form, error, setError)
+    setError(onChangeError(name, value, form, error))
   }
 
   return (
     <motion.div 
-      className={`${styles.signin} spacing-lg ${!lightMode && styles.signin_dark}`}
+      className={`${styles.signin} spacing-lg ${darkMode && styles.signin_dark}`}
       variants={pageAnimations.swipeRight}
       initial="hidden"
       animate="visible"
@@ -108,9 +108,10 @@ const SignIn = () => {
               errorMessage="Provide an email, username or phone number"
               activateRef={activateRef}
               required={true}
-            />
+              setError={setError}
+            /> 
 
-            <Form.Input 
+            <Form.Input
               label="Password"
               onChange={handleChange}
               value={form.password}
@@ -121,6 +122,7 @@ const SignIn = () => {
               autoComplete={"true"}
               activateRef={activateRef}
               required={true}
+              setError={setError}
             />
 
             
@@ -143,7 +145,7 @@ const SignIn = () => {
           </div>
 
           <div className={`${styles.google} spacing-sm`}>
-            <Google />
+            <Google/>
           </div>
 
           <div className={`${styles.forgot_passowrd}`}>

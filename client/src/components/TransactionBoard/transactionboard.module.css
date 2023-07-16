@@ -1,0 +1,194 @@
+.transaction_board{
+    background: #fff;
+    border-radius: 2rem;
+    padding: 2rem;
+    border: 1px solid rgba(2, 2, 75, 0.4);
+}
+
+.transaction_board_calculator{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.transaction_board_calculator  input{
+    text-align: right;
+    color: var(--color-dark-grey);
+    width: 100%;
+    background: transparent;
+}
+
+.transaction_board_calculator  input:active,
+.transaction_board_calculator  input:focus-visible,
+.transaction_board_calculator  input:focus{
+    border: 1px solid var(--color-light-blue);
+}
+
+.transaction_board_calculator_base {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 90%;
+    width: 100%;
+    padding: 0 0.9rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transaction_board_calculator_base label{
+    color: #fff;
+    font-size: 0.7rem;
+}
+
+.transaction_board_calculator_base > div{
+    color: #fff;
+}
+
+
+.transaction_board_calculator_base > div > svg{
+    margin-right: 1rem;
+    cursor: pointer;
+    font-size: 0.7rem;
+}
+
+.transaction_board_calculator > div > div > svg:first-child{
+    color: hsl(320,91%,83%);
+}
+
+.transaction_board_calculator > div > div > svg:last-child{
+    color: hsl(215,97%,53%);
+}
+
+@media screen and (min-width: 400px){
+    .transaction_board_calculator_base label,
+    .transaction_board_calculator_base > div > svg{
+        font-size: 0.95rem;
+    }
+}
+
+.transaction_body{
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction_body h1{
+    font-size: 1.2rem;
+    flex: 1;
+    margin-right: 1rem;
+    overflow-wrap: break-word;
+}
+
+.transaction_body h1 svg{
+    font-size: 1.4rem;
+}
+
+.transaction_body_buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    align-self: flex-end;
+}
+
+.transaction_body_buttons > button{
+    padding: 0.08rem 0.6rem;
+    border-radius: 0.2rem;
+    font-size: 0.55rem;
+    cursor: pointer;
+    outline: 0;
+    border: 0;
+}
+
+.transaction_body_buttons > button:first-child {
+    color: #fff;
+    background: linear-gradient(to right, hsl(215,97%,55%), hsl(197,84%,70%)); 
+    margin-bottom: 0.5rem
+}
+
+.transaction_body_buttons > button:last-child{
+    color: #fff;
+    background: linear-gradient(to right, hsl(262,85%,60%), hsl(296,100%,79%))
+}
+
+@media screen and (min-width: 400px){
+    .transaction_body h1{
+        font-size: 1.4rem;
+        width: 70%;
+    }
+
+    .transaction_body_buttons > button{
+        padding: 0.1rem 0.8rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media screen and (min-width: 550px){
+    .transaction_body{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .transaction_body h1{
+        font-size: 1.5rem;
+    }
+}
+
+.transaction_base{
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction_base > div{
+    align-self: end;
+    order: 1;
+}
+
+.transaction_base > p,
+.transaction_base > div > p{
+    font-size: 0.7rem;
+}
+
+.transaction_base > p{
+    order: 2;
+}
+
+.transaction_base_arrow{
+    margin: 0 0.3rem;
+}
+
+.transaction_base_arrow  svg{
+    color: hsl(170,83%,25%);
+}
+
+
+@media screen and (min-width: 450px){
+    .transaction_base{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .transaction_base > div{
+        align-self: unset;
+        order: 2;
+    }
+
+    .transaction_base > p,
+    .transaction_base > div > p{
+        font-size: 0.95rem;
+    }
+    
+    .transaction_base > p{
+        order: 1;
+    }
+}
+
+
+/* dark mode */
+.transaction_board_dark{
+    background: hsl(240,95%,15%);
+}
+
+.transaction_board_dark .transaction_board_head input{
+    color: #fff;
+}

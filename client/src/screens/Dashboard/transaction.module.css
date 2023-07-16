@@ -1,0 +1,187 @@
+.transaction{
+    width: min(90%, 90rem);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+}
+
+.transaction_container{
+    width: min(100%, 28rem);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.transaction_detail{
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid black;
+}
+
+.transaction_detail > p {
+    color: #c1becb;
+}
+
+.transaction_detail > h3{
+    color: black;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    position: relative;
+}
+
+.transaction_detail > h3 > span{
+    margin-right: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    display: flex;
+    align-items: center;
+}
+
+.transaction_rate_arrow{
+    margin: 0 0.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.transaction_detail > h3 > svg{
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.transaction_detail > h3 > .copied_message{
+    position: absolute;
+    display: inline-block;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    bottom: 0.2rem;
+    right: 0.2rem;
+    z-index: 999;
+    color: rgb(219, 236, 255);
+    background: var(--color-light-blue);
+    font-size: 0.6rem;
+}
+
+.form_buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form_buttons button{
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+    letter-spacing: 0.04em;
+    line-height: 28px;
+    font-size: 0.9375rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    border: none;
+    font-family: var(--font-rubik);
+}
+
+
+.accept_button{
+    transition: ease-in-out .5s;
+    background-color: #1de41d;
+    color: #fff;
+    box-shadow: rgba(17,12,46,0.15) 0px
+    4px 3px 0px;
+}
+
+.accept_button:hover{
+    background-color: #20a020;
+}
+
+.reject_button{
+    transition: ease-in-out .5s;
+    background-color:#e91919;
+    color: #fff;
+    box-shadow: rgba(17,12,46,0.15) 0px
+    4px 3px 0px;
+    border: 1px solid rgba(74, 119, 215,0.3);
+}
+
+.reject_button:hover{
+    background-color: #a02020;
+}
+
+.form_container{
+    width: min(100%, 28rem);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.submit_button{
+    transition: ease-in-out .5s;
+    background-color:#fff;
+    color: var(--color-dark-grey);
+    box-shadow: rgba(17,12,46,0.15) 0px
+    4px 3px 0px;
+}
+
+.submit_button:hover{
+    background-color: #e5e5e5;
+}
+
+@media screen and (min-width: 300px){
+    .form_buttons{
+        flex-direction: row;
+        margin-bottom: 1rem;
+    }
+
+    .form_buttons button{
+        width: 45%;
+        max-width: 13.5rem;
+    }
+}
+
+.return_link{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.return_link > a{
+    letter-spacing: 0.04em;
+    line-height: 28px;
+    font-size: 0.7375rem;
+    cursor: pointer;
+    font-family: var(--font-rubik);
+    transition: ease-in-out .5s;
+    color: #4a77d7;
+    text-decoration: underline;
+    margin-top: 2rem;
+}
+
+.return_link > a:hover{
+    color: var(--color-light-blue);
+}
+
+
+@media screen and (min-width: 500px){
+    .transaction_detail > h3 > .copied_message{
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
+
+
+/* dark mode */
+
+.transaction_dark .transaction_detail{
+    border-bottom: 1px solid #fff;
+}
+
+.transaction_dark .transaction_detail p {
+    color: #c1becb;
+}
+
+.transaction_dark .transaction_detail h3{
+    color: #fff;
+}
+

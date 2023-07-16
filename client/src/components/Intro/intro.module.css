@@ -43,3 +43,12 @@
         align-self: stretch;
     }
 }
+
+/* dark mode */
+.intro_dark .intro_container h1{
+    color: #fff;
+}
+
+.intro_dark .intro_container p{
+    color: #747498;
+}

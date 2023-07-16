@@ -1,6 +1,6 @@
 import Event from "../../../models/eventModel.js";
 import Comment from "../../../models/commentModel.js";
-import { isAdmin, isSuperAdmin } from "../../../utils/index.js"
+import { isAdmin } from "../../../utils/index.js"
 
 // create Event
 export const createEvent = async(req, res) => {

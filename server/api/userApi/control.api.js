@@ -1,13 +1,16 @@
 import express from "express";
 
 import { getUsers, getUser, deleteUser, updateUser }from "./controllers/index.js";
-import { isAuth } from "../../utils/index.js"
+import { isAuth, isNotBlocked, isVerified } from "../../utils/index.js"
 
 const router = express.Router();
 
 // get all users
 router.get(
     "/", 
+    isAuth,
+    isNotBlocked,
+    isVerified,
     async(req, res) => {
         getUsers(req,res)
     }
@@ -16,6 +19,8 @@ router.get(
 router.get(
     "/:id", 
     isAuth,
+    isNotBlocked,
+    isVerified,
     async(req, res) => {
         getUser(req, res)
     }
@@ -24,6 +29,7 @@ router.get(
 router.put(
     "/:id",
     isAuth,
+    isNotBlocked,
     async(req, res) => {
         updateUser(req, res)
     }
@@ -32,6 +38,7 @@ router.put(
 router.delete(
     "/:id",
     isAuth,
+    isNotBlocked,
     async(req, res) => {
         deleteUser(req, res)
     }

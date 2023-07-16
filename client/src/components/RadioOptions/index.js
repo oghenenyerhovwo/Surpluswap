@@ -5,10 +5,10 @@ import styles from "./radiooptions.module.css"
 
 const RadioOptions = props => {
 
-    const { options, value, onChange, label, orientation } = props
+    const { options, value, onChange, label, orientation, darkMode } = props
 
     return (
-        <div className={styles.radiooptions}> 
+        <div className={`${styles.radiooptions} ${darkMode && styles.radiooptions_dark}`}> 
             <RadioGroup
                 id="radio-group-component-1"
                 options={options}

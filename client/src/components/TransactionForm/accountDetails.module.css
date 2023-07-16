@@ -1,0 +1,52 @@
+.account_details{
+    display: flex;
+    flex-direction: column;
+}
+
+.account_details h3{
+    position: relative;
+ }
+
+.account_details h3:first-child{
+   margin-bottom: 0.3rem;
+}
+
+.account_details h3:last-child{
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+ }
+
+.account_details .copy_icon{
+    cursor: pointer;
+}
+
+.copied_message{
+    position: absolute;
+    display: inline-block;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    bottom: 0.2rem;
+    right: 0.2rem;
+    z-index: 999;
+    color: rgb(219, 236, 255);
+    background: var(--color-light-blue);
+    font-size: 0.6rem;
+}
+
+
+@media screen and (min-width: 500px){
+    .account_details{
+        flex-direction: row;
+    }
+
+    .account_details h3:first-child{
+        width: 10rem;
+        margin-bottom: 0rem;
+    }
+
+    .copied_message{
+        bottom: 1rem;
+        right: 1rem;
+    }
+}

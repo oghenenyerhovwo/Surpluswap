@@ -1,5 +1,4 @@
 import express from "express";
-import {isAuth} from "../../utils/index.js"
 
 import { 
     signIn, 
@@ -28,4 +27,5 @@ router.post(
     (req, res) => {
         resendEmail(req, res)
 });
+
 export default router;

@@ -1,11 +1,18 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Lookup } from 'react-rainbow-components';
 
+import { switchListBoxReactRainbow } from "../../actions"
 import styles from "./searchbar.module.css"
 
 const SearchBar = props => {
+    const dispatch = useDispatch()
 
-    const { data, searchState, setSearchState, label, placeholder } = props
+    const { data, searchState, setSearchState, label, placeholder, darkMode, turnOffDisplaySearchList } = props
+
+    const openMenu = () => {
+        dispatch(switchListBoxReactRainbow(!turnOffDisplaySearchList))
+    }
 
     function filter(query, options) {
         if (query) {
@@ -57,7 +64,7 @@ const SearchBar = props => {
     }
 
     return (
-        <div className={`${styles.searchbar}`}>
+        <div onClick={openMenu} className={`${styles.searchbar} ${darkMode && styles.searchbar_dark}`}>
             <Lookup
                 id="lookup-1"
                 label={label}
@@ -67,7 +74,7 @@ const SearchBar = props => {
                 onChange={handleChange}
                 onSearch={search}
                 className="rainbow-m-vertical_x-large rainbow-p-horizontal_medium rainbow-m_auto"
-            />;
+            />
         </div>
     )
 }

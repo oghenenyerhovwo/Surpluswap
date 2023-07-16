@@ -33,8 +33,29 @@ const AppContainer =props => {
   }=  useSelector(state => state.userStore)
 
   const { 
-    lightMode,
+    darkMode,
+    listBoxDisplayReactRainbow,
   }=  useSelector(state => state.generalStore)
+
+  useEffect(() => {
+    // adding dark mode class from body to all lists
+    const bodyNodes = document.getElementsByTagName("body")[0]
+    if(darkMode){
+      bodyNodes.classList.add("dark_mode_body")
+    } else {
+      bodyNodes.classList.remove("dark_mode_body")
+    }
+  }, [darkMode])
+
+  useEffect(() => {
+    //adding react rainbow listbox class
+    const bodyNodes = document.getElementsByTagName("body")[0]
+    if(!listBoxDisplayReactRainbow){
+      bodyNodes.classList.add("list_box_react_rainbow_off")
+    } else {
+      bodyNodes.classList.remove("list_box_react_rainbow_off")
+    }
+  }, [listBoxDisplayReactRainbow])
 
   useEffect(() => {
     if(token && !currentUser.email && !loadingSignInToken){
@@ -67,7 +88,7 @@ const AppContainer =props => {
       animate="visible"
       whileInView="scrollVisible"
       whileHover="hoverVisible"
-      className={` app_container ${lightMode && "app_container_light"} ${!lightMode && "app_container_dark"}`}
+      className={` app_container ${darkMode ? "app_container_dark" : "app_container_light"}`}
     >
       {props.children}
 
